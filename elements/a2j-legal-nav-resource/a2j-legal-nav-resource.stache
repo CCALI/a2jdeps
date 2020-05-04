@@ -1,0 +1,3 @@
+<can-import from="./a2j-legal-nav-resource.less!" />
+
+<span>{{name}}</span>

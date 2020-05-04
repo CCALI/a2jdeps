@@ -1,0 +1,10 @@
+<can-import from="../varpicker/varpicker.less!" />
+<can-import from="@open-xchange/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css!" />
+
+<input
+  type="text"
+  style:raw="display: none;"
+  class="form-control"
+  value:bind="selected"
+  disabled:from="disabled"
+/>

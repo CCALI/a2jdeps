@@ -1,0 +1,16 @@
+<can-import from="../element-toolbar/"/>
+<can-import from="./element-container.less!"/>
+
+<div class="wrapper{{#if(selected)}} selected{{/if}}">
+  <content />
+</div>
+
+{{#if selected}}
+  <element-toolbar
+    nodeIndex:from="scope.index"
+    nodeId:from="scope/nodeId"
+    cloneNode:from="scope/cloneNode"
+    deleteNode:from="scope/deleteNode"
+    moveNode:from="scope/moveNode"
+  />
+{{/if}}
