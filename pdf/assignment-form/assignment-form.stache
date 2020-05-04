@@ -1,7 +1,7 @@
 <can-import from='./assignment-form.less' />
-<can-import from='modal/' />
-<can-import from='variables/editor/' />
-<can-import from='pdf/checkmark-picker/' />
+<can-import from='../../modal/' />
+<can-import from='../../variables/editor/' />
+<can-import from='../checkmark-picker/' />
 <can-import from='can-stache-converters' />
 
 {{#if conflictingVariables}}

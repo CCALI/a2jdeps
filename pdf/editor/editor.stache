@@ -1,9 +1,9 @@
 <can-import from="./editor.less" />
-<can-import from='modal/' />
-<can-import from='variables/editor/' />
-<can-import from='pdf/addendum-options/' />
-<can-import from='pdf/assignment-form/' />
-<can-import from='pdf/thumbnail-sidebar/' />
+<can-import from='../../modal/' />
+<can-import from='../../variables/editor/' />
+<can-import from='../addendum-options/' />
+<can-import from='../assignment-form/' />
+<can-import from='../thumbnail-sidebar/' />
 <can-import from='can-stache-route-helpers' />
 
 <div class='editor-container'>
