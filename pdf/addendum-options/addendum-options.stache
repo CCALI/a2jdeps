@@ -1,4 +1,4 @@
-<can-import from='pdf/addendum-options/addendum-options.less' />
+<can-import from='./addendum-options.less' />
 <can-import from='modal/' />
 
 <author-modal

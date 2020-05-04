@@ -1,4 +1,4 @@
-<can-import from="../varpicker/varpicker.less!" />
+<can-import from="./varpicker.less" />
 <can-import from="@open-xchange/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css!" />
 
 <input

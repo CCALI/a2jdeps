@@ -1,5 +1,5 @@
 <can-import from="../element-toolbar/"/>
-<can-import from="./element-container.less!"/>
+<can-import from="./element-container.less"/>
 
 <div class="wrapper{{#if(selected)}} selected{{/if}}">
   <content />

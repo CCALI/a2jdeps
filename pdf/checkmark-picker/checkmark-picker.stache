@@ -1,4 +1,4 @@
-<can-import from='pdf/checkmark-picker/checkmark-picker.less' />
+<can-import from='./checkmark-picker.less' />
 
 {{#if (isLoadingChecks) }}
   <div class='status'>

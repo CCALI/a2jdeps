@@ -1,4 +1,4 @@
-<can-import from="pdf/editor/editor.less!" />
+<can-import from="./editor.less" />
 <can-import from='modal/' />
 <can-import from='variables/editor/' />
 <can-import from='pdf/addendum-options/' />

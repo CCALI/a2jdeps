@@ -2,7 +2,7 @@
 <can-import from="../a2j-variable/" />
 <can-import from="../options-pane/" />
 <can-import from="../element-container/" />
-<can-import from="../a2j-repeat-loop/a2j-repeat-loop.less!" />
+<can-import from="./a2j-repeat-loop.less" />
 
 {{#if (editEnabled) }}
   <element-container

@@ -1,4 +1,4 @@
-<can-import from="../options-pane/options-pane.less!" />
+<can-import from="./options-pane.less" />
 
 <div class="popover right" style="display: block;">
   <div class="arrow"></div>

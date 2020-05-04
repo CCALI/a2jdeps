@@ -1,4 +1,4 @@
-<can-import from='pdf/assignment-form/assignment-form.less' />
+<can-import from='./assignment-form.less' />
 <can-import from='modal/' />
 <can-import from='variables/editor/' />
 <can-import from='pdf/checkmark-picker/' />

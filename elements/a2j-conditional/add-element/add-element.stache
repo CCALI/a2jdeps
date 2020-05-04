@@ -1,5 +1,5 @@
 <can-import from="../../options-pane/" />
-<can-import from="./add-element.less!" />
+<can-import from="./add-element.less" />
 
 <div class="{{#if selected}}selected{{/if}}" on:click="select(scope.event)">
   add elements here...

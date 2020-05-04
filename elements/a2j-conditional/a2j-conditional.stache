@@ -4,7 +4,7 @@
 <can-import from="../condition-form/" />
 <can-import from="../element-container/" />
 <can-import from="../a2j-conditional/add-element/" />
-<can-import from="../a2j-conditional/a2j-conditional.less" />
+<can-import from="./a2j-conditional.less" />
 
 {{#if (editEnabled) }}
   <element-container

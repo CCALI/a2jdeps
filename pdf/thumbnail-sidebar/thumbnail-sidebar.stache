@@ -1,4 +1,4 @@
-<can-import from='pdf/thumbnail-sidebar/thumbnail-sidebar.less' />
+<can-import from='./thumbnail-sidebar.less' />
 <div class='thumbnail-sidebar {{#if isShowingThumbnails}}active{{/if}}'>
   <div
     title='Toggle thumbnails'

@@ -4,7 +4,7 @@
 <can-import from="../a2j-repeat-loop/" />
 <can-import from="../a2j-conditional/" />
 <can-import from="../a2j-section-title/" />
-<can-import from="../a2j-template/a2j-template.less!" />
+<can-import from="./a2j-template.less" />
 
 <ul>
   {{#for (childNode of rootNode.children) }}

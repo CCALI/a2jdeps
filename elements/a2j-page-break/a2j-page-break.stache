@@ -1,6 +1,6 @@
 <can-import from="../options-pane/" />
 <can-import from="../element-container/" />
-<can-import from="./a2j-page-break.less!" />
+<can-import from="./a2j-page-break.less" />
 {{#if (editEnabled) }}
   <element-container
     nodeId:from="nodeId"
