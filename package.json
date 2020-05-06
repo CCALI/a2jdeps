@@ -1,7 +1,7 @@
 {
   "name": "a2j-deps",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shared dependencies for A2J Author, A2J Viewer, and A2J Document Assembly Tool (DAT)",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
