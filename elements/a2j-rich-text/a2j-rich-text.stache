@@ -2,7 +2,7 @@
 <can-import from="a2j-deps/elements/element-container/" />
 <can-import from="a2j-deps/elements/a2j-legal-nav-resource/" />
 <can-import from="a2j-deps/elements/a2j-rich-text/a2j-rich-text.less" />
-RICH TEXT LOADED
+
 {{#if (editEnabled )}}
   {{#if (wrapWithContainer) }}
     <element-container

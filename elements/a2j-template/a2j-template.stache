@@ -5,7 +5,7 @@
 <can-import from="a2j-deps/elements/a2j-conditional/" />
 <can-import from="a2j-deps/elements/a2j-section-title/" />
 <can-import from="a2j-deps/elements/a2j-template/a2j-template.less" />
-TEMPLATE STACHE in there!
+
 <ul>
   {{#for (childNode of rootNode.children) }}
     <li

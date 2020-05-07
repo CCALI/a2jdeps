@@ -1,6 +1,6 @@
 <can-import from="a2j-deps/elements/a2j-template/" />
 <can-import from="a2j-deps/elements/a2j-template-ssr/a2j-template-ssr.less" />
-SSR STACHE LOADED
+
 {{#if(scope.vm.templatesPromise.isResolved)}}
   {{#each(scope.vm.templates)}}
     {{#if(scope.vm.canRenderTemplate(this))}}
