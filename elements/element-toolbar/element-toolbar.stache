@@ -1,5 +1,5 @@
-<can-import from="./element-toolbar.less"/>
-
+<can-import from="a2j-deps/elements/element-toolbar/element-toolbar.less"/>
+element-toolbar loaded
 <div>
   <span class="glyphicon-move small text-muted drag-handle" aria-hidden="true"></span>
 

@@ -1,11 +1,11 @@
-<can-import from="../a2j-variable/" />
-<can-import from="../a2j-rich-text/" />
-<can-import from="../a2j-page-break/" />
-<can-import from="../a2j-repeat-loop/" />
-<can-import from="../a2j-conditional/" />
-<can-import from="../a2j-section-title/" />
-<can-import from="./a2j-template.less" />
-
+<can-import from="a2j-deps/elements/a2j-variable/" />
+<can-import from="a2j-deps/elements/a2j-rich-text/" />
+<can-import from="a2j-deps/elements/a2j-page-break/" />
+<can-import from="a2j-deps/elements/a2j-repeat-loop/" />
+<can-import from="a2j-deps/elements/a2j-conditional/" />
+<can-import from="a2j-deps/elements/a2j-section-title/" />
+<can-import from="a2j-deps/elements/a2j-template/a2j-template.less" />
+TEMPLATE STACHE in there!
 <ul>
   {{#for (childNode of rootNode.children) }}
     <li
