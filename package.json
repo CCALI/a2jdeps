@@ -1,5 +1,5 @@
 {
-  "name": "a2j-deps",
+  "name": "a2jdeps",
   "version": "1.0.0",
   "description": "Shared dependencies for A2J Author, A2J Viewer, and A2J Document Assembly Tool (DAT)",
   "main": "",
