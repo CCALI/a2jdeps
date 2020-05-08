@@ -24,5 +24,8 @@ export default Component.extend({
   view: template,
   tag: 'a2j-template-ssr',
   ViewModel: TemplateSsrVM,
-  leakScope: false
+  leakScope: false,
+  init () {
+    console.log('ssr init')
+  }
 })

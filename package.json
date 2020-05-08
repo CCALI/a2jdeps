@@ -1,11 +1,20 @@
 {
   "name": "a2j-deps",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shared dependencies for A2J Author, A2J Viewer, and A2J Document Assembly Tool (DAT)",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "steal": {
+    "paths": {
+      "tokenfield-jquery": "node_modules/bootstrap-tokenfield/node_modules/jquery/dist/jquery.js"
+    }
+  },
+  "dependencies": {
+    "@open-xchange/bootstrap-tokenfield": "^0.13.1",
+    "can-stache-converters": "^4.2.5"
+  }
 }
