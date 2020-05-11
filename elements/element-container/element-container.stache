@@ -1,5 +1,5 @@
-<can-import from="a2j-deps/elements/element-toolbar/"/>
-<can-import from="a2j-deps/elements/element-container/element-container.less"/>
+<can-import from="a2jdeps/elements/element-toolbar/"/>
+<can-import from="a2jdeps/elements/element-container/element-container.less"/>
 
 <div class="wrapper{{#if(selected)}} selected{{/if}}">
   <content />

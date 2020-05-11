@@ -1,8 +1,8 @@
-<can-import from="a2j-deps/elements/varpicker/" />
-<can-import from="a2j-deps/elements/a2j-variable/" />
-<can-import from="a2j-deps/elements/options-pane/" />
-<can-import from="a2j-deps/elements/element-container/" />
-<can-import from="a2j-deps/elements/a2j-repeat-loop/a2j-repeat-loop.less" />
+<can-import from="a2jdeps/elements/varpicker/" />
+<can-import from="a2jdeps/elements/a2j-variable/" />
+<can-import from="a2jdeps/elements/options-pane/" />
+<can-import from="a2jdeps/elements/element-container/" />
+<can-import from="a2jdeps/elements/a2j-repeat-loop/a2j-repeat-loop.less" />
 
 {{#if (editEnabled) }}
   <element-container

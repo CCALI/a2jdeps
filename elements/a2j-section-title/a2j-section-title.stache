@@ -1,6 +1,6 @@
-<can-import from="a2j-deps/elements/options-pane/" />
-<can-import from="a2j-deps/elements/element-container/" />
-<can-import from="a2j-deps/elements/a2j-section-title/a2j-section-title.less" />
+<can-import from="a2jdeps/elements/options-pane/" />
+<can-import from="a2jdeps/elements/element-container/" />
+<can-import from="a2jdeps/elements/a2j-section-title/a2j-section-title.less" />
 
 <div>
   {{#if(editEnabled)}}
