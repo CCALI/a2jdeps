@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@open-xchange/bootstrap-tokenfield": "^0.13.1",
+    "a2jstyles": "file:../a2jstyles",
     "can-stache-converters": "^4.2.5"
   }
 }
