@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import parser from 'caja/viewer/mobile/util/parser'
+import parser from 'a2jdeps/utils/parser'
 import assemble from './assemble'
 import PDFJS from 'pdfjs-dist'
 import 'pdfjs-dist/build/pdf.worker.entry'
