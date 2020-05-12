@@ -1,0 +1,11 @@
+<can-import from="./color-chips.less"/>
+<ul class='chip-list'>
+  {{#each colorClasses}}
+    <li
+      tabindex="0"
+      class="color-chip {{.}} {{#is (this, scope.vm.selectedColorClass)}}selected-chip{{/is}}"
+      on:click="scope.vm.onSelect(., scope.element)()"
+      on:keydown="keydownFireClickHandler(scope.event, scope.vm.onSelect(., scope.element))"
+    ></li>
+  {{/each}}
+</ul>
