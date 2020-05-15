@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import { assert } from 'chai'
 import stache from 'can-stache'
-import { ViewerAvatarVM } from 'caja/viewer/desktop/avatar/'
+import { ViewerAvatarVM } from 'a2jdeps/avatar/'
 
 import 'steal-mocha'
 
