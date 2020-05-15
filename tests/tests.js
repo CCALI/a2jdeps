@@ -1,4 +1,5 @@
 import 'a2jdeps/alert/alert-test'
+import 'a2jdeps/avatar/avatar-test'
 import 'a2jdeps/elements/varpicker/varpicker-test'
 import 'a2jdeps/elements/a2j-template/a2j-template-test'
 import 'a2jdeps/elements/a2j-variable/a2j-variable-test'

@@ -11,11 +11,27 @@
   "steal": {
     "paths": {
       "tokenfield-jquery": "node_modules/bootstrap-tokenfield/node_modules/jquery/dist/jquery.js"
+    },
+    "map": {
+      "chai": "chai/chai"
     }
   },
   "dependencies": {
     "@open-xchange/bootstrap-tokenfield": "^0.13.1",
     "a2jstyles": "file:../a2jstyles",
-    "can-stache-converters": "^4.2.5"
+    "can-list": "^4.2.2",
+    "can-map": "^4.3.12",
+    "can-map-define": "^4.4.0",
+    "can-model": "^4.1.0",
+    "can-stache-converters": "^4.2.5",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.25.3",
+    "numbro": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "steal": "^1.12.6",
+    "steal-mocha": "^2.0.1"
   }
 }

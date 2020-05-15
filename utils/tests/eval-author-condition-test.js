@@ -1,6 +1,6 @@
 import { assert } from 'chai'
-import Answers from '../models/answers'
-import evalAuthorCondition from './eval-author-condition'
+import Answers from 'a2jdeps/models/answers'
+import evalAuthorCondition from 'a2jdeps/utils/eval-author-condition'
 
 import 'steal-mocha'
 
