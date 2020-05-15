@@ -41,11 +41,13 @@
     "can-reflect-promise": "^2.2.1",
     "can-stache": "^4.17.21",
     "can-stache-converters": "^4.2.5",
+    "can-stache-route-helpers": "^1.1.1",
     "cuid": "^2.1.8",
     "jquery": "^3.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
     "numbro": "^2.2.0",
+    "pdfjs-dist": "^2.0.466",
     "typeahead.js": "git://github.com/twitter/typeahead.js.git#v0.11.1"
   },
   "devDependencies": {
