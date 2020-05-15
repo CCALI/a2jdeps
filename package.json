@@ -19,17 +19,21 @@
   "dependencies": {
     "@open-xchange/bootstrap-tokenfield": "^0.13.1",
     "a2jstyles": "file:../a2jstyles",
+    "can-define": "^2.8.0",
     "can-list": "^4.2.2",
     "can-map": "^4.3.12",
     "can-map-define": "^4.4.0",
     "can-model": "^4.1.0",
+    "can-reflect-promise": "^2.2.1",
     "can-stache-converters": "^4.2.5",
+    "cuid": "^2.1.8",
     "jquery": "^3.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
     "numbro": "^2.2.0"
   },
   "devDependencies": {
+    "can-fixture": "^2.1.0",
     "chai": "^4.2.0",
     "steal": "^1.12.6",
     "steal-mocha": "^2.0.1"

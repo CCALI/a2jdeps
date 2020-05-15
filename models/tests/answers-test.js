@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import Answers from '../answers'
+import Answers from '../answers-from-author'
 
 import 'steal-mocha'
 
