@@ -1,5 +1,5 @@
 import CanMap from 'can-map'
-import Answers from '../../models/answers'
+import Answers from '../../models/answers-from-author'
 
 import 'can-map-define'
 

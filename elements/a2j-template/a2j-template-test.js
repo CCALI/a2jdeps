@@ -4,7 +4,7 @@ import { assert } from 'chai'
 import stache from 'can-stache'
 import A2JTemplateVM from './a2j-template-vm'
 import A2JTemplate from '../../models/a2j-template'
-import templateFixture from 'models/fixtures/templates/guide20-template2114'
+import templateFixture from 'a2jdeps/models/fixtures-author/templates/guide20-template2114'
 
 import 'steal-mocha'
 import './a2j-template'

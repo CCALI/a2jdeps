@@ -3,7 +3,7 @@ import _omit from 'lodash/omit'
 import _inRange from 'lodash/inRange'
 import _isFunction from 'lodash/isFunction'
 import A2JNode from '../../models/a2j-node'
-import Answers from '../../models/answers'
+import Answers from '../../models/answers-from-author'
 
 import 'can-map-define'
 

@@ -1,6 +1,6 @@
 import CanMap from 'can-map'
 import { assert } from 'chai'
-import Answers from '../../models/answers'
+import Answers from '../../models/answers-from-author'
 import A2JVariableVM from './a2j-variable-vm'
 
 import 'steal-mocha'
