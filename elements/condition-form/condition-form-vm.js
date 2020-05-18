@@ -1,5 +1,6 @@
 import CanMap from 'can-map'
 import _includes from 'lodash/includes'
+import 'can-map-define'
 
 /**
  * @module ConditionFormVM
