@@ -7,7 +7,7 @@ import ConditionalVM from './a2j-conditional-vm'
 import 'steal-mocha'
 import './a2j-conditional'
 import '../a2j-template/'
-import 'a2jstyles/author/styles.less'
+import '@caliorg/a2jstyles/author/styles.less'
 
 describe('<a2j-conditional>', function () {
   describe('viewModel', function () {
