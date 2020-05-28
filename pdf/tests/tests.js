@@ -1,5 +1,5 @@
 
-import 'a2jdeps/pdf/assemble-test'
-import 'a2jdeps/pdf/editor/area-test'
-import 'a2jdeps/pdf/editor/editor-test'
-import 'a2jdeps/pdf/checkmark-picker/checkmark-picker-test'
+import '~/pdf/assemble-test'
+import '~/pdf/editor/area-test'
+import '~/pdf/editor/editor-test'
+import '~/pdf/checkmark-picker/checkmark-picker-test'

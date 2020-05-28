@@ -1,7 +1,7 @@
 import { assert } from 'chai'
 import CanList from 'can-list'
 import VarPickerVM from './varpicker-vm'
-import A2JVariable from 'a2jdeps/models/a2j-variable'
+import A2JVariable from '~/models/a2j-variable'
 
 import 'steal-mocha'
 

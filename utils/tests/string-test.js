@@ -1,4 +1,4 @@
-import cString from 'a2jdeps/utils/string'
+import cString from '~/utils/string'
 import { assert } from 'chai'
 import 'steal-mocha'
 

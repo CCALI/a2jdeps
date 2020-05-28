@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import { assert } from 'chai'
 import stache from 'can-stache'
-import { UserAvatarPickerVm, AvatarPick } from 'a2jdeps/user-avatar-picker/'
+import { UserAvatarPickerVm, AvatarPick } from '~/user-avatar-picker/'
 
 import 'steal-mocha'
 

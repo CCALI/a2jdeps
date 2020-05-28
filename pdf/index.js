@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import parser from 'a2jdeps/utils/parser'
+import parser from '~/utils/parser'
 import assemble from './assemble'
 import PDFJS from 'pdfjs-dist'
 import 'pdfjs-dist/build/pdf.worker.entry'

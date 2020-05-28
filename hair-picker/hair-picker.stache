@@ -1,4 +1,4 @@
-<can-import from='a2jdeps/color-chips/' />
+<can-import from='~/color-chips/' />
 <color-chips
   vm:selectedColorClass:from="selectedHairClass"
   vm:colorClasses:from="hairClasses"

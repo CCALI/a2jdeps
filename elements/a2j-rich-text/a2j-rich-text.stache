@@ -1,7 +1,7 @@
-<can-import from="a2jdeps/elements/options-pane/" />
-<can-import from="a2jdeps/elements/element-container/" />
-<can-import from="a2jdeps/elements/a2j-legal-nav-resource/" />
-<can-import from="a2jdeps/elements/a2j-rich-text/a2j-rich-text.less" />
+<can-import from="~/elements/options-pane/" />
+<can-import from="~/elements/element-container/" />
+<can-import from="~/elements/a2j-legal-nav-resource/" />
+<can-import from="~/elements/a2j-rich-text/a2j-rich-text.less" />
 
 {{#if (editEnabled )}}
   {{#if (wrapWithContainer) }}

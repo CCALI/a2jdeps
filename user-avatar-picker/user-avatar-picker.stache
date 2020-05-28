@@ -1,5 +1,5 @@
 <can-import from="./user-avatar-picker.less"/>
-<can-import from="a2jdeps/avatar/" />
+<can-import from="~/avatar/" />
 
 <div class="user-avatar-group">
   <div class="row">

@@ -2,10 +2,10 @@ import $ from 'jquery'
 import _keys from 'lodash/keys'
 import _find from 'lodash/find'
 import _forEach from 'lodash/forEach'
-import Answers from 'a2jdeps/models/answers-from-viewer'
-import constants from 'a2jdeps/models/constants'
-import cString from 'a2jdeps/utils/string'
-import cDate from 'a2jdeps/utils/date'
+import Answers from '~/models/answers-from-viewer'
+import constants from '~/models/constants'
+import cString from '~/utils/string'
+import cDate from '~/utils/date'
 
 const mapANX2Var = {
   unknown: constants.vtUnknown,

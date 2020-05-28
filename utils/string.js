@@ -1,4 +1,4 @@
-import constants from 'a2jdeps/models/constants'
+import constants from '~/models/constants'
 import numbro from 'numbro'
 
 export default {

@@ -1,10 +1,10 @@
 import { assert } from 'chai'
-import Parser from 'a2jdeps/utils/parser'
-import partialJSON from 'a2jdeps/models/fixtures/partial.json'
-import partialXML from 'a2jdeps/models/fixtures/partial.anx!text'
-import interviewJSON from 'a2jdeps/models/fixtures/interview.json'
-import answersJSON from 'a2jdeps/models/fixtures/inclusive_answers.json'
-import answersXML from 'a2jdeps/models/fixtures/inclusive_answers.xml!text'
+import Parser from '~/utils/parser'
+import partialJSON from '~/models/fixtures/partial.json'
+import partialXML from '~/models/fixtures/partial.anx!text'
+import interviewJSON from '~/models/fixtures/interview.json'
+import answersJSON from '~/models/fixtures/inclusive_answers.json'
+import answersXML from '~/models/fixtures/inclusive_answers.xml!text'
 
 // These correspond to an interview that has repeating variables
 import answersWithRepeating from './fixtures/answers-with-repeating-values.json'

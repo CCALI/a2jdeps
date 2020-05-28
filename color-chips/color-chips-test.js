@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { ColorChipsVm } from 'a2jdeps/color-chips/'
+import { ColorChipsVm } from '~/color-chips/'
 
 import 'steal-mocha'
 

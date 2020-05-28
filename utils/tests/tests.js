@@ -1,5 +1,5 @@
-import 'a2jdeps/utils/tests/string-test'
-import 'a2jdeps/utils/tests/parser-test'
-import 'a2jdeps/utils/tests/date-test'
-import 'a2jdeps/utils/tests/eval-author-condition-test'
+import '~/utils/tests/string-test'
+import '~/utils/tests/parser-test'
+import '~/utils/tests/date-test'
+import '~/utils/tests/eval-author-condition-test'
 

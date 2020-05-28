@@ -1,4 +1,4 @@
-<can-import from="a2jdeps/elements/a2j-blank/a2j-blank.less" />
+<can-import from="~/elements/a2j-blank/a2j-blank.less" />
 
 <div class="text-center">
   <h2>This template is empty! <span class="glyphicon-right-thin" aria-hidden="true"></span></h2>

@@ -6,7 +6,7 @@ import {
   Hair,
   Skin,
   Gender
-} from 'a2jdeps/avatar/colors'
+} from '~/avatar/colors'
 
 const baseAvatars = [
   {gender: 'female', isOld: false, hasWheelchair: false},
