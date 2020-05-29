@@ -1,18 +1,18 @@
 import { assert } from 'chai'
 import Parser from '~/utils/parser'
 import partialJSON from '~/models/fixtures/partial.json'
-import partialXML from '~/models/fixtures/partial.anx!text'
+import partialXML from '~/models/fixtures/partial.anx!text' // eslint-disable-line
 import interviewJSON from '~/models/fixtures/interview.json'
 import answersJSON from '~/models/fixtures/inclusive_answers.json'
-import answersXML from '~/models/fixtures/inclusive_answers.xml!text'
+import answersXML from '~/models/fixtures/inclusive_answers.xml!text' // eslint-disable-line
 
 // These correspond to an interview that has repeating variables
 import answersWithRepeating from './fixtures/answers-with-repeating-values.json'
 import pagesWithRepeating from './fixtures/interview-pages-with-repeating-vars.json'
-import answersXMLWithRepeating from './fixtures/answers-file-with-repeating-values.anx!text'
+import answersXMLWithRepeating from './fixtures/answers-file-with-repeating-values.anx!text' // eslint-disable-line
 
 // Nested loop answers file
-import nestedAnswersXML from './fixtures/answers-with-nested-values.anx!text'
+import nestedAnswersXML from './fixtures/answers-with-nested-values.anx!text' // eslint-disable-line
 
 import 'steal-mocha'
 
