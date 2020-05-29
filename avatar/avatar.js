@@ -134,8 +134,7 @@ export let ViewerAvatarVM = CanMap.extend('ViewerAvatarVM', {
      */
     svgBasePath: {
       get () {
-        return joinBaseUrl('../a2jdeps/avatar/images/')
-      }
+        return joinBaseUrl('node_modules/@caliorg/a2jdeps/avatar/images/')      }
     }
   },
 
