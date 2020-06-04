@@ -30,7 +30,6 @@
     }
   },
   "dependencies": {
-    "@caliorg/a2jstyles": "^7.0.3",
     "@open-xchange/bootstrap-tokenfield": "^0.13.1",
     "can-component": "^4.6.3",
     "can-define": "^2.8.0",
