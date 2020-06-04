@@ -1,5 +1,5 @@
-<can-import from="caja/viewer/desktop/avatar/" />
-<can-import from="caja/viewer/styles.less!" />
+<can-import from="~/desktop/avatar/" />
+<can-import from="~/styles.less!" />
 <can-import from='can-stache-converters' />
 
 <div class="row">
