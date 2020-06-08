@@ -68,7 +68,8 @@
     "ignore": [
       "/calculator/",
       "/models/fixtures-author/",
-      "/models/fixtures/"
+      "/models/fixtures/",
+      "styles/documentjs-theme/"
     ]
   }
 }
