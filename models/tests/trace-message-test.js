@@ -9,7 +9,7 @@ describe('TraceMessage Model', () => {
 
   beforeEach(() => {
     traceMessage = new TraceMessage()
-    testMessage = { key: 'num', fragments: [ {format: 'var', msg: 'num'}, {format: '', msg: ' = '}, {format: 'val', msg: '5'} ] }
+    testMessage = { key: 'num', fragments: [ { format: 'var', msg: 'num' }, { format: '', msg: ' = ' }, { format: 'val', msg: '5' } ] }
   })
 
   afterEach(() => {

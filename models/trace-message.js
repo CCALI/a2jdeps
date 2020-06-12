@@ -76,7 +76,7 @@ export default DefineMap.extend('TraceMessageModel', {
 
   // reset the messageLog preserving the currentPageName - used in debug-panel.js
   clearMessageLog () {
-    const logItem = new LogItem({pageName: this.currentPageName})
+    const logItem = new LogItem({ pageName: this.currentPageName })
     this.messageLog.update(new DefineMap()).set(this.currentPageName, logItem)
   },
 

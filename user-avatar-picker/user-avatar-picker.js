@@ -9,14 +9,14 @@ import {
 } from '~/avatar/colors'
 
 const baseAvatars = [
-  {gender: 'female', isOld: false, hasWheelchair: false},
-  {gender: 'female', isOld: false, hasWheelchair: true},
-  {gender: 'female', isOld: true, hasWheelchair: false},
-  {gender: 'female', isOld: true, hasWheelchair: true},
-  {gender: 'male', isOld: false, hasWheelchair: false},
-  {gender: 'male', isOld: false, hasWheelchair: true},
-  {gender: 'male', isOld: true, hasWheelchair: false},
-  {gender: 'male', isOld: true, hasWheelchair: true}
+  { gender: 'female', isOld: false, hasWheelchair: false },
+  { gender: 'female', isOld: false, hasWheelchair: true },
+  { gender: 'female', isOld: true, hasWheelchair: false },
+  { gender: 'female', isOld: true, hasWheelchair: true },
+  { gender: 'male', isOld: false, hasWheelchair: false },
+  { gender: 'male', isOld: false, hasWheelchair: true },
+  { gender: 'male', isOld: true, hasWheelchair: false },
+  { gender: 'male', isOld: true, hasWheelchair: true }
 ]
 
 export const AvatarPick = DefineMap.extend('AvatarPick', {
