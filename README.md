@@ -1,6 +1,6 @@
 # A2J Deps
 
-A2J Deps is a set of shared javascript CanJs 4.x components and utils for A2J Author, A2J Viewer, and A2J DAT.
+A2J Deps is a set of shared javascript CanJs 4.x components and utils for [A2J Author](https://github.com/CCALI/a2jauthor), [A2J Viewer](https://github.com/CCALI/a2jviewer), and [A2J DAT](https://github.com/CCALI/a2jdat).
 
 ## Installation
 
