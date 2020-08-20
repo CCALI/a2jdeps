@@ -16,7 +16,7 @@ const baseAvatars = [
   { gender: 'male', isOld: false, hasWheelchair: false, ariaLabel: 'male younger standing' },
   { gender: 'male', isOld: false, hasWheelchair: true, ariaLabel: 'male younger wheelchair' },
   { gender: 'male', isOld: true, hasWheelchair: false, ariaLabel: 'male older standing' },
-  { gender: 'male', isOld: true, hasWheelchair: true, ariaLabel: 'male older wheelchair' },
+  { gender: 'male', isOld: true, hasWheelchair: true, ariaLabel: 'male older wheelchair' }
 ]
 
 export const AvatarPick = DefineMap.extend('AvatarPick', {
@@ -65,7 +65,7 @@ export const UserAvatarPickerVm = DefineMap.extend('UserAvatarPickerVm', {
     default: () => {
       const list = new AvatarPick.List()
       baseAvatars.forEach((avatar, index) => {
-        list.push({ gender: avatar.gender, isOld: avatar.isOld, hasWheelchair: avatar.hasWheelchair, ariaLabel:avatar.ariaLabel, index })
+        list.push({ gender: avatar.gender, isOld: avatar.isOld, hasWheelchair: avatar.hasWheelchair, ariaLabel: avatar.ariaLabel, index })
       })
       return list
     }
