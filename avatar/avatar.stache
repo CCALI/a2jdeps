@@ -2,7 +2,7 @@
 
 <div class="scaling-svg-container">
   {{#if(avatarImageName)}}
-  <div class="scaling-svg">
+  <div class="scaling-svg" aria-label="avatar image">
     {{{svgInline}}}
   </div>
   {{/if}}
