@@ -44,7 +44,7 @@ describe('<user-avatar-picker>', () => {
 
       const avatarIndex = 0
       vm.fireAvatar(avatarIndex)()
-      assert.deepEqual(testAvatar, { gender: 'female', isOld: false, hasWheelchair: false }, 'should fire passed in onAvatar handler')
+      assert.deepEqual(testAvatar, { gender: 'female', isOld: false, hasWheelchair: false, ariaLabel: 'female younger standing' }, 'should fire passed in onAvatar handler')
     })
 
     it('isSelected', () => {
