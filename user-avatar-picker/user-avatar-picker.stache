@@ -1,12 +1,13 @@
 <can-import from="./user-avatar-picker.less"/>
 <can-import from="~/avatar/" />
 
-<div class="user-avatar-group">
+<div class="user-avatar-group" aria-label="Avatars">
   <div class="row">
     {{#for (avatar of femaleAvatars)}}
       <div class="col-xs-3">
         <div
           tabindex="0"
+          aria-label="{{avatar.ariaLabel}}"
           class="avatar-cell {{#if (isSelected(avatar))}}avatar-cell--selected{{/if}}"
           on:click="fireAvatar(avatar.index)()"
           on:keydown="keydownFireClickHandler(scope.event, fireAvatar(avatar.index))"
@@ -29,7 +30,8 @@
       <div class="col-xs-3">
         <div
           tabindex="0"
-          class="avatar-cell {{#if (isSelected(avatar))}}avatar-cell--selected{{/if}}"
+          aria-label="{{avatar.ariaLabel}}"
+          class="avatar-cell{{#if (isSelected(avatar))}} avatar-cell--selected{{/if}}"
           on:click="fireAvatar(avatar.index)()"
           on:keydown="keydownFireClickHandler(scope.event, fireAvatar(avatar.index))"
         >
