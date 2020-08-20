@@ -69,11 +69,20 @@
     "testee": "^0.9.1"
   },
   "standard": {
+    "globals": [
+      "$",
+      "jQuery",
+      "can",
+      "mocha"
+    ],
     "ignore": [
       "/calculator/",
       "/models/fixtures-author/",
       "/models/fixtures/",
       "styles/documentjs-theme/"
+    ],
+      "env": [
+      "mocha"
     ]
   }
 }
