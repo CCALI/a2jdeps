@@ -4,7 +4,7 @@ import template from './skin-picker.stache'
 import {
   skinTones,
   getClassNameForSkin
-} from 'a2jdeps/avatar/colors'
+} from '~/avatar/colors'
 
 import 'can-map-define'
 

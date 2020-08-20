@@ -45,7 +45,7 @@ export default Component.extend({
       let displayType = vm.attr('displayType')
 
       if (editEnabled) {
-        loader.import('caja/ckeditor/').then(() => {
+        loader.import('~/ckeditor/').then(() => {
           if (displayType === 'text' && editActive) {
             this.initCKEditor()
           }

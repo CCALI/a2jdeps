@@ -6,17 +6,17 @@ import {
   Hair,
   Skin,
   Gender
-} from 'a2jdeps/avatar/colors'
+} from '~/avatar/colors'
 
 const baseAvatars = [
-  {gender: 'female', isOld: false, hasWheelchair: false},
-  {gender: 'female', isOld: false, hasWheelchair: true},
-  {gender: 'female', isOld: true, hasWheelchair: false},
-  {gender: 'female', isOld: true, hasWheelchair: true},
-  {gender: 'male', isOld: false, hasWheelchair: false},
-  {gender: 'male', isOld: false, hasWheelchair: true},
-  {gender: 'male', isOld: true, hasWheelchair: false},
-  {gender: 'male', isOld: true, hasWheelchair: true}
+  { gender: 'female', isOld: false, hasWheelchair: false, ariaLabel: 'female younger standing' },
+  { gender: 'female', isOld: false, hasWheelchair: true, ariaLabel: 'female younger wheelchair' },
+  { gender: 'female', isOld: true, hasWheelchair: false, ariaLabel: 'female older standing' },
+  { gender: 'female', isOld: true, hasWheelchair: true, ariaLabel: 'female older wheelchair' },
+  { gender: 'male', isOld: false, hasWheelchair: false, ariaLabel: 'male younger standing' },
+  { gender: 'male', isOld: false, hasWheelchair: true, ariaLabel: 'male younger wheelchair' },
+  { gender: 'male', isOld: true, hasWheelchair: false, ariaLabel: 'male older standing' },
+  { gender: 'male', isOld: true, hasWheelchair: true, ariaLabel: 'male older wheelchair' }
 ]
 
 export const AvatarPick = DefineMap.extend('AvatarPick', {
@@ -65,7 +65,7 @@ export const UserAvatarPickerVm = DefineMap.extend('UserAvatarPickerVm', {
     default: () => {
       const list = new AvatarPick.List()
       baseAvatars.forEach((avatar, index) => {
-        list.push({ gender: avatar.gender, isOld: avatar.isOld, hasWheelchair: avatar.hasWheelchair, index })
+        list.push({ gender: avatar.gender, isOld: avatar.isOld, hasWheelchair: avatar.hasWheelchair, ariaLabel: avatar.ariaLabel, index })
       })
       return list
     }

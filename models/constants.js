@@ -6,8 +6,8 @@ export default {
   // Spinnner for loading wait
   AJAXLoader: '<span class="loader">&nbsp;</span>',
 
-  A2JVersionNum: '6.0', // VersionInfo.verNum
-  A2JVersionDate: '2020-04-28',
+  A2JVersionNum: '7.0', // VersionInfo.verNum
+  A2JVersionDate: '2020-05-15',
 
   // CAVersionNum:'5.0.0',
   // CAVersionDate:'2013-04-15',

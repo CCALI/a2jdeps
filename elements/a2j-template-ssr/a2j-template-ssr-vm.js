@@ -1,6 +1,6 @@
 import CanMap from 'can-map'
 import CanList from 'can-list'
-import Answers from '../../models/answers'
+import Answers from '../../models/answers-from-author'
 import A2JTemplate from '../../models/a2j-template'
 import evalAuthorCondition from '../../utils/eval-author-condition'
 

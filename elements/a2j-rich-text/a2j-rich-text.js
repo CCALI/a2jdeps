@@ -143,7 +143,7 @@ export default Component.extend({
       let editEnabled = vm.attr('editEnabled')
 
       if (editEnabled) {
-        loader.import('caja/ckeditor/').then(() => {
+        loader.import('~/ckeditor/').then(() => {
           if (editActive) this.initCKEditor()
         })
       }

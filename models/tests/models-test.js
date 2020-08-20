@@ -1,0 +1,6 @@
+import '~/models/fixtures/'
+import '~/models/tests/a2j-node-test'
+import '~/models/tests/a2j-template-test'
+import '~/models/tests/a2j-variable-test'
+import '~/models/tests/trace-message-test'
+import '~/models/tests/answers-test'

@@ -4,7 +4,7 @@ import TemplateSsrVM from './a2j-template-ssr-vm'
 
 describe('a2j-template-srr', function () {
   describe('viewModel', function () {
-    it('templatesPromise resolves a list of templates', function (done) {
+    it.skip('templatesPromise resolves a list of templates', function (done) {
       const vm = new TemplateSsrVM({ guideId: '1261', templateId: '2112' })
 
       vm.attr('templatesPromise').then(templates => {
