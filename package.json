@@ -1,6 +1,6 @@
 {
   "name": "@caliorg/a2jdeps",
-  "version": "7.0.11",
+  "version": "7.0.12",
   "description": "Shared dependencies for A2J Author, A2J Viewer, and A2J Document Assembly Tool (DAT)",
   "main": "",
   "scripts": {
@@ -81,7 +81,7 @@
       "/models/fixtures/",
       "styles/documentjs-theme/"
     ],
-      "env": [
+    "env": [
       "mocha"
     ]
   }
