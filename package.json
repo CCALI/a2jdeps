@@ -76,7 +76,6 @@
       "mocha"
     ],
     "ignore": [
-      "/calculator/",
       "/models/fixtures-author/",
       "/models/fixtures/",
       "styles/documentjs-theme/"
