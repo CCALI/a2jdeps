@@ -15,15 +15,17 @@ npm install @caliorg/a2jdeps
 In your javascript:
 
 ```javascript
-import { audio-player } from '@caliorg/a2jdeps'
+import '@caliorg/a2jdeps/alert/'
+// or in can-stache
+<can-import from="@caliorg/a2jdeps/alert/"/>
 ```
 
 In your stache file:
 ```html
-  <audio-player
-    class="modal-audio"
-    sourceUrl:from="normalizePath(scope/mState.fileDataURL, modalContent.audioURL)"
-  />
+  <app-alert open:from="true" alertType:raw="warning" class="demo-notice">
+    For demonstration and testing purposes only. Not intended for use by the
+    public. This A2J Guided Interview will not generate a form.
+  </app-alert>
 ```
 
 ## Contributing
