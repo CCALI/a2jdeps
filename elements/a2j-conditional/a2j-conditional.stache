@@ -15,6 +15,7 @@
     cloneNode:from="scope/cloneNode"
     deleteNode:from="scope/deleteNode"
     toggleEditActiveNode:from="toggleEditActiveNode"
+    fontProperties:from="fontProperties"
   >
     <div class="panel panel-warning">
       <div class="panel-heading">
@@ -42,7 +43,7 @@
         {{/if}}
       </div>
 
-      <div class="panel-body">
+      <div class="panel-body" style="{{scope/fontProperties}}">
         <a2j-template
           guide:from="scope/guide"
           editEnabled:from="true"
@@ -61,7 +62,7 @@
       {{#if (scope/elseClause)}}
         <div class="panel-else">ELSE</div>
 
-        <div class="panel-body">
+        <div class="panel-body" style="{{scope/fontProperties}}">
           <a2j-template
             guide:from="scope/guide"
             editEnabled:from="true"
