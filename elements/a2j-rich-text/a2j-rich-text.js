@@ -18,6 +18,9 @@ stache.registerPartial('rich-text-content', contentTpl)
  */
 export let RichTextVM = CanMap.extend('RichTextVM', {
   define: {
+    // passed in from parent a2j-template.stache
+    fontProperties: {},
+
     /**
      * @property {String} notes
      *

@@ -49,6 +49,7 @@
           editEnabled:from="true"
           template:from="scope/ifBody"
           saveCallback:from="scope/updateNodeState"
+          parentState:from="scope/parentState"
         />
 
         <conditional-add-element
@@ -68,6 +69,7 @@
             editEnabled:from="true"
             template:from="scope/elseBody"
             saveCallback:from="scope/updateNodeState"
+            parentState:from="scope/parentState"
           />
 
           <conditional-add-element
@@ -112,6 +114,7 @@
       answers:from="scope/answers"
       template:from="scope/ifBody"
       editEnabled:raw="false"
+      parentState:from="scope/parentState"
     />
   {{else}}
     <a2j-template
@@ -120,6 +123,7 @@
       answers:from="scope/answers"
       editEnabled:raw="false"
       template:from="scope/elseBody"
+      parentState:from="scope/parentState"
     />
   {{/if}}
 {{/if}}
