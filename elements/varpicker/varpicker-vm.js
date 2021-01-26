@@ -3,7 +3,6 @@ import CanMap from 'can-map'
 import CanList from 'can-list'
 import _compact from 'lodash/compact'
 import _includes from 'lodash/includes'
-import Bloodhound from 'typeahead.js/dist/bloodhound'
 
 import 'can-map-define'
 
@@ -106,6 +105,35 @@ export default CanMap.extend('VarPickerVM', {
       }
     },
 
+    variableSuggestions: {
+      get () {
+        const hasWorkingVariable = this.isValidVarName(this.attr('selected'))
+        if (hasWorkingVariable) {
+          return []
+        }
+
+        const text = this.attr('selected').toLowerCase()
+        if (!text) {
+          return []
+        }
+
+        let names = this.attr('variableNames')
+        if (!names) {
+          return []
+        }
+
+        const maxSuggestionCount = 5
+        return names
+          .serialize()
+          .filter(name => {
+            const containsText = name.toLowerCase().match(text) !== null
+            return containsText
+          })
+          .sort((a, b) => a.localeCompare(b))
+          .slice(0, maxSuggestionCount)
+      }
+    },
+
     /**
      * @property {can.List} varPicker.ViewModel.prototype.variableNames variableNames
      * @parent varPicker.ViewModel
@@ -123,53 +151,81 @@ export default CanMap.extend('VarPickerVM', {
 
         return names
       }
+    },
+
+    hoveredSuggestionIndex: {
+      value: 0
     }
+  },
+
+  isValidVarName (varName) {
+    const variableNames = this.attr('variableNames')
+    return _includes(variableNames, varName)
+  },
+
+  onSuggestionSelect (name) {
+    this.attr('selected', name)
   },
 
   connectedCallback (el) {
     let vm = el.viewModel
-    let selected = vm.attr('selected')
-    let $input = $(el).find('.form-control')
-    let variableNames = vm.attr('variableNames').attr()
+    const varNameInput = el.querySelector('.var-picker-input')
+    const inputHandler = (ev) => {
+      vm.attr('selected', ev.target.value)
+    }
+    varNameInput.addEventListener('input', inputHandler)
 
-    let engine = new Bloodhound({
-      local: variableNames,
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      datumTokenizer: Bloodhound.tokenizers.whitespace
+    $('li.suggestion-item').mouseenter((ev) => {
+      // clear any active
+      $('li.suggestion-item').removeClass('active')
     })
 
-    setTimeout(function () {
-      $input
-        .tokenfield({
-          limit: 1,
-          tokens: selected,
-          inputType: 'text',
-          createTokensOnBlur: false,
-          typeahead: [null, { source: engine.ttAdapter() }]
-        })
-        .trigger('tokenfield:initialized')
-        .show()
-    })
+    const keydownHandler = (ev) => {
+      let currentHoveredIndex = vm.attr('hoveredSuggestionIndex')
+      let targetIndex
+      const targetMax = vm.attr('variableSuggestions').length
 
-    // ListenTo the disabled change and set the $.tokenField to
-    // enable | disable the plugin when the disabled scope changes
-    this.listenTo('disabled', function (ev, newVal) {
-      $input.tokenfield(newVal ? 'disable' : 'enable')
-    })
+      // clear any active
+      $('li.suggestion-item.active').removeClass('active')
 
-    // we think the typeahead plugin messes up the `value:bind' in the input (by
-    // removing it from the DOM or preventDefault/stopPropagation or something),
-    // but this works around the issue
-    const pickerInputHandler = function pickerInputChanged () {
-      vm.attr('selected', this.value)
+      if (ev.keyCode === 40) { // arrow down
+        targetIndex = currentHoveredIndex + 1
+        if (targetIndex > targetMax) { targetIndex = targetMax }
+        vm.attr('hoveredSuggestionIndex', targetIndex)
+        console.log('arrow down')
+      }
+      if (ev.keyCode === 38) { // arrow up
+        targetIndex = currentHoveredIndex - 1
+        if (targetIndex <= 0) {
+          targetIndex = 0
+        }
+        vm.attr('hoveredSuggestionIndex', targetIndex)
+        console.log('arrow up')
+      }
+
+      if (targetIndex !== 0 && targetIndex <= targetMax) {
+        const $newTargetLi = $(`.suggestion-list li:nth-of-type(${targetIndex})`)
+        $newTargetLi.addClass('active')
+        console.log('newTargetLi', $newTargetLi, targetIndex, targetMax)
+      }
+
+      if (ev.keyCode === 13) { // enter
+        const selectedIndex = vm.attr('hoveredSuggestionIndex') - 1
+        if (selectedIndex >= 0 && selectedIndex < targetMax) {
+          const selectedVarName = vm.attr('variableSuggestions')[selectedIndex]
+          vm.attr('selected', selectedVarName)
+          console.log('setting selected', selectedVarName)
+        }
+      }
+
+      console.log(ev.keyCode)
     }
 
-    $input.on('change', pickerInputHandler)
+    varNameInput.addEventListener('keydown', keydownHandler)
 
-    // cleanup
     return () => {
-      $input.off('change', pickerInputHandler)
-      this.stopListening()
+      varNameInput.removeEventListener('input', inputHandler)
+      varNameInput.removeEventListener('keydown', keydownHandler)
     }
   }
 })

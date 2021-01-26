@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "can-fixture": "^2.1.0",
+    "can-view-autorender": "^6.0.0",
     "chai": "^4.2.0",
     "funcunit": "^3.7.0",
     "sinon": "^1.17.7",

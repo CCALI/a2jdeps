@@ -1,10 +1,24 @@
 <can-import from="~/elements/varpicker/varpicker.less" />
-<can-import from="@open-xchange/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css!" />
 
-<input
-  type="text"
-  style:raw="display: none;"
-  class="form-control"
-  value:bind="selected"
-  disabled:from="disabled"
-/>
+    <div>
+      <span class="var-picker-span">
+        <input
+          type="text"
+          name="varname"
+          class="var-picker-input editable text ui-widget-content ui-corner-all"
+          value:bind="selected"
+          autocomplete="off"
+        />
+      </span>
+      {{#if(variableSuggestions.length)}}
+        <div class='variable-suggestions'>
+          <div class='suggestion-container'>
+            <ul class='suggestion-list'>
+              {{#each(variableSuggestions)}}
+                <li class='suggestion-item' on:el:click="scope/onSuggestionSelect(this)">{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+    </div>
