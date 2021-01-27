@@ -1,6 +1,9 @@
 <can-import from="~/elements/varpicker/varpicker.less" />
 
     <div>
+      {{#if(showInvalidMessage)}}
+        <span class="var-picker-warning glyphicon-info-circled"> no match</span>
+      {{/if}}
       <span class="var-picker-span">
         <input
           type="text"

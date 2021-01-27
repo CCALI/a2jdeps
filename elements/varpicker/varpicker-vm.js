@@ -155,6 +155,22 @@ export default CanMap.extend('VarPickerVM', {
 
     hoveredSuggestionIndex: {
       value: 0
+
+    /**
+     * @property {Boolean} varPicker.ViewModel.prototype.showInvalidMessage showInvalidMessage
+     * @parent varPicker.ViewModel
+     *
+     * Toggle warning message when no matches
+     */
+    showInvalidMessage: {
+      get () {
+        const varName = this.attr('selected')
+        const notEmptyString = varName !== ''
+        const suggestionsShowing = this.attr('variableSuggestions').length
+        const notValid = !this.isValidVarName(varName)
+
+        return notEmptyString && suggestionsShowing && notValid
+      }
     }
   },
 
