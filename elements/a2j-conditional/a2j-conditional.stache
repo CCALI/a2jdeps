@@ -15,6 +15,7 @@
     cloneNode:from="scope/cloneNode"
     deleteNode:from="scope/deleteNode"
     toggleEditActiveNode:from="toggleEditActiveNode"
+    fontProperties:from="fontProperties"
   >
     <div class="panel panel-warning">
       <div class="panel-heading">
@@ -42,12 +43,13 @@
         {{/if}}
       </div>
 
-      <div class="panel-body">
+      <div class="panel-body" style="{{scope/fontProperties}}">
         <a2j-template
           guide:from="scope/guide"
           editEnabled:from="true"
           template:from="scope/ifBody"
           saveCallback:from="scope/updateNodeState"
+          parentState:from="scope/parentState"
         />
 
         <conditional-add-element
@@ -61,12 +63,13 @@
       {{#if (scope/elseClause)}}
         <div class="panel-else">ELSE</div>
 
-        <div class="panel-body">
+        <div class="panel-body" style="{{scope/fontProperties}}">
           <a2j-template
             guide:from="scope/guide"
             editEnabled:from="true"
             template:from="scope/elseBody"
             saveCallback:from="scope/updateNodeState"
+            parentState:from="scope/parentState"
           />
 
           <conditional-add-element
@@ -111,6 +114,7 @@
       answers:from="scope/answers"
       template:from="scope/ifBody"
       editEnabled:raw="false"
+      parentState:from="scope/parentState"
     />
   {{else}}
     <a2j-template
@@ -119,6 +123,7 @@
       answers:from="scope/answers"
       editEnabled:raw="false"
       template:from="scope/elseBody"
+      parentState:from="scope/parentState"
     />
   {{/if}}
 {{/if}}

@@ -9,7 +9,7 @@ import 'can-map-define'
 
 const fontFamilyMap = {
   'sans-serif': '\'Open Sans\', sans-serif',
-  arial: 'Arial, \'Helvetica Neue\', Helvetica, sans-serif',
+  'arial': 'Arial, \'Helvetica Neue\', Helvetica, sans-serif',
   'times-new-roman': 'TimesNewRoman, \'Times New Roman\', Times, Baskerville, Georgia, serif',
   'courier-new': '\'Courier New\', Courier, \'Lucida Sans Typewriter\', \'Lucida Typewriter\', monospace'
 }
@@ -53,6 +53,10 @@ export default CanMap.extend('A2JTemplateVM', {
     leftOperand: {},
     leftOperandType: {},
     guide: {},
+    // used for a2j-conditional child element styles
+    parentState: {
+      value: () => new CanMap()
+    },
 
     /**
      * @property {Answers} conditional.ViewModel.prototype.answers answers
@@ -162,8 +166,9 @@ export default CanMap.extend('A2JTemplateVM', {
     fontProperties: {
       get () {
         const state = this.attr('rootNode.state')
-        const size = state.attr('fontSize')
-        const family = fontFamilyMap[state.attr('fontFamily')]
+        const parentState = this.attr('parentState')
+        const size = state.attr('fontSize') || parentState.attr('fontSize')
+        const family = fontFamilyMap[state.attr('fontFamily')] || fontFamilyMap[parentState.attr('fontFamily')]
 
         if (family && size) {
           return `font-family: ${family}; font-size: ${size}px;`

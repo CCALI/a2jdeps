@@ -141,5 +141,24 @@ describe('a2j-template', function () {
       const child = vm.getChildById('citvkuui300013k6a8n9329e9')
       assert.equal(child.attr('tag'), 'a2j-conditional')
     })
+
+    it('fontProperties', function () {
+      const template = makeA2JTemplate(templateFixture)
+      const vm = new A2JTemplateVM({ template })
+      vm.attr('template.rootNode.state.fontSize', 12)
+      vm.attr('template.rootNode.state.fontFamily', 'courier-new')
+      let fontProperties = vm.attr('fontProperties')
+      let expectedResults = 'font-family: \'Courier New\', Courier, \'Lucida Sans Typewriter\', \'Lucida Typewriter\', monospace; font-size: 12px;'
+      assert.deepEqual(expectedResults, fontProperties, 'should get fontProperties from vm.rootNode.state if they exist')
+
+      // remove rootNode, set parentState, and test for fonts
+      vm.attr('parentState', { fontSize: 13, fontFamily: 'sans-serif' })
+      vm.attr('template.rootNode.state.fontSize', null)
+      vm.attr('template.rootNode.state.fontFamily', null)
+
+      fontProperties = vm.attr('fontProperties')
+      expectedResults = 'font-family: \'Open Sans\', sans-serif; font-size: 13px;'
+      assert.deepEqual(expectedResults, fontProperties, 'should get fontProperties from vm.parentState if rootNode.state does not have fontSize/fontFamily')
+    })
   })
 })

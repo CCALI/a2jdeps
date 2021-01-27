@@ -18,6 +18,8 @@ export default CanMap.extend('A2JConditionalVM', {
   define: {
     // passed in via stache
     toggleEditActiveNode: {},
+    parentState: {},
+    fontProperties: {},
     cloneNode: {},
     deleteNode: {},
     updateNode: {},

@@ -103,6 +103,7 @@
           updateNode:from="updateNode"
           editEnabled:from="editEnabled"
           fontProperties:from="fontProperties"
+          parentState:from="this.rootNode.state"
           variablesList:from="this.guide.variablesList"
           toggleEditActiveNode:from="toggleEditActiveNode"
         />
