@@ -1,6 +1,6 @@
-import $ from 'jquery'
 import CanMap from 'can-map'
 import CanList from 'can-list'
+import escapeStringRegexp from 'escape-string-regexp'
 import _compact from 'lodash/compact'
 import _includes from 'lodash/includes'
 
@@ -34,6 +34,15 @@ const byType = function (types, variable) {
  */
 export default CanMap.extend('VarPickerVM', {
   define: {
+    /**
+     * @property {Number} maxSuggestionCount
+     *
+     * maxSuggestionCount for variableSuggestions, can override with stache
+     */
+    maxSuggestionCount: {
+      value: 5
+    },
+
     /**
      * @property {Boolean} disabled
      *
@@ -105,6 +114,12 @@ export default CanMap.extend('VarPickerVM', {
       }
     },
 
+    /**
+     * @property {CanList} varPicker.ViewModel.prototype.variableSuggestions variableSuggestions
+     * @parent varPicker.ViewModel
+     *
+     * List of search result suggestions, limited by this.maxSuggestionCount.
+     */
     variableSuggestions: {
       get () {
         const hasWorkingVariable = this.isValidVarName(this.attr('selected'))
@@ -122,11 +137,12 @@ export default CanMap.extend('VarPickerVM', {
           return []
         }
 
-        const maxSuggestionCount = 5
+        const maxSuggestionCount = this.attr('maxSuggestionCount')
         return names
           .serialize()
           .filter(name => {
-            const containsText = name.toLowerCase().match(text) !== null
+            const escapedText = escapeStringRegexp(text)
+            const containsText = name.toLowerCase().match(escapedText) !== null
             return containsText
           })
           .sort((a, b) => a.localeCompare(b))
@@ -135,7 +151,7 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {can.List} varPicker.ViewModel.prototype.variableNames variableNames
+     * @property {CanList} varPicker.ViewModel.prototype.variableNames variableNames
      * @parent varPicker.ViewModel
      *
      * List of variables names, this derived from the [variables] list.
@@ -153,8 +169,27 @@ export default CanMap.extend('VarPickerVM', {
       }
     },
 
-    hoveredSuggestionIndex: {
+    /**
+     * @property {Number} varPicker.ViewModel.prototype.suggestionIndex suggestionIndex
+     * @parent varPicker.ViewModel
+     *
+     * Index of current .active or hovered suggestion
+     */
+    suggestionIndex: {
       value: 0
+    },
+
+    /**
+     * @property {Number} varPicker.ViewModel.prototype.suggestionIndexMax suggestionIndexMax
+     * @parent varPicker.ViewModel
+     *
+     * Index of current .active or hovered suggestion
+     */
+    suggestionIndexMax: {
+      get () {
+        return this.attr('variableSuggestions').length
+      }
+    },
 
     /**
      * @property {Boolean} varPicker.ViewModel.prototype.showInvalidMessage showInvalidMessage
@@ -166,82 +201,128 @@ export default CanMap.extend('VarPickerVM', {
       get () {
         const varName = this.attr('selected')
         const notEmptyString = varName !== ''
-        const suggestionsShowing = this.attr('variableSuggestions').length
         const notValid = !this.isValidVarName(varName)
 
-        return notEmptyString && suggestionsShowing && notValid
+        return notEmptyString && notValid
       }
     }
   },
 
+  /**
+   * @property {Booelan} varPicker.ViewModel.prototype.isValidVarName isValidVarName
+   * @parent varPicker.ViewModel
+   *
+   * Check varName is in the list of variableNames
+   */
   isValidVarName (varName) {
     const variableNames = this.attr('variableNames')
-    return _includes(variableNames, varName)
+    return !!_includes(variableNames, varName)
   },
 
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.onSuggestionSelect onSuggestionSelect
+   * @parent varPicker.ViewModel
+   *
+   * Click handler for updating the selected name
+   */
   onSuggestionSelect (name) {
     this.attr('selected', name)
+    // reset suggestionIndex
+    this.attr('suggestionIndex', 0)
+  },
+
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.onVarNameInput onVarNameInput
+   * @parent varPicker.ViewModel
+   *
+   * Input handler to sync as a user types
+   */
+  onVarNameInput (ev) {
+    const vm = ev.currentTarget.vm
+    vm.attr('selected', ev.target.value)
+  },
+
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.highlightSuggestion highlightSuggestion
+   * @parent varPicker.ViewModel
+   *
+   * handler for keyboard nav/select on the suggestion list
+   */
+  highlightSuggestion (targetIndex) {
+    const suggestionIndexMax = this.attr('suggestionIndexMax')
+    if (targetIndex !== 0 && targetIndex <= suggestionIndexMax) {
+      const newTargetLi = document.querySelector(`.suggestion-list li:nth-of-type(${targetIndex})`)
+      newTargetLi.classList.add('active')
+    }
+  },
+
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.onSuggestionKeydown onSuggestionKeydown
+   * @parent varPicker.ViewModel
+   *
+   * handler for keyboard nav/select on the suggestion list
+   */
+  onSuggestionKeydown (ev) {
+    const vm = ev.currentTarget.vm
+    let currentSuggestionIndex = vm.attr('suggestionIndex')
+    let targetIndex
+    const suggestionIndexMax = vm.attr('suggestionIndexMax')
+
+    // clear any active
+    vm.clearActiveClass()
+
+    if (ev.keyCode === 40) { // arrow down
+      targetIndex = currentSuggestionIndex + 1
+      if (targetIndex > suggestionIndexMax) { targetIndex = suggestionIndexMax }
+      vm.attr('suggestionIndex', targetIndex)
+    }
+    if (ev.keyCode === 38) { // arrow up
+      targetIndex = currentSuggestionIndex - 1
+      if (targetIndex <= 0) {
+        targetIndex = 0
+      }
+      vm.attr('suggestionIndex', targetIndex)
+    }
+    // highlight suggestion
+    vm.highlightSuggestion(targetIndex)
+
+    // handle keyboard select on highlighted selection
+    if (ev.keyCode === 13) { // enter
+      const selectedIndex = vm.attr('suggestionIndex') - 1
+      if (selectedIndex >= 0 && selectedIndex < suggestionIndexMax) {
+        const selectedVarName = vm.attr('variableSuggestions')[selectedIndex]
+        vm.attr('selected', selectedVarName)
+        // reset suggestionIndex
+        vm.attr('suggestionIndex', 0)
+      }
+    }
+  },
+
+  clearActiveClass () {
+    document.querySelectorAll('li.suggestion-item').forEach((li) => {
+      li.classList.remove('active')
+    })
   },
 
   connectedCallback (el) {
-    let vm = el.viewModel
+    const vm = this
+    // grab input unique to this instance
     const varNameInput = el.querySelector('.var-picker-input')
-    const inputHandler = (ev) => {
-      vm.attr('selected', ev.target.value)
-    }
-    varNameInput.addEventListener('input', inputHandler)
+    varNameInput.addEventListener('input', this.onVarNameInput)
+    varNameInput.addEventListener('keydown', this.onSuggestionKeydown)
+    varNameInput.vm = vm
 
-    $('li.suggestion-item').mouseenter((ev) => {
-      // clear any active
-      $('li.suggestion-item').removeClass('active')
+    const suggestionElements = document.querySelectorAll('li.suggestion-item')
+    suggestionElements.forEach((el) => {
+      el.addEventListener('mouseenter', this.clearActiveClass)
     })
 
-    const keydownHandler = (ev) => {
-      let currentHoveredIndex = vm.attr('hoveredSuggestionIndex')
-      let targetIndex
-      const targetMax = vm.attr('variableSuggestions').length
-
-      // clear any active
-      $('li.suggestion-item.active').removeClass('active')
-
-      if (ev.keyCode === 40) { // arrow down
-        targetIndex = currentHoveredIndex + 1
-        if (targetIndex > targetMax) { targetIndex = targetMax }
-        vm.attr('hoveredSuggestionIndex', targetIndex)
-        console.log('arrow down')
-      }
-      if (ev.keyCode === 38) { // arrow up
-        targetIndex = currentHoveredIndex - 1
-        if (targetIndex <= 0) {
-          targetIndex = 0
-        }
-        vm.attr('hoveredSuggestionIndex', targetIndex)
-        console.log('arrow up')
-      }
-
-      if (targetIndex !== 0 && targetIndex <= targetMax) {
-        const $newTargetLi = $(`.suggestion-list li:nth-of-type(${targetIndex})`)
-        $newTargetLi.addClass('active')
-        console.log('newTargetLi', $newTargetLi, targetIndex, targetMax)
-      }
-
-      if (ev.keyCode === 13) { // enter
-        const selectedIndex = vm.attr('hoveredSuggestionIndex') - 1
-        if (selectedIndex >= 0 && selectedIndex < targetMax) {
-          const selectedVarName = vm.attr('variableSuggestions')[selectedIndex]
-          vm.attr('selected', selectedVarName)
-          console.log('setting selected', selectedVarName)
-        }
-      }
-
-      console.log(ev.keyCode)
-    }
-
-    varNameInput.addEventListener('keydown', keydownHandler)
-
     return () => {
-      varNameInput.removeEventListener('input', inputHandler)
-      varNameInput.removeEventListener('keydown', keydownHandler)
+      varNameInput.removeEventListener('input', this.onVarNameInput)
+      varNameInput.removeEventListener('keydown', this.onSuggestionKeydown)
+      suggestionElements.forEach((el) => {
+        el.removeEventListener('mouseenter', this.clearActiveClass)
+      })
     }
   }
 })
