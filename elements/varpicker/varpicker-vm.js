@@ -1,9 +1,8 @@
-import $ from 'jquery'
 import CanMap from 'can-map'
 import CanList from 'can-list'
+import escapeStringRegexp from 'escape-string-regexp'
 import _compact from 'lodash/compact'
 import _includes from 'lodash/includes'
-import Bloodhound from 'typeahead.js/dist/bloodhound'
 
 import 'can-map-define'
 
@@ -35,6 +34,15 @@ const byType = function (types, variable) {
  */
 export default CanMap.extend('VarPickerVM', {
   define: {
+    /**
+     * @property {Number} maxSuggestionCount
+     *
+     * maxSuggestionCount for variableSuggestions, can override with stache
+     */
+    maxSuggestionCount: {
+      value: 5
+    },
+
     /**
      * @property {Boolean} disabled
      *
@@ -107,7 +115,43 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {can.List} varPicker.ViewModel.prototype.variableNames variableNames
+     * @property {CanList} varPicker.ViewModel.prototype.variableSuggestions variableSuggestions
+     * @parent varPicker.ViewModel
+     *
+     * List of search result suggestions, limited by this.maxSuggestionCount.
+     */
+    variableSuggestions: {
+      get () {
+        const hasWorkingVariable = this.isValidVarName(this.attr('selected'))
+        if (hasWorkingVariable) {
+          return []
+        }
+
+        const text = this.attr('selected').toLowerCase()
+        if (!text) {
+          return []
+        }
+
+        let names = this.attr('variableNames')
+        if (!names) {
+          return []
+        }
+
+        const maxSuggestionCount = this.attr('maxSuggestionCount')
+        return names
+          .serialize()
+          .filter(name => {
+            const escapedText = escapeStringRegexp(text)
+            const containsText = name.toLowerCase().match(escapedText) !== null
+            return containsText
+          })
+          .sort((a, b) => a.localeCompare(b))
+          .slice(0, maxSuggestionCount)
+      }
+    },
+
+    /**
+     * @property {CanList} varPicker.ViewModel.prototype.variableNames variableNames
      * @parent varPicker.ViewModel
      *
      * List of variables names, this derived from the [variables] list.
@@ -123,53 +167,162 @@ export default CanMap.extend('VarPickerVM', {
 
         return names
       }
+    },
+
+    /**
+     * @property {Number} varPicker.ViewModel.prototype.suggestionIndex suggestionIndex
+     * @parent varPicker.ViewModel
+     *
+     * Index of current .active or hovered suggestion
+     */
+    suggestionIndex: {
+      value: 0
+    },
+
+    /**
+     * @property {Number} varPicker.ViewModel.prototype.suggestionIndexMax suggestionIndexMax
+     * @parent varPicker.ViewModel
+     *
+     * Index of current .active or hovered suggestion
+     */
+    suggestionIndexMax: {
+      get () {
+        return this.attr('variableSuggestions').length
+      }
+    },
+
+    /**
+     * @property {Boolean} varPicker.ViewModel.prototype.showInvalidMessage showInvalidMessage
+     * @parent varPicker.ViewModel
+     *
+     * Toggle warning message when no matches
+     */
+    showInvalidMessage: {
+      get () {
+        const varName = this.attr('selected')
+        const notEmptyString = varName !== ''
+        const notValid = !this.isValidVarName(varName)
+
+        return notEmptyString && notValid
+      }
     }
   },
 
-  connectedCallback (el) {
-    let vm = el.viewModel
-    let selected = vm.attr('selected')
-    let $input = $(el).find('.form-control')
-    let variableNames = vm.attr('variableNames').attr()
+  /**
+   * @property {Booelan} varPicker.ViewModel.prototype.isValidVarName isValidVarName
+   * @parent varPicker.ViewModel
+   *
+   * Check varName is in the list of variableNames
+   */
+  isValidVarName (varName) {
+    const variableNames = this.attr('variableNames')
+    return !!_includes(variableNames, varName)
+  },
 
-    let engine = new Bloodhound({
-      local: variableNames,
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      datumTokenizer: Bloodhound.tokenizers.whitespace
-    })
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.onSuggestionSelect onSuggestionSelect
+   * @parent varPicker.ViewModel
+   *
+   * Click handler for updating the selected name
+   */
+  onSuggestionSelect (name) {
+    this.attr('selected', name)
+    // reset suggestionIndex
+    this.attr('suggestionIndex', 0)
+  },
 
-    setTimeout(function () {
-      $input
-        .tokenfield({
-          limit: 1,
-          tokens: selected,
-          inputType: 'text',
-          createTokensOnBlur: false,
-          typeahead: [null, { source: engine.ttAdapter() }]
-        })
-        .trigger('tokenfield:initialized')
-        .show()
-    })
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.onVarNameInput onVarNameInput
+   * @parent varPicker.ViewModel
+   *
+   * Input handler to sync as a user types
+   */
+  onVarNameInput (ev) {
+    const vm = ev.currentTarget.vm
+    vm.attr('selected', ev.target.value)
+  },
 
-    // ListenTo the disabled change and set the $.tokenField to
-    // enable | disable the plugin when the disabled scope changes
-    this.listenTo('disabled', function (ev, newVal) {
-      $input.tokenfield(newVal ? 'disable' : 'enable')
-    })
-
-    // we think the typeahead plugin messes up the `value:bind' in the input (by
-    // removing it from the DOM or preventDefault/stopPropagation or something),
-    // but this works around the issue
-    const pickerInputHandler = function pickerInputChanged () {
-      vm.attr('selected', this.value)
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.highlightSuggestion highlightSuggestion
+   * @parent varPicker.ViewModel
+   *
+   * handler for keyboard nav/select on the suggestion list
+   */
+  highlightSuggestion (targetIndex) {
+    const suggestionIndexMax = this.attr('suggestionIndexMax')
+    if (targetIndex !== 0 && targetIndex <= suggestionIndexMax) {
+      const newTargetLi = document.querySelector(`.suggestion-list li:nth-of-type(${targetIndex})`)
+      newTargetLi.classList.add('active')
     }
+  },
 
-    $input.on('change', pickerInputHandler)
+  /**
+   * @property {Function} varPicker.ViewModel.prototype.onSuggestionKeydown onSuggestionKeydown
+   * @parent varPicker.ViewModel
+   *
+   * handler for keyboard nav/select on the suggestion list
+   */
+  onSuggestionKeydown (ev) {
+    const vm = ev.currentTarget.vm
+    let currentSuggestionIndex = vm.attr('suggestionIndex')
+    let targetIndex
+    const suggestionIndexMax = vm.attr('suggestionIndexMax')
 
-    // cleanup
+    // clear any active
+    vm.clearActiveClass()
+
+    if (ev.keyCode === 40) { // arrow down
+      targetIndex = currentSuggestionIndex + 1
+      if (targetIndex > suggestionIndexMax) { targetIndex = suggestionIndexMax }
+      vm.attr('suggestionIndex', targetIndex)
+    }
+    if (ev.keyCode === 38) { // arrow up
+      targetIndex = currentSuggestionIndex - 1
+      if (targetIndex <= 0) {
+        targetIndex = 0
+      }
+      vm.attr('suggestionIndex', targetIndex)
+    }
+    // highlight suggestion
+    vm.highlightSuggestion(targetIndex)
+
+    // handle keyboard select on highlighted selection
+    if (ev.keyCode === 13) { // enter
+      const selectedIndex = vm.attr('suggestionIndex') - 1
+      if (selectedIndex >= 0 && selectedIndex < suggestionIndexMax) {
+        const selectedVarName = vm.attr('variableSuggestions')[selectedIndex]
+        vm.attr('selected', selectedVarName)
+        // reset suggestionIndex
+        vm.attr('suggestionIndex', 0)
+      }
+    }
+  },
+
+  clearActiveClass () {
+    document.querySelectorAll('li.suggestion-item').forEach((li) => {
+      li.classList.remove('active')
+    })
+  },
+
+  connectedCallback (el) {
+    const vm = this
+    // grab input unique to this instance
+    const varNameInput = el.querySelector('.var-picker-input')
+    varNameInput.addEventListener('input', this.onVarNameInput)
+    varNameInput.addEventListener('keydown', this.onSuggestionKeydown)
+    varNameInput.vm = vm
+
+    const suggestionElements = document.querySelectorAll('li.suggestion-item')
+    suggestionElements.forEach((el) => {
+      el.addEventListener('mouseenter', this.clearActiveClass)
+    })
+
     return () => {
-      $input.off('change', pickerInputHandler)
-      this.stopListening()
+      varNameInput.removeEventListener('input', this.onVarNameInput)
+      varNameInput.removeEventListener('keydown', this.onSuggestionKeydown)
+      suggestionElements.forEach((el) => {
+        el.removeEventListener('mouseenter', this.clearActiveClass)
+      })
     }
   }
 })

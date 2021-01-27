@@ -1,77 +1,55 @@
-@import (reference) '../../styles/shared/mixins';
-@import (reference) 'locate://bootstrap/less/mixins/nav-divider';
-@import (reference) 'locate://bootstrap/less/mixins/reset-filter';
+@import (reference) '../../styles/bootstrap-overrides/color-palette.less';
 
+@var-highlight:   #def;
 
 var-picker {
-  .transparent-input {
-    border: none;
-    box-shadow: none;
-    background-color: rgba(0, 0, 0, 0);
+  .var-picker-warning {
+    color: #777777;
+    background-color: #fdfaec;
+    border-color: #e0e0e0;
   }
 
-  .tokenfield {
-    &.disabled {
-      opacity: 1;
-      background-color: @gray-lighter;
+  .variable-suggestions {
+    .suggestion-container {
+      position: relative;
     }
 
-    // prevents the inner input to show outside of its container.
-    .twitter-typeahead {
-      width: auto;
-    }
+    .suggestion-list {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin: 0px;
+      padding: 0px;
+      list-style-type: none;
+      border: 1px solid @gray-lighter;
+      border-top: none;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+      background-color: @body-bg;
 
-    .token {
-      color: #31708f;
-      font-weight: normal;
-      background-color: #d9edf7;
-    }
+      li {
+        width: 100%!important;
+        text-align: left!important;
+        padding: 4px 8px;
+        font-size: 1em;
+        color: @gray-light;
+        border-bottom: 1px solid @gray-lighter;
 
-    // make sure inner input is completely transparent
-    .token-input,
-    .token-input:focus {
-      .transparent-input() !important;
-    }
-  }
+        &:hover {
+          background-color: @var-highlight!important;
+          color: @gray-darker;
+        }
 
-  // https://github.com/bassjobsen/typeahead.js-bootstrap-css
-  span.twitter-typeahead {
-    width: 100%;
-
-    .tt-menu {
-      &:extend(.dropdown-menu);
-    }
-
-    .tt-dropdown-menu {
-      &:extend(.dropdown-menu);
-    }
-
-    .tt-suggestion {
-      &:extend(.dropdown-menu > li > a);
-      &:hover,
-      &:focus {
-        &:extend(.dropdown-menu > .active > a);
+        &:last-child {
+          border-bottom: none;
+        }
       }
-    }
 
-    .tt-suggestion.tt-cursor {
-      &:extend(.dropdown-menu > .active > a);
-    }
-
-    .input-group & {
-      display: block !important;
-      .tt-dropdown-menu {
-        top:32px !important;
-      }
-    }
-    .input-group.input-group-lg & {
-      .tt-dropdown-menu {
-        top:44px !important;
-      }
-    }
-    .input-group.input-group-sm & {
-      .tt-dropdown-menu {
-        top:28px !important;
+      li.suggestion-item.active {
+        background-color: @var-highlight!important;
+        color: @gray-darker;
       }
     }
   }

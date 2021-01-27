@@ -33,7 +33,6 @@
     }
   },
   "dependencies": {
-    "@open-xchange/bootstrap-tokenfield": "^0.13.1",
     "bootstrap": "^3.4.1",
     "can-component": "^4.6.3",
     "can-define": "^2.8.0",
@@ -47,15 +46,17 @@
     "can-stache-converters": "^4.2.5",
     "can-stache-route-helpers": "^1.1.1",
     "cuid": "^2.1.8",
+    "escape-string-regexp": "^4.0.0",
     "jquery": "^3.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
     "numbro": "^2.2.0",
-    "pdfjs-dist": "^2.0.466",
-    "typeahead.js": "git://github.com/twitter/typeahead.js.git#v0.11.1"
+    "pdfjs-dist": "^2.0.466"
   },
   "devDependencies": {
     "can-fixture": "^2.1.0",
+    "can-view-autorender": "^6.0.0",
+    "can-view-model": "^4.0.3",
     "chai": "^4.2.0",
     "funcunit": "^3.7.0",
     "sinon": "^1.17.7",

@@ -6,10 +6,10 @@
 
   <body>
     <script id="template" type="text/stache" can-autorender>
-      <can-import from="styles.less!" />
-      <can-import from="../varpicker/demo/" />
+      <can-import from="~/styles/" />
+      <can-import from="~/elements/varpicker/demo/" />
 
-      <div class="bootstrap-styles" >
+      <div class="bootstrap-styles" style="margin: 20px;">Type 'c' to start search
         <div class="row clearfix" style="margin-top: 20px;">
           <div class="col-md-6 col-md-offset-3">
             <varpicker-demo />
@@ -18,7 +18,7 @@
       </div>
     </script>
 
-    <script src="../../../../node_modules/steal/steal.js" main="can-view-autorender/">
+    <script src="../../node_modules/steal/steal.js" main="can-view-autorender/">
       window.less = { async: true };
     </script>
   </body>
