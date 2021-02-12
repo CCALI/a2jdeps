@@ -18,7 +18,7 @@
     "email": "webmaster@a2jauthor.org",
     "url": "https://www.a2jauthor.org"
   },
-  "license": "AGPL-3.0-only",
+  "license": "GNU AGPL v3.0",
   "steal": {
     "paths": {
       "tokenfield-jquery": "node_modules/bootstrap-tokenfield/node_modules/jquery/dist/jquery.js"
