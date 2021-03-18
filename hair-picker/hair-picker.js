@@ -3,6 +3,15 @@ import Component from 'can-component'
 import template from './hair-picker.stache'
 import 'can-map-define'
 
+/*
+* Usage:
+*     <hair-picker
+*       id="hair-color-picker"
+*       selectedHair:from="userAvatar.hairColor"
+*       onHair:from="onUserAvatarHairColorChange"
+*     />
+*/
+
 import {
   hairColors,
   getClassNameForHair
@@ -13,8 +22,12 @@ const hairClasses = hairColors.map(hair => {
   return hair !== 'bald' ? hairClass : `${hairClass} cross-through`
 })
 
-export const HairPickerVm = CanMap.extend({
+export const HairPickerVm = CanMap.extend('HairPickerVm', {
   define: {
+    // set via parent stache bindings, see Usage above
+    selectedHair: {},
+    onHair: { value () { return null } },
+
     selectedHairClass: {
       get () {
         const hair = this.attr('selectedHair')
