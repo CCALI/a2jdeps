@@ -5,6 +5,6 @@ import '~/hair-picker/hair-picker-test'
 import '~/color-chips/color-chips-test'
 import '~/models/tests/models-test'
 import '~/pdf/assemble-test'
-// skin-picker
+import '~/skin-picker/skin-picker-test'
 import '~/user-avatar-picker/user-avatar-picker-test'
 import '~/utils/tests/tests'
