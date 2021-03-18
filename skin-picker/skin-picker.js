@@ -12,6 +12,10 @@ const skinClasses = skinTones.map(getClassNameForSkin)
 
 export const SkinPickerVm = CanMap.extend({
   define: {
+    // set via parent stache bindings, see Usage above
+    selectedSkin: {},
+    onSkin: { value () { return null } },
+
     selectedSkinClass: {
       get () {
         const skin = this.attr('selectedSkin')
