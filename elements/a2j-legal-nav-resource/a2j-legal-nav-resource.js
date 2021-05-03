@@ -20,8 +20,10 @@ export default Component.extend({
   tag: 'legal-nav-resource-id',
   viewModel () {
     const name = this.element.getAttribute('name')
+    const url = this.element.getAttribute('guid')
     return new A2JLegalNavResourceVM({
-      name
+      name,
+      url
     })
   }
 })
