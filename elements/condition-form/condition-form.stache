@@ -9,24 +9,25 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <select
-      class="form-control"
-      value:bind="operator"
-      disabled:from="disabled"
-    >
-      <option value="is-true">is true</option>
-      <option value="is-false">is false</option>
-      <option value="is-equal">equals</option>
-      <option value="is-not-equal">does not equal</option>
-      <option value="is-greater-than">is greater than</option>
-      <option value="is-less-than">is less than</option>
-    </select>
-  </div>
-
-  <div class="form-group row clearfix right-operand {{#if(isUnaryOperation)}}invisible{{/if}}">
-    <div class="col-md-6">
+  <div class="form-group row">
+    <div class="col-md-7" style="padding-right: 8px;">
       <select
+        style="padding: 5px"
+        class="form-control"
+        value:bind="operator"
+        disabled:from="disabled"
+      >
+        <option value="is-true">is true</option>
+        <option value="is-false">is false</option>
+        <option value="is-equal">equals</option>
+        <option value="is-not-equal">does not equal</option>
+        <option value="is-greater-than">is greater than</option>
+        <option value="is-less-than">is less than</option>
+      </select>
+    </div>
+    <div class="col-md-5" style="padding-left: 0px;">
+      <select
+        style="padding: 5px"
         class="form-control"
         disabled:from="disabled"
         value:bind="rightOperandType"
@@ -35,8 +36,12 @@
         <option value="text">Text</option>
       </select>
     </div>
+  </div>
 
-    <div class="col-md-6">
+  <div class="form-group row clearfix right-operand {{#if(isUnaryOperation)}}invisible{{/if}}">
+    
+
+    <div class="col-md-12">
       {{#is(rightOperandType, 'variable')}}
         <var-picker
           disabled:from="disabled"
