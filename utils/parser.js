@@ -112,6 +112,10 @@ let setVariable = function (variable, pages) {
 }
 
 export default {
+  decodeHTMLEntities (answerXML, options) {
+    return options ? decode(answerXML, options) : decode(answerXML)
+  },
+
   parseANX (answers, pages) {
     var xml = constants.HotDocsANXHeader_UTF8_str // jshint ignore:line
 
@@ -156,7 +160,7 @@ export default {
         case 'textvalue':
           let answerValue = $(this).find('TextValue').html()
           if (varName === 'visitedpages') {
-            answerValue = decode(answerValue)
+            answerValue = this.decodeHTMLEntities(answerValue)
           }
           guide.varSet(varName, answerValue)
           break

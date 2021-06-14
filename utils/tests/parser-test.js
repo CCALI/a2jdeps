@@ -64,6 +64,6 @@ describe('Parser', function () {
     let encodedText = '&lt;p&gt;Text of my first question goes here.&lt;/p&gt;\n'
     let decodedAnswers = '<p>Text of my first question goes here.</p>\n'
 
-    assert.equal(decode(encodedText), decodedAnswers, 'TF answer not of type boolean')
+    assert.equal(Parser.decodeHTMLEntities(encodedText), decodedAnswers, 'Should convert html-entities to HTML tags')
   })
 })
