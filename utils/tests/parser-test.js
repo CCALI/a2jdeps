@@ -5,6 +5,7 @@ import partialXML from '~/models/fixtures/partial.anx!text' // eslint-disable-li
 import interviewJSON from '~/models/fixtures/interview.json'
 import answersJSON from '~/models/fixtures/inclusive_answers.json'
 import answersXML from '~/models/fixtures/inclusive_answers.xml!text' // eslint-disable-line
+import { decode } from 'html-entities'
 
 // These correspond to an interview that has repeating variables
 import answersWithRepeating from './fixtures/answers-with-repeating-values.json'
@@ -57,5 +58,12 @@ describe('Parser', function () {
     assert.equal(parsedAnswers['client last name te'].values[21], 'Dang', 'Text values')
     assert.equal(parsedAnswers['dob da'].values[21], '02/02/1980', 'Date values')
     assert.equal(parsedAnswers['chocolate tf'].values[21], true, 'TF values')
+  })
+
+  it('decodes html-entities to HTML tags', function () {
+    let encodedText = '&lt;p&gt;Text of my first question goes here.&lt;/p&gt;\n'
+    let decodedAnswers = '<p>Text of my first question goes here.</p>\n'
+
+    assert.equal(decode(encodedText), decodedAnswers, 'TF answer not of type boolean')
   })
 })
