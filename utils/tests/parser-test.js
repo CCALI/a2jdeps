@@ -61,8 +61,8 @@ describe('Parser', function () {
   })
 
   it('decodes html-entities to HTML tags', function () {
-    let encodedText = '&lt;p&gt;Text of my first question goes here.&lt;/p&gt;\n'
-    let decodedAnswers = '<p>Text of my first question goes here.</p>\n'
+    let encodedText = '&lt;p&gt;Text of my first question goes here, &amp; &quot;Some quotes&quot;.&lt;/p&gt;\n'
+    let decodedAnswers = '<p>Text of my first question goes here, & "Some quotes".</p>\n'
 
     assert.equal(Parser.decodeHTMLEntities(encodedText), decodedAnswers, 'Should convert html-entities to HTML tags')
   })
