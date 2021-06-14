@@ -5,7 +5,6 @@ import partialXML from '~/models/fixtures/partial.anx!text' // eslint-disable-li
 import interviewJSON from '~/models/fixtures/interview.json'
 import answersJSON from '~/models/fixtures/inclusive_answers.json'
 import answersXML from '~/models/fixtures/inclusive_answers.xml!text' // eslint-disable-line
-import { decode } from 'html-entities'
 
 // These correspond to an interview that has repeating variables
 import answersWithRepeating from './fixtures/answers-with-repeating-values.json'
