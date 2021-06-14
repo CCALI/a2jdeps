@@ -138,6 +138,7 @@ export default {
   // are case-insensitive and normalized to lowercase. This function depends on
   // the tags to be lowercase.
   parseJSON (answersXML, vars) {
+    let that = this
     var guide = new Answers(vars)
 
     $(answersXML).find('answer').each(function () {
@@ -160,7 +161,7 @@ export default {
         case 'textvalue':
           let answerValue = $(this).find('TextValue').html()
           if (varName === 'visitedpages') {
-            answerValue = this.decodeHTMLEntities(answerValue)
+            answerValue = that.decodeHTMLEntities(answerValue)
           }
           guide.varSet(varName, answerValue)
           break
