@@ -1,6 +1,6 @@
 {
   "name": "@caliorg/a2jdeps",
-  "version": "7.0.18",
+  "version": "7.0.19",
   "description": "Shared dependencies for A2J Author, A2J Viewer, and A2J Document Assembly Tool (A2J DAT)",
   "main": "",
   "scripts": {
