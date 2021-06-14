@@ -6,6 +6,7 @@ import Answers from '~/models/answers-from-viewer'
 import constants from '~/models/constants'
 import cString from '~/utils/string'
 import cDate from '~/utils/date'
+import { decode } from 'html-entities'
 
 const mapANX2Var = {
   unknown: constants.vtUnknown,
@@ -111,6 +112,10 @@ let setVariable = function (variable, pages) {
 }
 
 export default {
+  decodeHTMLEntities (answerXML, options) {
+    return options ? decode(answerXML, options) : decode(answerXML)
+  },
+
   parseANX (answers, pages) {
     var xml = constants.HotDocsANXHeader_UTF8_str // jshint ignore:line
 
@@ -153,7 +158,11 @@ export default {
 
       switch (varANXType) {
         case 'textvalue':
-          guide.varSet(varName, $(this).find('TextValue').html())
+          let answerValue = $(this).find('TextValue').html()
+          if (varName === 'visitedpages') {
+            answerValue = this.decodeHTMLEntities(answerValue)
+          }
+          guide.varSet(varName, answerValue)
           break
 
         case 'numvalue':

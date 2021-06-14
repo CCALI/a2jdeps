@@ -57,6 +57,7 @@
     "can-stache-route-helpers": "^1.1.1",
     "cuid": "^2.1.8",
     "escape-string-regexp": "^4.0.0",
+    "html-entities": "^2.3.2",
     "jquery": "^3.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
