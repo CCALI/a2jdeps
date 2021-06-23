@@ -43,19 +43,19 @@ steal("can/control", "can/util","jquery",function(Control, can, $){
 		},
 		init: function(){
 			if(pageConfig.project && pageConfig.project.version) {
-				var self = this;
+				var that = this;
 				
 				$.ajax(pageConfig.docConfigDest || "../../documentjs.json", {
 					success: function(docConfig){
-						self.docConfig = docConfig;
+						that.docConfig = docConfig;
 						var versions = [];
 						$.each(docConfig.versions||[], function(name){
 							versions.push(name);
 						});
-						self.addOptions(versions);
+						that.addOptions(versions);
 					},
 					error: function(){
-						// self.addOptions(["0.0.0","0.0.1"]);	
+						// that.addOptions(["0.0.0","0.0.1"]);	
 					},
 					dataType: "json"
 				});
@@ -65,12 +65,12 @@ steal("can/control", "can/util","jquery",function(Control, can, $){
 		addOptions: function(versions){
 			this.versions = versions;
 			var html = "",
-				self = this;
+				that = this;
 			can.each(versions, function(version){
 				html += "<option value='"+version+"'"+
 							(version == pageConfig.project.version ? 
 								" SELECTED" : "") +
-						">"+ self.getVersionSelectText(version)+
+						">"+ that.getVersionSelectText(version)+
 						"</option>";
 			});
 			this.element.html(html).fadeIn();
