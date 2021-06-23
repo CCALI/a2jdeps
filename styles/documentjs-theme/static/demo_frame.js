@@ -9,7 +9,7 @@ steal('can/control', './demo_frame.mustache', 'jquery', 'can/observe', './pretti
 		this.showTab('demo')
 
 		// When the iframe loads, grab the HTML and JS and fill in the other tabs.
-		var self = this
+		var that = this
 		var iFrame = $(this.element).find('iframe')
 		iFrame.load(function () {
         var demoEl = this.contentDocument.getElementById('demo-html'),
@@ -41,12 +41,12 @@ steal('can/control', './demo_frame.mustache', 'jquery', 'can/observe', './pretti
         }
         source = $.trim(source)
 
-			self.element.find('[data-for=html] > pre').html(self.prettify(html))
+			that.element.find('[data-for=html] > pre').html(that.prettify(html))
 
-			var prettySource = self.prettify(source.replace(/\t/g, '  '))
+			var prettySource = that.prettify(source.replace(/\t/g, '  '))
 			if (prettySource.length) {
-          self.element.find('[data-for=js] > pre').html(prettySource)
-				self.element.find('[data-tab=js]').show()
+          that.element.find('[data-for=js] > pre').html(prettySource)
+				that.element.find('[data-tab=js]').show()
 			}
 
         // prettyPrint();

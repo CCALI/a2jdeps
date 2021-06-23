@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import Parser from '~/utils/parser'
+import Parser, { decodeHTMLEntities } from '~/utils/parser'
 import partialJSON from '~/models/fixtures/partial.json'
 import partialXML from '~/models/fixtures/partial.anx!text' // eslint-disable-line
 import interviewJSON from '~/models/fixtures/interview.json'
@@ -63,6 +63,6 @@ describe('Parser', function () {
     let encodedText = '&lt;p&gt;Text of my first question goes here, &amp; &quot;Some quotes&quot;.&lt;/p&gt;\n'
     let decodedAnswers = '<p>Text of my first question goes here, & "Some quotes".</p>\n'
 
-    assert.equal(Parser.decodeHTMLEntities(encodedText), decodedAnswers, 'Should convert html-entities to HTML tags')
+    assert.equal(decodeHTMLEntities(encodedText), decodedAnswers, 'Should convert html-entities to HTML tags')
   })
 })
