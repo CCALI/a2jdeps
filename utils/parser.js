@@ -104,6 +104,9 @@ let setVariable = function (variable, pages) {
     }
   }
 
+  if (variable.name === '') {
+    variable.name = 'Unassigned Variable'
+  }
   if (xml !== '') {
     xml = '<Answer name="' + variable.name + '">' + xml + '</Answer>'
   }
