@@ -4,7 +4,12 @@
 {{#not(editActive)}}
   {{#if(containsWords)}}
     <div class="preview" on:click="setEditActive(true)">
-      {{{ userContent }}}
+      <a2j-rich-text
+      userContent:from="userContent"
+      showOptionsPane:from="showOptionsPane"
+      wrapWithContainer:from="wrapWithContainer"
+      fontProperties:from="fontProperties"
+      setUserContent:from="setUserContent" />
     </div>
   {{/if}}
 {{else}}
