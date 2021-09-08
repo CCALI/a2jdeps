@@ -6,7 +6,7 @@ import Answers from '~/models/answers-from-viewer'
 import constants from '~/models/constants'
 import cString from '~/utils/string'
 import cDate from '~/utils/date'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import { decode } from 'html-entities'
 
 const mapANX2Var = {
@@ -141,120 +141,151 @@ export default {
   // the tags to be lowercase.
   parseJSON (answersXML, vars) {
     const answers = new Answers(vars) // recheck
-    $(answersXML).find('answer').each(function () {
-      let varName = cString.makestr($(this).attr('name'))
+    $(answersXML)
+      .find('answer')
+      .each(function () {
+        let varName = cString.makestr($(this).attr('name'))
 
-      // 12/03/2013 Do not allow # in variable names.
-      if (varName.indexOf('#') !== -1) return
+        // 12/03/2013 Do not allow # in variable names.
+        if (varName.indexOf('#') !== -1) return
 
-      let v = answers.varExists(varName)
-      let varANXType = $(this).children().get(0).tagName.toLowerCase()
-      let varType = mapANX2Var[varANXType]
+        let v = answers.varExists(varName)
+        let varANXType = $(this)
+          .children()
+          .get(0)
+          .tagName.toLowerCase()
+        let varType = mapANX2Var[varANXType]
 
-      // Variables not defined in the interview should be added in case
-      // we're passing variables between interviews.
-      if (v == null) {
-        v = answers.varCreate(varName, varType, false, '')
-      }
+        // Variables not defined in the interview should be added in case
+        // we're passing variables between interviews.
+        if (v == null) {
+          v = answers.varCreate(varName, varType, false, '')
+        }
 
-      switch (varANXType) {
-        case 'textvalue':
-          let answerValue = $(this).find('TextValue').html()
-          if (varName === 'visitedpages') {
-            answerValue = decodeHTMLEntities(answerValue)
-          }
-          answers.varSet(varName, answerValue)
-          break
-
-        case 'numvalue':
-          answers.varSet(varName, +$(this).find('NumValue').html())
-          break
-
-        case 'tfvalue':
-        // Needs to be true boolean for 2 way binding in checkbox.stache view
-          let bool = $(this).find('TFValue').html()
-          if (bool.toLowerCase() === 'true') {
-            bool = true
-          } else {
-            bool = false
-          }
-          answers.varSet(varName, bool)
-          break
-
-        case 'datevalue':
-        // HotDocs dates in british format while A2J expects US format
-          const britDate = $(this).find('DateValue').html()
-          const usDate = cDate.swapMonthAndDay(britDate)
-          answers.varSet(varName, usDate)
-          break
-
-        case 'mcvalue':
-          answers.varSet(varName, $(this).find('MCValue > SelValue').html())
-          break
-
-        case 'rptvalue':
-          v.attr('repeating', true)
-
-          $('rptvalue', this).children().each(function (i) {
-            varANXType = $(this).get(0).tagName.toLowerCase()
-            varType = mapANX2Var[varANXType]
-            // Only set answers with values to keep Author Var list in Debug Panel clean
-            if ($(this).html() !== '') {
-              switch (varANXType) {
-                case 'textvalue':
-                  answers.varSet(varName, $(this).html(), i + 1)
-                  break
-
-                case 'numvalue':
-                  answers.varSet(varName, +$(this).html(), i + 1)
-                  break
-
-                case 'tfvalue':
-                  // Needs to be true boolean for 2 way binding in checkbox.stache view
-                  let bool = $(this).html()
-                  if (bool.toLowerCase() === 'true') {
-                    bool = true
-                  } else {
-                    bool = false
-                  }
-                  answers.varSet(varName, bool, i + 1)
-                  break
-
-                case 'datevalue':
-                  const britDate = $(this).html()
-                  const usDate = cDate.swapMonthAndDay(britDate)
-                  answers.varSet(varName, usDate, i + 1)
-                  break
-
-                case 'mcvalue':
-                  answers.varSet(varName, $(this).find('SelValue').html(), i + 1)
-                  break
-              }
+        switch (varANXType) {
+          case 'textvalue':
+            let answerValue = $(this)
+              .find('TextValue')
+              .html()
+            if (varName === 'visitedpages') {
+              answerValue = decodeHTMLEntities(answerValue)
             }
-          })
+            answers.varSet(varName, answerValue)
+            break
 
-          break
-      }
+          case 'numvalue':
+            answers.varSet(
+              varName,
+              +$(this)
+                .find('NumValue')
+                .html()
+            )
+            break
 
-      if (v.attr('type') === constants.vtUnknown) {
-        v.attr('type', varType)
+          case 'tfvalue':
+            // Needs to be true boolean for 2 way binding in checkbox.stache view
+            let bool = $(this)
+              .find('TFValue')
+              .html()
+            if (bool.toLowerCase() === 'true') {
+              bool = true
+            } else {
+              bool = false
+            }
+            answers.varSet(varName, bool)
+            break
+
+          case 'datevalue':
+            // HotDocs dates in british format while A2J expects US format
+            const britDate = $(this)
+              .find('DateValue')
+              .html()
+            const usDate = cDate.swapMonthAndDay(britDate)
+            answers.varSet(varName, usDate)
+            break
+
+          case 'mcvalue':
+            answers.varSet(
+              varName,
+              $(this)
+                .find('MCValue > SelValue')
+                .html()
+            )
+            break
+
+          case 'rptvalue':
+            v.attr('repeating', true)
+
+            $('rptvalue', this)
+              .children()
+              .each(function (i) {
+                varANXType = $(this)
+                  .get(0)
+                  .tagName.toLowerCase()
+                varType = mapANX2Var[varANXType]
+                // Only set answers with values to keep Author Var list in Debug Panel clean
+                if ($(this).html() !== '') {
+                  switch (varANXType) {
+                    case 'textvalue':
+                      answers.varSet(varName, $(this).html(), i + 1)
+                      break
+
+                    case 'numvalue':
+                      answers.varSet(varName, +$(this).html(), i + 1)
+                      break
+
+                    case 'tfvalue':
+                      // Needs to be true boolean for 2 way binding in checkbox.stache view
+                      let bool = $(this).html()
+                      if (bool.toLowerCase() === 'true') {
+                        bool = true
+                      } else {
+                        bool = false
+                      }
+                      answers.varSet(varName, bool, i + 1)
+                      break
+
+                    case 'datevalue':
+                      const britDate = $(this).html()
+                      const usDate = cDate.swapMonthAndDay(britDate)
+                      answers.varSet(varName, usDate, i + 1)
+                      break
+
+                    case 'mcvalue':
+                      answers.varSet(
+                        varName,
+                        $(this)
+                          .find('SelValue')
+                          .html(),
+                        i + 1
+                      )
+                      break
+                  }
+                }
+              })
+
+            break
+        }
 
         if (v.attr('type') === constants.vtUnknown) {
-          varName = varName.split(' ')
-          varName = varName[varName.length - 1]
+          v.attr('type', varType)
 
-          if (varName === 'MC') {
-            v.attr('type', constants.vtMC)
-          } else if (varName === 'TF') {
-            v.attr('type', constants.vtTF)
-          } else if (varName === 'NU') {
-            v.attr('type', constants.vtNumber)
-          } else {
-            v.attr('type', constants.vtText)
+          if (v.attr('type') === constants.vtUnknown) {
+            varName = varName.split(' ')
+            varName = varName[varName.length - 1]
+
+            if (varName === 'MC') {
+              v.attr('type', constants.vtMC)
+            } else if (varName === 'TF') {
+              v.attr('type', constants.vtTF)
+            } else if (varName === 'NU') {
+              v.attr('type', constants.vtNumber)
+            } else {
+              v.attr('type', constants.vtText)
+            }
           }
         }
-      }
-    })
+      })
 
     return answers.serialize()
   },
@@ -264,7 +295,7 @@ export default {
   parseHotDocsXML (cmp) {
     const $cmpXML = $($.parseXML(cmp))
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       // TODO: catch errors with 'reject'
       const newVarList = []
 
