@@ -6,7 +6,7 @@ import Answers from '~/models/answers-from-viewer'
 import constants from '~/models/constants'
 import cString from '~/utils/string'
 import cDate from '~/utils/date'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import { decode } from 'html-entities'
 
 const mapANX2Var = {
