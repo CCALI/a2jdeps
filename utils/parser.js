@@ -6,6 +6,8 @@ import Answers from '~/models/answers-from-viewer'
 import constants from '~/models/constants'
 import cString from '~/utils/string'
 import cDate from '~/utils/date'
+import { v4 as uuidv4 } from 'uuid';
+import { decode } from 'html-entities'
 
 const mapANX2Var = {
   unknown: constants.vtUnknown,
@@ -36,8 +38,8 @@ let variableToField = function (varName, pages) {
 }
 
 let setVariable = function (variable, pages) {
-  var varType
-  var field = variableToField(variable.name, pages)
+  let varType
+  let field = variableToField(variable.name, pages)
 
   if (variable && variable.type) {
     varType = variable.type
@@ -47,7 +49,7 @@ let setVariable = function (variable, pages) {
     varType = constants.vtText
   }
 
-  var mapVar2ANX = {}
+  const mapVar2ANX = {}
 
   mapVar2ANX[constants.vtUnknown] = 'Unknown'
   mapVar2ANX[constants.vtText] = 'TextValue'
@@ -57,20 +59,20 @@ let setVariable = function (variable, pages) {
   mapVar2ANX[constants.vtDate] = 'DateValue'
   mapVar2ANX[constants.vtOther] = 'OtherValue'
 
-  var ansType = mapVar2ANX[varType]
+  let ansType = mapVar2ANX[varType]
 
   // Type unknown possible with a Looping variable like CHILD
   if (ansType === constants.vtUnknown || ansType == null) {
     ansType = [constants.vtText]
   }
 
-  var getXMLValue = function (value) {
+  const getXMLValue = function (value) {
     if (varType === constants.vtDate) {
       // Ensure our m/d/y is converted to HotDocs d/m/y
       value = cDate.swapMonthAndDay(value)
     }
 
-    var xmlV
+    let xmlV
     if (typeof value === 'undefined' || value === null || value === '') {
       // 2014-06-02 SJG Blank value for Repeating variables MUST be in answer file (acting as placeholders.)
       xmlV = '<' + ansType + ' UNANS="true">' + '</' + ansType + '>'
@@ -87,32 +89,37 @@ let setVariable = function (variable, pages) {
     return xmlV
   }
 
-  var xml = ''
+  let xml = ''
   if (variable.repeating) {
     // Repeating variables are nested in RptValue tag.
-    for (var i = 1; i < variable.values.length; i += 1) {
+    for (let i = 1; i < variable.values.length; i += 1) {
       xml += getXMLValue(variable.values[i])
     }
 
     xml = '<RptValue>' + xml + '</RptValue>'
   } else {
-    var value = variable.values[1]
+    let value = variable.values[1]
     if (!(typeof value === 'undefined' || value === null || value === '')) {
       // 2014-06-02 SJG Blank value for non-repeating must NOT be in the answer file.
       xml = getXMLValue(value)
     }
   }
 
+  if (variable.name === '') {
+    variable.name = 'Unassigned Variable ' + uuidv4()
+  }
   if (xml !== '') {
     xml = '<Answer name="' + variable.name + '">' + xml + '</Answer>'
   }
 
   return xml
 }
-
+export function decodeHTMLEntities (answerXML, options) {
+  return options ? decode(answerXML, options) : decode(answerXML)
+}
 export default {
   parseANX (answers, pages) {
-    var xml = constants.HotDocsANXHeader_UTF8_str // jshint ignore:line
+    let xml = constants.HotDocsANXHeader_UTF8_str // jshint ignore:line
 
     xml += '<AnswerSet title="">'
 
@@ -133,53 +140,56 @@ export default {
   // are case-insensitive and normalized to lowercase. This function depends on
   // the tags to be lowercase.
   parseJSON (answersXML, vars) {
-    var guide = new Answers(vars)
-
+    const answers = new Answers(vars) // recheck
     $(answersXML).find('answer').each(function () {
-      var varName = cString.makestr($(this).attr('name'))
+      let varName = cString.makestr($(this).attr('name'))
 
       // 12/03/2013 Do not allow # in variable names.
       if (varName.indexOf('#') !== -1) return
 
-      var v = guide.varExists(varName)
-      var varANXType = $(this).children().get(0).tagName.toLowerCase()
-      var varType = mapANX2Var[varANXType]
+      let v = answers.varExists(varName)
+      let varANXType = $(this).children().get(0).tagName.toLowerCase()
+      let varType = mapANX2Var[varANXType]
 
       // Variables not defined in the interview should be added in case
       // we're passing variables between interviews.
       if (v == null) {
-        v = guide.varCreate(varName, varType, false, '')
+        v = answers.varCreate(varName, varType, false, '')
       }
 
       switch (varANXType) {
         case 'textvalue':
-          guide.varSet(varName, $(this).find('TextValue').html())
+          let answerValue = $(this).find('TextValue').html()
+          if (varName === 'visitedpages') {
+            answerValue = decodeHTMLEntities(answerValue)
+          }
+          answers.varSet(varName, answerValue)
           break
 
         case 'numvalue':
-          guide.varSet(varName, +$(this).find('NumValue').html())
+          answers.varSet(varName, +$(this).find('NumValue').html())
           break
 
         case 'tfvalue':
         // Needs to be true boolean for 2 way binding in checkbox.stache view
-          var bool = $(this).find('TFValue').html()
+          let bool = $(this).find('TFValue').html()
           if (bool.toLowerCase() === 'true') {
             bool = true
           } else {
             bool = false
           }
-          guide.varSet(varName, bool)
+          answers.varSet(varName, bool)
           break
 
         case 'datevalue':
         // HotDocs dates in british format while A2J expects US format
-          let britDate = $(this).find('DateValue').html()
-          let usDate = cDate.swapMonthAndDay(britDate)
-          guide.varSet(varName, usDate)
+          const britDate = $(this).find('DateValue').html()
+          const usDate = cDate.swapMonthAndDay(britDate)
+          answers.varSet(varName, usDate)
           break
 
         case 'mcvalue':
-          guide.varSet(varName, $(this).find('MCValue > SelValue').html())
+          answers.varSet(varName, $(this).find('MCValue > SelValue').html())
           break
 
         case 'rptvalue':
@@ -192,32 +202,32 @@ export default {
             if ($(this).html() !== '') {
               switch (varANXType) {
                 case 'textvalue':
-                  guide.varSet(varName, $(this).html(), i + 1)
+                  answers.varSet(varName, $(this).html(), i + 1)
                   break
 
                 case 'numvalue':
-                  guide.varSet(varName, +$(this).html(), i + 1)
+                  answers.varSet(varName, +$(this).html(), i + 1)
                   break
 
                 case 'tfvalue':
                   // Needs to be true boolean for 2 way binding in checkbox.stache view
-                  var bool = $(this).html()
+                  let bool = $(this).html()
                   if (bool.toLowerCase() === 'true') {
                     bool = true
                   } else {
                     bool = false
                   }
-                  guide.varSet(varName, bool, i + 1)
+                  answers.varSet(varName, bool, i + 1)
                   break
 
                 case 'datevalue':
-                  let britDate = $(this).html()
-                  let usDate = cDate.swapMonthAndDay(britDate)
-                  guide.varSet(varName, usDate, i + 1)
+                  const britDate = $(this).html()
+                  const usDate = cDate.swapMonthAndDay(britDate)
+                  answers.varSet(varName, usDate, i + 1)
                   break
 
                 case 'mcvalue':
-                  guide.varSet(varName, $(this).find('SelValue').html(), i + 1)
+                  answers.varSet(varName, $(this).find('SelValue').html(), i + 1)
                   break
               }
             }
@@ -246,7 +256,7 @@ export default {
       }
     })
 
-    return guide.serialize()
+    return answers.serialize()
   },
 
   // Traverses XML of uploaded HotDocs cmp file to find variables to import
@@ -295,7 +305,7 @@ export default {
           case 'hd:computation':
             // <hd:computation name="Any parent address not known CO" resultType="trueFalse">
             // <hd:computation name="A minor/minors aff of due dliligence CO" resultType="text">
-            var resultType = $(this).attr('resultType')
+            const resultType = $(this).attr('resultType')
             if (resultType === 'text') {
               newVarList.push({ name: name, type: constants.vtText })
             }

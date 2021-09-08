@@ -1,6 +1,6 @@
 {
   "name": "@caliorg/a2jdeps",
-  "version": "7.0.18",
+  "version": "7.0.21",
   "description": "Shared dependencies for A2J Author, A2J Viewer, and A2J Document Assembly Tool (A2J DAT)",
   "main": "",
   "scripts": {
@@ -57,11 +57,13 @@
     "can-stache-route-helpers": "^1.1.1",
     "cuid": "^2.1.8",
     "escape-string-regexp": "^4.0.0",
+    "html-entities": "^2.3.2",
     "jquery": "^3.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.25.3",
     "numbro": "^2.2.0",
-    "pdfjs-dist": "^2.0.466"
+    "pdfjs-dist": "^2.0.466",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "can-fixture": "^2.1.0",
