@@ -86,6 +86,13 @@ export default {
       .replace(/>/g, '&gt;')
   },
 
+  // remove html tags and strip trailing whitespace
+  stripHtml: function (html) {
+    html = html || ''
+
+    return html.replace(/(<([^>]+)>)/gi, '').trim()
+  },
+
   textToNumber: function (textNumber) {
     // TODO: update tlogic.js macros to use numbro.js
     if (!textNumber) {
