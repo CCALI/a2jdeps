@@ -60,4 +60,23 @@ describe('util: string', function () {
       assert.equal(cString.escapeHtml(html), expectedOutput, 'should escape for php safety')
     })
   })
+
+  describe('stripHtml', function () {
+    it('returns emptystring if null or undefined', function () {
+      let html
+      assert.equal(cString.stripHtml(html), '', 'should handle undefined, returning empty string for display')
+
+      html = null
+      assert.equal(cString.stripHtml(html), '', 'should handle null, returning empty string for display')
+
+      html = 'someString ' + undefined
+      assert.equal(cString.stripHtml(html), 'someString undefined', 'should not clear undefined on coerced values')
+    })
+
+    it('strips html tags', function () {
+      const html = '<p>Here is some html <br>and some <emote>more</emote> as well</p>'
+      const expectedOutput = 'Here is some html and some more as well'
+      assert.equal(cString.stripHtml(html), expectedOutput, 'should strip all html tags')
+    })
+  })
 })
