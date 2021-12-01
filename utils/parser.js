@@ -36,7 +36,8 @@ let variableToField = function (varName, pages) {
   return field
 }
 
-let setVariable = function (variable, pages) {
+let setVariable = function (variable, pages, counterNum) {
+  let counter = counterNum
   let varType
   let field = variableToField(variable.name, pages)
 
@@ -104,6 +105,10 @@ let setVariable = function (variable, pages) {
     }
   }
 
+  if (variable.name === '') {
+    counter++
+    variable.name = 'Unassigned Variable ' + counter
+  }
   if (xml !== '') {
     xml = '<Answer name="' + variable.name + '">' + xml + '</Answer>'
   }
@@ -118,9 +123,9 @@ export default {
     let xml = constants.HotDocsANXHeader_UTF8_str // jshint ignore:line
 
     xml += '<AnswerSet title="">'
-
+    const counter = 0
     Object.keys(answers).forEach(function (varName) {
-      xml += setVariable(answers[varName], pages)
+      xml += setVariable(answers[varName], pages, counter)
     })
 
     xml += '</AnswerSet>'
