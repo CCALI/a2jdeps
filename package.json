@@ -5,7 +5,8 @@
   "main": "",
   "scripts": {
     "lint": "standard --fix --env mocha",
-    "test": "npm run lint && testee --reporter Spec --browsers firefox tests/index.html",
+    "test": "npm run lint && npm run testee",
+    "testee": "testee --reporter Spec --browsers firefox tests/index.html",
     "preversion": "npm test",
     "release:pre": "npm version prerelease && npm publish --tag=pre",
     "release:patch": "npm version patch && npm publish",
