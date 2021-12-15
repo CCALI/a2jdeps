@@ -4,12 +4,20 @@
 {{#if(scope.vm.templatesPromise.isResolved)}}
   {{#each(scope.vm.templates)}}
     {{#if(scope.vm.canRenderTemplate(this))}}
-      <a2j-template
-        vm:template:from="."
-        use-answers:raw="true"
-        vm:answers:from="scope.vm.answers"
-        edit-enabled:raw="false"
-      />
+      <section>
+        {{#and(scope.vm.renderTemplateFootersAndHeaders, this.header)}}
+          <header>{{{this.header}}}</header>
+        {{/and}}
+        <a2j-template
+          vm:template:from="."
+          use-answers:raw="true"
+          vm:answers:from="scope.vm.answers"
+          edit-enabled:raw="false"
+        />
+        {{#and(scope.vm.renderTemplateFootersAndHeaders, this.footer)}}
+          <footer>{{{this.footer}}}</footer>
+        {{/and}}
+      </section>
     {{/if}}
   {{/each}}
 {{/if}}

@@ -16,6 +16,10 @@ export default CanMap.extend({
   define: {
     // passed in from server.stache
     guideId: {},
+    renderTemplateFootersAndHeaders: {
+      type: 'boolean',
+      default: false
+    },
     templateId: {},
     templateIds: {
       type: '*'
