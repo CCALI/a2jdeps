@@ -13,7 +13,7 @@ export default Component.extend('A2JTemplateComponent', {
       evt.stopPropagation()
     },
 
-    'li dragstart': function (el, evt) {
+    'section dragstart': function (el, evt) {
       evt.stopPropagation()
       let $el = $(el)
       let dt = evt.dataTransfer
@@ -23,7 +23,7 @@ export default Component.extend('A2JTemplateComponent', {
       $(this.element).find('element-options-pane').hide()
     },
 
-    'li dragenter': function (el, evt) {
+    'section dragenter': function (el, evt) {
       evt.stopPropagation()
       let $el = $(el)
       let dropIndex = this.viewModel.attr('dropItemIndex')
@@ -36,7 +36,7 @@ export default Component.extend('A2JTemplateComponent', {
       }
     },
 
-    'li dragover': function ($el, evt) {
+    'section dragover': function ($el, evt) {
       evt.preventDefault()
 
       let dt = evt.dataTransfer
@@ -46,7 +46,7 @@ export default Component.extend('A2JTemplateComponent', {
     // this event won't be dispatched if the source node is moved during the
     // drag, causing the placeholder to stay visible after the elemet has been
     // dropped.
-    'li dragend': function () {
+    'section dragend': function () {
       this.viewModel.removeDragPlaceholderFlag()
 
       this.viewModel.attr({
@@ -55,7 +55,7 @@ export default Component.extend('A2JTemplateComponent', {
       })
     },
 
-    'li drop': function (el, evt) {
+    'section drop': function (el, evt) {
       evt.stopPropagation()
       this.viewModel.removeDragPlaceholderFlag()
 
