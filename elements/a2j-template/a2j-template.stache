@@ -6,9 +6,9 @@
 <can-import from="~/elements/a2j-section-title/" />
 <can-import from="~/elements/a2j-template/a2j-template.less" />
 
-<ul>
+<div>
   {{#for (childNode of rootNode.children) }}
-    <li
+    <section
       draggable="true"
       class="node-wrapper{{#if(childNode.isBeingDragged)}} drag-placeholder{{/if}}">
 
@@ -138,6 +138,6 @@
           toggleEditActiveNode:from="toggleEditActiveNode"
         />
       {{/eq}}
-    </li>
+    </section>
   {{/for}}
-</ul>
+</div>
