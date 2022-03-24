@@ -181,7 +181,7 @@ export default Component.extend({
           let $textarea = $el.find('textarea')
 
           let editor = window.CKEDITOR.replace($textarea.get(0), {
-            extraPlugins: 'a2j-variable,a2j-guid',
+            extraPlugins: 'a2j-variable,a2j-guid,textindent',
             extraAllowedContent: {
               'a2j-variable': {
                 attributes: ['name']
