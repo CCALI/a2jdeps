@@ -8,16 +8,50 @@ export default {
     tag: 'a2j-template',
     state: {},
     children: [
-      { tag: 'a2j-repeat-loop',
-        state: {}
-      },
-      { tag: 'a2j-rich-text',
+      {
+        tag: 'a2j-repeat-loop',
         state: {
-          userContent: 'User\'s last name <a2j-variable name="Client last name TE" />.'
+          listStyleType: 'disc',
+          loopTitleTag: 'h1',
+          repeatEachInOneList: true,
+          tableStyle: 'bordered',
+          tableColumns: [
+            {
+              width: 50,
+              variable: 'Item name TE',
+              column: 'Item name'
+            },
+            {
+              variable: 'Item value NU',
+              width: 50,
+              column: 'Item value'
+            }
+          ],
+          loopCounter: 1,
+          listItems: [
+            {
+              variable: '',
+              item: 'Item 1'
+            }
+          ],
+          loopType: 'variable',
+          loopTitle: 'This is a repeat loop title',
+          displayType: 'table',
+          loopRichText: '',
+          loopVariable: 'CountVar'
         }
       },
-      { tag: 'a2j-rich-text',
+      {
+        tag: 'a2j-rich-text',
         state: {
+          notes: '',
+          userContent: 'User\'s last name <a2j-variable name=Client last name TE />.'
+        }
+      },
+      {
+        tag: 'a2j-rich-text',
+        state: {
+          notes: '',
           userContent: `<p><em>Lorem ipsum dolor sit amet, pri ad porro consul
             disputando. Mea tale admodum cu, soluta fuisset per ad. Te omittam
             noluisse consequat vel. Impetus appetere antiopam sit ut, at nec

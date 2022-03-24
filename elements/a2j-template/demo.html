@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>&lt;a2j-template&gt;</title>
+</head>
+
+<body>
+  <div class="bootstrap-styles">
+    <div class="row clearfix" style="margin-top: 20px;">
+      <div class="col-md-12 app"></div>
+    </div>
+  </div>
+
+  <script>window.less = { async: true };</script>
+
+  <script src="../../../../node_modules/steal/steal.js" main="@empty">
+    require('elements/a2j-template/');
+
+    const $ = require('jquery');
+    const stache = require('can-stache/');
+    const A2JTemplate = require('~/models/a2j-template').default;
+    const templateFixture = require('~/models/fixtures-author/templates/guide1261-template2115').default;
+
+    function makeA2JTemplate({ rootNode }) {
+      const docTree = A2JTemplate.makeDocumentTree(rootNode)
+      const template = new A2JTemplate()
+      template.attr('rootNode', docTree)
+      return template
+    }
+
+    const template = '<a2j-template editEnabled:from="true" template:from="template" />';
+    const frag = stache(template);
+
+    $('.app').append(frag({
+      template: makeA2JTemplate(templateFixture)
+    }));
+  </script>
+</body>
+
+</html>

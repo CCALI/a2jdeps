@@ -30,4 +30,6 @@
       </form>
     </element-options-pane>
   {{/if}}
+{{else}}
+  <p class="sr-only">Page break</p>
 {{/if}}

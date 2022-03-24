@@ -22,7 +22,7 @@ describe('A2JTemplate Model', function () {
     let promise = A2JTemplate.findAll({ guideId: 1261 })
 
     return promise.then(function (a2jTemplates) {
-      assert.equal(a2jTemplates.length, 3, 'should have 3 total templates')
+      assert.equal(a2jTemplates.length, 4, 'should have 4 total templates')
       a2jTemplates.forEach(function (a2jTemplate) {
         assert.ok(a2jTemplate.attr('rootNode') instanceof A2JNode)
 
@@ -37,7 +37,7 @@ describe('A2JTemplate Model', function () {
     let promise = A2JTemplate.findAll({ guideId: 1261, active: true })
 
     return promise.then(function (a2jTemplates) {
-      assert.equal(a2jTemplates.length, 2, 'should only have 2 active of 3 templates')
+      assert.equal(a2jTemplates.length, 3, 'should only have 3 active of 4 templates')
     })
   })
 

@@ -2,11 +2,12 @@ import template2111 from './templates/guide1261-template2111'
 import template2112 from './templates/guide1261-template2112'
 import template2113 from './templates/guide1261-template2113'
 import template2114 from './templates/guide20-template2114'
+import template2115 from './templates/guide1261-template2115'
 
 // emulates a Guide's local templates.json file which has a map like {"guideId":20,"templateIds":[2114]}
 // and the api call that returns the template based on guideId/templateId comboId like {20-2114}
 let fixtureTemplates = {
-  1261: { 2111: template2111, 2112: template2112, 2113: template2113 },
+  1261: { 2111: template2111, 2112: template2112, 2113: template2113, 2115: template2115 },
   20: { 2114: template2114 },
   5150: {} // used for 'throw away' tests that don't need templates map to persist
 }
