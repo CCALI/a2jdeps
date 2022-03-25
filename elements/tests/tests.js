@@ -1,5 +1,6 @@
 import '~/elements/a2j-conditional/a2j-conditional-test'
 import '~/elements/a2j-header-footer/a2j-header-footer-test'
+import '~/elements/a2j-page-break/a2j-page-break-test'
 import '~/elements/a2j-repeat-loop/a2j-repeat-loop-test'
 import '~/elements/a2j-template/a2j-template-test'
 import '~/elements/a2j-template-ssr/a2j-template-ssr-test'
