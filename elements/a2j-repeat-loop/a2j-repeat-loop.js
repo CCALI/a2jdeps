@@ -107,7 +107,9 @@ export default Component.extend({
         // check if we have access to the element while dragging is going on
         if ($textarea.get(0)) {
           let editor = window.CKEDITOR.replace($textarea.get(0), {
-            extraPlugins: 'a2j-variable,a2j-guid',
+            extraPlugins: 'a2j-variable,a2j-guid,textindent',
+            indentation: '24px', // this sets single line indent size
+            indentOffset: 24, // this sets block indent/outdent size
             extraAllowedContent: {
               'a2j-variable': {
                 attributes: ['name']
