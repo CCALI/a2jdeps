@@ -11,8 +11,14 @@ a2j-variable {
     background-color: #D7ECF5;
     vertical-align: middle;
 
+
     &.unanswered {
       visibility: hidden;
     }
   }
+  // this handles extra space around resolved variable names
+    span.var-val { 
+      margin-right: -0.25em;
+      margin-left: -0.25em;
+    }
 }
