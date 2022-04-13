@@ -9,19 +9,19 @@ import 'can-map-define'
 
 const fontFamilyMap = {
   'sans-serif': '\'Open Sans\', sans-serif',
-  'arial': 'Arial, \'Helvetica Neue\', Helvetica, sans-serif',
+  arial: 'Arial, \'Helvetica Neue\', Helvetica, sans-serif',
   'times-new-roman': 'TimesNewRoman, \'Times New Roman\', Times, Baskerville, Georgia, serif',
   'courier-new': '\'Courier New\', Courier, \'Lucida Sans Typewriter\', \'Lucida Typewriter\', monospace'
 }
 
 const moveItem = function (list, from, to) {
-  let length = list.attr('length')
+  const length = list.attr('length')
 
   from = parseInt(from, 10)
   to = parseInt(to, 10)
 
   if (_inRange(from, 0, length) && _inRange(to, 0, length)) {
-    var item = list.splice(from, 1)[0]
+    const item = list.splice(from, 1)[0]
     list.splice(to, 0, item)
     return list
   }
@@ -87,7 +87,7 @@ export default CanMap.extend('A2JTemplateVM', {
      */
     rootNode: {
       get: function () {
-        let template = this.attr('template')
+        const template = this.attr('template')
         return template && template.attr('rootNode')
       }
     },
@@ -178,7 +178,7 @@ export default CanMap.extend('A2JTemplateVM', {
   },
 
   saveTemplateChanges () {
-    let saveCallback = this.saveCallback
+    const saveCallback = this.saveCallback
 
     if (_isFunction(saveCallback)) {
       saveCallback.call(this)
@@ -255,7 +255,7 @@ export default CanMap.extend('A2JTemplateVM', {
   // this function only flags the node as deleted, so we have time to display
   // the alert that allows user to restore the node right away.
   deleteNode (id) {
-    let deletedNode = this.getChildById(id)
+    const deletedNode = this.getChildById(id)
 
     deletedNode.attr('deleted', true)
     deletedNode.attr('state.deleted', true)
@@ -321,9 +321,9 @@ export default CanMap.extend('A2JTemplateVM', {
   },
 
   updateChildrenOrder () {
-    let from = this.attr('dragItemIndex')
-    let to = this.attr('dropItemIndex')
-    let children = this.attr('rootNode.children')
+    const from = this.attr('dragItemIndex')
+    const to = this.attr('dropItemIndex')
+    const children = this.attr('rootNode.children')
 
     if (from !== to) {
       moveItem(children, from, to)
@@ -332,11 +332,11 @@ export default CanMap.extend('A2JTemplateVM', {
   },
 
   setDragPlaceholderFlag () {
-    let dragItemIndex = this.attr('dragItemIndex')
+    const dragItemIndex = this.attr('dragItemIndex')
     if (dragItemIndex == null) return
 
-    let children = this.attr('rootNode.children')
-    let draggedItem = children.attr(dragItemIndex)
+    const children = this.attr('rootNode.children')
+    const draggedItem = children.attr(dragItemIndex)
 
     if (typeof draggedItem !== 'undefined') {
       draggedItem.attr('isBeingDragged', true)
@@ -344,11 +344,11 @@ export default CanMap.extend('A2JTemplateVM', {
   },
 
   removeDragPlaceholderFlag () {
-    let dragItemIndex = this.attr('dragItemIndex')
+    const dragItemIndex = this.attr('dragItemIndex')
     if (dragItemIndex == null) return
 
-    let children = this.attr('rootNode.children')
-    let draggedItem = children.attr(dragItemIndex)
+    const children = this.attr('rootNode.children')
+    const draggedItem = children.attr(dragItemIndex)
 
     if (typeof draggedItem !== 'undefined') {
       draggedItem.attr('isBeingDragged', false)

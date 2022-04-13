@@ -89,7 +89,7 @@ export default CanMap.extend({
      */
     isUnaryOperation: {
       get () {
-        let operator = this.attr('operator')
+        const operator = this.attr('operator')
         return _includes(['is-true', 'is-false'], operator)
       }
     },

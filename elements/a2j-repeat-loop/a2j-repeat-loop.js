@@ -39,10 +39,10 @@ export default Component.extend({
 
   events: {
     inserted () {
-      let vm = this.viewModel
-      let editActive = vm.attr('editActive')
-      let editEnabled = vm.attr('editEnabled')
-      let displayType = vm.attr('displayType')
+      const vm = this.viewModel
+      const editActive = vm.attr('editActive')
+      const editEnabled = vm.attr('editEnabled')
+      const displayType = vm.attr('displayType')
 
       if (editEnabled) {
         loader.import('~/ckeditor/').then(() => {
@@ -54,9 +54,9 @@ export default Component.extend({
     },
 
     '{viewModel} displayType': function () {
-      let vm = this.viewModel
-      let editActive = vm.attr('editActive')
-      let displayType = vm.attr('displayType')
+      const vm = this.viewModel
+      const editActive = vm.attr('editActive')
+      const displayType = vm.attr('displayType')
 
       if (displayType === 'text' && editActive) {
         this.initCKEditor()
@@ -67,9 +67,9 @@ export default Component.extend({
     },
 
     '{viewModel} editActive': function () {
-      let vm = this.viewModel
-      let editActive = vm.attr('editActive')
-      let displayType = vm.attr('displayType')
+      const vm = this.viewModel
+      const editActive = vm.attr('editActive')
+      const displayType = vm.attr('displayType')
 
       if (displayType === 'text' && editActive) {
         this.initCKEditor()
@@ -96,17 +96,17 @@ export default Component.extend({
     },
 
     initCKEditor () {
-      let vm = this.viewModel
-      let $el = $(this.element)
+      const vm = this.viewModel
+      const $el = $(this.element)
 
       // wait for the template to be updated, otherwise the `textarea`
       // won't be in the DOM when `ckeditor.replace` is called.
       setTimeout(() => {
-        let $textarea = $el.find('textarea')
+        const $textarea = $el.find('textarea')
 
         // check if we have access to the element while dragging is going on
         if ($textarea.get(0)) {
-          let editor = window.CKEDITOR.replace($textarea.get(0), {
+          const editor = window.CKEDITOR.replace($textarea.get(0), {
             extraPlugins: 'a2j-variable,a2j-guid,textindent',
             indentation: '24px', // this sets single line indent size
             indentOffset: 24, // this sets block indent/outdent size
@@ -128,7 +128,7 @@ export default Component.extend({
 
   helpers: {
     a2jParse (templateSnippet, index) {
-      let scope = {
+      const scope = {
         answers: this.attr('answers'),
         useAnswers: this.attr('useAnswers')
       }
@@ -145,13 +145,13 @@ export default Component.extend({
     },
 
     displayTypeText () {
-      let type = this.attr('displayType')
+      const type = this.attr('displayType')
       return displayTypeMap[type]
     },
 
     showRepeatLoopTitle () {
-      let title = this.attr('loopTitle')
-      let tag = this.attr('loopTitleTag')
+      const title = this.attr('loopTitle')
+      const tag = this.attr('loopTitleTag')
 
       return `<${tag}>${title}</${tag}>`
     }

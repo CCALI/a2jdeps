@@ -19,7 +19,7 @@ describe('<color-chips>', () => {
     })
 
     it('onSelect', () => {
-      var handler = (colorClass) => {
+      const handler = (colorClass) => {
         vm.attr('selectedColorClass', colorClass)
       }
       vm.attr('onColorClass', handler)

@@ -61,7 +61,7 @@
     const rightOperandType = params.rightOperandType
     const answers = params.answers
 
-    var val
+    let val
     const leftValue = getOperandValue(leftOperand, 'variable', answers)
     const rightValue = getOperandValue(rightOperand, rightOperandType, answers)
 

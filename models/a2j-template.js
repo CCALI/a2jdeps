@@ -85,7 +85,7 @@ const A2JTemplate = Model.extend('A2JTemplateModel',
 
     makeFindAll (findAllData) {
       return function (params, success, error) {
-        let dfd = findAllData(params).then(response => {
+        const dfd = findAllData(params).then(response => {
           let a2jTemplates = this.models(response)
           if (params.active) {
             a2jTemplates = a2jTemplates.filter((template) => template.active)
@@ -95,7 +95,7 @@ const A2JTemplate = Model.extend('A2JTemplateModel',
             // extend template with buildOrder property.
             a2jTemplate.attr('buildOrder', index + 1)
 
-            let documentTree = this.makeDocumentTree(
+            const documentTree = this.makeDocumentTree(
               a2jTemplate.attr('rootNode')
             )
             a2jTemplate.attr('rootNode', documentTree)
@@ -110,9 +110,9 @@ const A2JTemplate = Model.extend('A2JTemplateModel',
 
     makeFindOne (findOneData) {
       return function (params, success, error) {
-        let dfd = findOneData(params).then(response => {
-          let a2jTemplate = this.model(response)
-          let documentTree = this.makeDocumentTree(
+        const dfd = findOneData(params).then(response => {
+          const a2jTemplate = this.model(response)
+          const documentTree = this.makeDocumentTree(
             a2jTemplate.attr('rootNode')
           )
 
@@ -285,7 +285,7 @@ A2JTemplate.List = A2JTemplate.List.extend({
   search (token) {
     return this.filter(function (template) {
       token = token.toLowerCase()
-      let title = template.attr('title').toLowerCase()
+      const title = template.attr('title').toLowerCase()
       return title.indexOf(token) !== -1
     })
   }

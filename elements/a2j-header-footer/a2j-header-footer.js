@@ -11,7 +11,7 @@ import 'can-map-define'
  *
  * `<a2j-header-footer>`'s viewModel.
  */
-export let HeaderFooterVM = CanMap.extend('HeaderFooterVM', {
+export const HeaderFooterVM = CanMap.extend('HeaderFooterVM', {
   define: {
     /**
      * @property {String} headerFooter.ViewModel.prototype.title title
@@ -118,7 +118,7 @@ export let HeaderFooterVM = CanMap.extend('HeaderFooterVM', {
     this.attr('editActive', val)
 
     if (!val) {
-      let save = this.attr('saveTemplate')
+      const save = this.attr('saveTemplate')
       save()
     }
   },

@@ -73,7 +73,7 @@ export default CanMap.extend('A2JNodeModel', {
       Type: NodeState,
       Value: NodeState,
       serialize (current) {
-        let serialized = current.serialize()
+        const serialized = current.serialize()
         return _omit(serialized, ...omitStateAttrs)
       }
     },

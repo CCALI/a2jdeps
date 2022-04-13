@@ -18,7 +18,7 @@ describe('<a2j-viewer-avatar>', function () {
     })
 
     it('enforces "gender" enum type', function () {
-      let testValues = [
+      const testValues = [
         { gender: 'male', expected: 'male' },
         { gender: 'foo', expected: 'female' }, // when invalid, default value is returned
         { gender: 'female', expected: 'female' }
@@ -35,7 +35,7 @@ describe('<a2j-viewer-avatar>', function () {
     })
 
     it('enforces "skin" enum type', function () {
-      let testValues = [
+      const testValues = [
         { skin: 'dark', expected: 'dark' },
         { gender: 'foo', expected: 'medium' }, // when invalid, default value is returned
         { skin: 'lighter', expected: 'lighter' }
@@ -48,7 +48,7 @@ describe('<a2j-viewer-avatar>', function () {
     })
 
     it('computes the correct avatar image name', function () {
-      let testValues = [
+      const testValues = [
         { gender: 'male', facing: 'front', expected: 'avatar-male-front.svg' },
         { gender: 'male', facing: 'right', expected: 'avatar-male-right.svg' },
         { gender: 'female', facing: 'front', expected: 'avatar-female-front.svg' },
@@ -64,7 +64,7 @@ describe('<a2j-viewer-avatar>', function () {
 
   describe('Component', function () {
     beforeEach(function () {
-      let frag = stache('<a2j-viewer-avatar />')
+      const frag = stache('<a2j-viewer-avatar />')
       $('#test-area').html(frag({}))
     })
 

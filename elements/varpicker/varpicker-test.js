@@ -42,7 +42,7 @@ describe('<var-picker>', () => {
     })
 
     it('variableNames - a list of variable names', () => {
-      let names = vm.attr('variableNames')
+      const names = vm.attr('variableNames')
 
       assert.instanceOf(names, CanList)
       assert.include(names.attr(), 'Child Name')
@@ -85,7 +85,7 @@ describe('<var-picker>', () => {
       assert.deepEqual(variableSuggestions, expectedResult, 'should return empty list with default selected value of empty string')
 
       vm.attr('selected', 'name')
-      expectedResult = [ 'Child Name', 'First Name' ]
+      expectedResult = ['Child Name', 'First Name']
       variableSuggestions = vm.attr('variableSuggestions')
       assert.deepEqual(variableSuggestions, expectedResult, 'should return list of matches')
 
@@ -169,9 +169,9 @@ describe('<var-picker>', () => {
       vm.attr('suggestionIndex', 1)
 
       const testCases = [
-        { keyCode: 40, attrsToTest: [ 'suggestionIndex' ], expectedResults: [ 2 ] },
-        { keyCode: 38, attrsToTest: [ 'suggestionIndex' ], expectedResults: [ 1 ] },
-        { keyCode: 13, attrsToTest: [ 'selected', 'suggestionIndex' ], expectedResults: [ 'Child Name', 0 ] }
+        { keyCode: 40, attrsToTest: ['suggestionIndex'], expectedResults: [2] },
+        { keyCode: 38, attrsToTest: ['suggestionIndex'], expectedResults: [1] },
+        { keyCode: 13, attrsToTest: ['selected', 'suggestionIndex'], expectedResults: ['Child Name', 0] }
       ]
 
       let testEvent

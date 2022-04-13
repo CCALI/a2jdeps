@@ -42,7 +42,7 @@ const alertTypeSymbols = {
  *
  * `<app-alert>`'s viewModel.
  */
-export let Alert = CanMap.extend('AppAlertVM', {
+export const Alert = CanMap.extend('AppAlertVM', {
   define: {
     /**
      * @property {Boolean} alert.ViewModel.prototype.define.autoClose autoClose
@@ -121,7 +121,7 @@ export let Alert = CanMap.extend('AppAlertVM', {
       type: 'boolean',
       value: false,
       set (newVal) {
-        let autoClose = this.attr('autoClose')
+        const autoClose = this.attr('autoClose')
 
         if (autoClose && newVal) {
           this.setAutoCloseTimeout()
@@ -133,11 +133,11 @@ export let Alert = CanMap.extend('AppAlertVM', {
   },
 
   setAutoCloseTimeout () {
-    let delay = this.attr('autoCloseTime')
+    const delay = this.attr('autoCloseTime')
 
     this.clearAutoCloseTimeout()
 
-    let timeoutId = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       this.closeAlert()
     }, delay)
 
@@ -158,7 +158,7 @@ export let Alert = CanMap.extend('AppAlertVM', {
   },
 
   clearAutoCloseTimeout () {
-    let timeoutId = this.attr('autoCloseTimeoutId')
+    const timeoutId = this.attr('autoCloseTimeoutId')
 
     clearTimeout(timeoutId)
     this.attr('autoCloseTimeoutId', null)
@@ -181,9 +181,9 @@ export default Component.extend({
     },
 
     '{viewModel} open': function () {
-      let $el = $(this.element)
-      let vm = this.viewModel
-      let open = vm.attr('open')
+      const $el = $(this.element)
+      const vm = this.viewModel
+      const open = vm.attr('open')
 
       if (open) {
         $el.slideDown()
@@ -196,11 +196,11 @@ export default Component.extend({
 
   helpers: {
     alertTypeClass () {
-      let type = this.attr('alertType')
+      const type = this.attr('alertType')
       return alertTypeClasses[type]
     },
     alertTypeSymbol () {
-      let type = this.attr('alertType')
+      const type = this.attr('alertType')
       return alertTypeSymbols[type]
     }
   },

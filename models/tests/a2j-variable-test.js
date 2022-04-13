@@ -5,7 +5,7 @@ import 'steal-mocha'
 
 describe('A2JVariable Model', function () {
   it('findOne (variable found)', function () {
-    let originalGuide = window.gGuide
+    const originalGuide = window.gGuide
     window.gGuide = {}
 
     window.gGuide.vars = {
@@ -21,7 +21,7 @@ describe('A2JVariable Model', function () {
       }
     }
 
-    let promise = A2JVariable.findOne({ name: 'A B C' })
+    const promise = A2JVariable.findOne({ name: 'A B C' })
 
     return promise.then(function (a2jvariable) {
       assert.equal(a2jvariable.attr('values.1'), 'alphabet')
@@ -30,7 +30,7 @@ describe('A2JVariable Model', function () {
   })
 
   it('findOne (variable not found)', function () {
-    let promise = A2JVariable.findOne({ name: 'not found' })
+    const promise = A2JVariable.findOne({ name: 'not found' })
 
     return promise.then(function (a2jvariable) {
       assert.isUndefined(a2jvariable.attr('values.1'))
@@ -38,7 +38,7 @@ describe('A2JVariable Model', function () {
   })
 
   it('fromGuideVars', function () {
-    let list = A2JVariable.fromGuideVars({
+    const list = A2JVariable.fromGuideVars({
       'foo bar': {
         name: 'Foo Bar',
         repeating: false,

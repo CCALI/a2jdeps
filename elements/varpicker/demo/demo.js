@@ -45,7 +45,7 @@ const guideVars = {
   }
 }
 
-let VarPickerDemoVM = CanMap.extend({
+const VarPickerDemoVM = CanMap.extend({
   define: {
     variables: {
       value () {

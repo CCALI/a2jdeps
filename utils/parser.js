@@ -19,11 +19,11 @@ const mapANX2Var = {
   rptvalue: constants.vtUnknown
 }
 
-let variableToField = function (varName, pages) {
+const variableToField = function (varName, pages) {
   let field
 
   _forEach(_keys(pages), function (pageName) {
-    let page = pages[pageName]
+    const page = pages[pageName]
 
     field = _find(page.fields, function (field) {
       return field.name.toLowerCase() === varName.toLowerCase()
@@ -36,10 +36,10 @@ let variableToField = function (varName, pages) {
   return field
 }
 
-let setVariable = function (variable, pages, counterNum) {
+const setVariable = function (variable, pages, counterNum) {
   let counter = counterNum
   let varType
-  let field = variableToField(variable.name, pages)
+  const field = variableToField(variable.name, pages)
 
   if (variable && variable.type) {
     varType = variable.type
@@ -98,7 +98,7 @@ let setVariable = function (variable, pages, counterNum) {
 
     xml = '<RptValue>' + xml + '</RptValue>'
   } else {
-    let value = variable.values[1]
+    const value = variable.values[1]
     if (!(typeof value === 'undefined' || value === null || value === '')) {
       // 2014-06-02 SJG Blank value for non-repeating must NOT be in the answer file.
       xml = getXMLValue(value)

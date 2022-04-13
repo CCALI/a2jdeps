@@ -10,7 +10,7 @@ const occurrence = ['any', 'single', 'repeating']
 
 const byRepeating = function (filter, variable) {
   if (filter !== 'any') {
-    let repeating = filter === 'repeating'
+    const repeating = filter === 'repeating'
     return variable.attr('repeating') === repeating
   } else {
     return true
@@ -19,7 +19,7 @@ const byRepeating = function (filter, variable) {
 
 const byType = function (types, variable) {
   if (types && types.length) {
-    let type = variable.attr('type') || ''
+    const type = variable.attr('type') || ''
     return _includes(types, type.toLowerCase())
   } else {
     return true
@@ -103,8 +103,8 @@ export default CanMap.extend('VarPickerVM', {
      */
     variables: {
       get (list) {
-        let types = this.attr('filterTypes')
-        let occurrence = this.attr('filterOccurrence')
+        const types = this.attr('filterTypes')
+        const occurrence = this.attr('filterOccurrence')
 
         if (list) {
           return list
@@ -132,7 +132,7 @@ export default CanMap.extend('VarPickerVM', {
           return []
         }
 
-        let names = this.attr('variableNames')
+        const names = this.attr('variableNames')
         if (!names) {
           return []
         }
@@ -159,7 +159,7 @@ export default CanMap.extend('VarPickerVM', {
     variableNames: {
       get () {
         let names = new CanList([])
-        let variables = this.attr('variables')
+        const variables = this.attr('variables')
 
         if (variables && variables.length) {
           names = variables.map(v => v.attr('name'))
@@ -264,7 +264,7 @@ export default CanMap.extend('VarPickerVM', {
    */
   onSuggestionKeydown (ev) {
     const vm = ev.currentTarget.vm
-    let currentSuggestionIndex = vm.attr('suggestionIndex')
+    const currentSuggestionIndex = vm.attr('suggestionIndex')
     let targetIndex
     const suggestionIndexMax = vm.attr('suggestionIndexMax')
 

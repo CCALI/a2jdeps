@@ -14,16 +14,16 @@ import 'can-map-define'
  * An A2J variable is an answer, or list of answers, to a guided interview
  * question. They are used when generating documents.
  */
-let A2JVariable = Model.extend('A2JVariable', {
+const A2JVariable = Model.extend('A2JVariable', {
   id: 'name',
 
   makeFindOne () {
     return function (params, success, error) {
-      let deferred = new $.Deferred()
+      const deferred = new $.Deferred()
       setupPromise(deferred)
-      let gGuide = window.gGuide || {}
-      let vars = gGuide.vars || {}
-      let name = params.name || ''
+      const gGuide = window.gGuide || {}
+      const vars = gGuide.vars || {}
+      const name = params.name || ''
 
       deferred.resolve(this.model(vars[name.toLowerCase()] || { }))
 
@@ -46,7 +46,7 @@ let A2JVariable = Model.extend('A2JVariable', {
     // convert the array to TVariable objects to an array of raw Object,
     // otherwise the can.List constructor won't convert the TVariable objects
     // to Map instances.
-    let values = _values(vars).map(_toPlainObject)
+    const values = _values(vars).map(_toPlainObject)
     return new A2JVariable.List(values)
   }
 }, {
@@ -69,7 +69,7 @@ let A2JVariable = Model.extend('A2JVariable', {
      */
     propertyName: {
       get () {
-        let name = this.attr('name') || ''
+        const name = this.attr('name') || ''
 
         return name.toLowerCase()
       }
