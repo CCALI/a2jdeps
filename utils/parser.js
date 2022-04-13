@@ -118,6 +118,7 @@ const setVariable = function (variable, pages, counterNum) {
 export function decodeHTMLEntities (answerXML, options) {
   return options ? decode(answerXML, options) : decode(answerXML)
 }
+
 export default {
   parseANX (answers, pages) {
     let xml = constants.HotDocsANXHeader_UTF8_str // jshint ignore:line
@@ -159,19 +160,20 @@ export default {
       }
 
       switch (varANXType) {
-        case 'textvalue':
+        case 'textvalue': {
           let answerValue = $(this).find('TextValue').html()
           if (varName === 'visitedpages') {
             answerValue = decodeHTMLEntities(answerValue)
           }
           answers.varSet(varName, answerValue)
           break
+        }
 
         case 'numvalue':
           answers.varSet(varName, +$(this).find('NumValue').html())
           break
 
-        case 'tfvalue':
+        case 'tfvalue': {
         // Needs to be true boolean for 2 way binding in checkbox.stache view
           let bool = $(this).find('TFValue').html()
           if (bool.toLowerCase() === 'true') {
@@ -181,13 +183,15 @@ export default {
           }
           answers.varSet(varName, bool)
           break
+        }
 
-        case 'datevalue':
+        case 'datevalue': {
         // HotDocs dates in british format while A2J expects US format
           const britDate = $(this).find('DateValue').html()
           const usDate = cDate.swapMonthAndDay(britDate)
           answers.varSet(varName, usDate)
           break
+        }
 
         case 'mcvalue':
           answers.varSet(varName, $(this).find('MCValue > SelValue').html())
@@ -210,7 +214,7 @@ export default {
                   answers.varSet(varName, +$(this).html(), i + 1)
                   break
 
-                case 'tfvalue':
+                case 'tfvalue': {
                   // Needs to be true boolean for 2 way binding in checkbox.stache view
                   let bool = $(this).html()
                   if (bool.toLowerCase() === 'true') {
@@ -220,13 +224,13 @@ export default {
                   }
                   answers.varSet(varName, bool, i + 1)
                   break
-
-                case 'datevalue':
+                }
+                case 'datevalue': {
                   const britDate = $(this).html()
                   const usDate = cDate.swapMonthAndDay(britDate)
                   answers.varSet(varName, usDate, i + 1)
                   break
-
+                }
                 case 'mcvalue':
                   answers.varSet(varName, $(this).find('SelValue').html(), i + 1)
                   break
@@ -303,7 +307,7 @@ export default {
             newVarList.push({ name: name, type: constants.vtMC })
             break
 
-          case 'hd:computation':
+          case 'hd:computation': {
             // <hd:computation name="Any parent address not known CO" resultType="trueFalse">
             // <hd:computation name="A minor/minors aff of due dliligence CO" resultType="text">
             const resultType = $(this).attr('resultType')
@@ -315,6 +319,7 @@ export default {
               newVarList.push({ name: name, type: constants.vtTF })
             }
             break
+          }
         }
       })
 

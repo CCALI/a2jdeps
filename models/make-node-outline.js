@@ -50,13 +50,14 @@ export default function (node) {
 
       break
 
-    case 'a2j-repeat-loop':
+    case 'a2j-repeat-loop': {
       const display = node.attr('state.displayType') || 'table'
       result = `${prettyName} (${_capitalize(display)})`
 
       break
+    }
 
-    case 'a2j-conditional':
+    case 'a2j-conditional': {
       const withoutEmptyMessage = childrenOutline().filter(outline => {
         return outline !== emptyTemplateMessage
       })
@@ -66,6 +67,7 @@ export default function (node) {
         : prettyName
 
       break
+    }
 
     default:
       result = prettyName
