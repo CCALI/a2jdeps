@@ -11,12 +11,18 @@ a2j-variable {
     background-color: #D7ECF5;
     vertical-align: middle;
 
-
     &.unanswered {
       visibility: hidden;
     }
   }
-  // this handles extra space around resolved a2j-variable names
+
+    // this removes extra space around a2j-variable names in the editor
+    span.var-name { 
+      margin-right: -0.25em;
+      margin-left: -0.25em;
+    }
+
+  // this removes extra space around resolved a2j-variable names in documents
     span.var-val { 
       margin-right: -0.25em;
       margin-left: -0.25em;
