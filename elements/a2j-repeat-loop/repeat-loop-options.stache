@@ -39,7 +39,7 @@
           <input type="number" min="1" class="form-control"
           value:bind="../loopCounter">
         {{else}}
-          <var-picker
+          <variable-picker
             filter-types="number"
             selected:bind="scope/loopVariable"
             variables:from="scope/variablesList"

@@ -1,14 +1,14 @@
-<can-import from="~/elements/varpicker/varpicker.less" />
+<can-import from="~/elements/variable-picker/variable-picker.less" />
 
     <div>
       {{#if(showInvalidMessage)}}
-        <span class="var-picker-warning glyphicon-info-circled"> no match</span>
+        <span class="variable-picker-warning glyphicon-info-circled"> no match</span>
       {{/if}}
-      <span class="var-picker-span">
+      <span class="variable-picker-span">
         <input
           type="text"
           name="varname"
-          class="var-picker-input editable text ui-widget-content ui-corner-all"
+          class="variable-picker-input editable text ui-widget-content ui-corner-all"
           value:bind="selected"
           autocomplete="off"
         />

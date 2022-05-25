@@ -5,7 +5,7 @@
         {{listItem.item}}:
 
         {{#if (scope/editActive)}}
-              <var-picker
+              <variable-picker
                 selected:bind="listItem.variable"
                 variables:from="scope/variablesList"
                 filterOccurrence:raw="repeating"

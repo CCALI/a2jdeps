@@ -1,9 +1,9 @@
 import Component from 'can-component'
-import VarPickerVM from './varpicker-vm'
-import template from './varpicker.stache'
+import VarPickerVM from './variable-picker-vm'
+import template from './variable-picker.stache'
 
 /**
- * @module {Module} author/templates/elements/var-picker/ <var-picker>
+ * @module {Module} author/templates/elements/variable-picker/ <variable-picker>
  * @parent api-components
  *
  * This is an input-like component that supports tagging and uses typeahead to
@@ -13,13 +13,13 @@ import template from './varpicker.stache'
  * ## Use
  *
  * @codestart
- *   <var-picker {variables}="guide.vars" {^selected-variable}="selected" />
+ *   <variable-picker {variables}="guide.vars" {^selected-variable}="selected" />
  * @codeend
  */
 
 export default Component.extend({
   view: template,
-  tag: 'var-picker',
+  tag: 'variable-picker',
   ViewModel: VarPickerVM,
 
   leakScope: true

@@ -3,8 +3,8 @@ import CanList from 'can-list'
 import stache from 'can-stache'
 import canViewModel from 'can-view-model'
 import A2JVariable from '~/models/a2j-variable'
-import VarPickerVM from './varpicker-vm'
-import './varpicker'
+import VarPickerVM from './variable-picker-vm'
+import './variable-picker'
 
 import 'steal-mocha'
 
@@ -31,7 +31,7 @@ const testVariables = {
   }
 }
 
-describe('<var-picker>', () => {
+describe('<variable-picker>', () => {
   describe('viewModel', () => {
     let vm
 
@@ -42,7 +42,7 @@ describe('<var-picker>', () => {
     })
 
     it('variableNames - a list of variable names', () => {
-      let names = vm.attr('variableNames')
+      const names = vm.attr('variableNames')
 
       assert.instanceOf(names, CanList)
       assert.include(names.attr(), 'Child Name')
@@ -85,7 +85,7 @@ describe('<var-picker>', () => {
       assert.deepEqual(variableSuggestions, expectedResult, 'should return empty list with default selected value of empty string')
 
       vm.attr('selected', 'name')
-      expectedResult = [ 'Child Name', 'First Name' ]
+      expectedResult = ['Child Name', 'First Name']
       variableSuggestions = vm.attr('variableSuggestions')
       assert.deepEqual(variableSuggestions, expectedResult, 'should return list of matches')
 
@@ -147,9 +147,9 @@ describe('<var-picker>', () => {
 
   describe('Component', () => {
     const render = (data) => {
-      const tpl = stache('<var-picker variables:from="variables" />')
+      const tpl = stache('<variable-picker variables:from="variables" />')
       document.querySelector('#test-area').appendChild(tpl(data))
-      return canViewModel('var-picker')
+      return canViewModel('variable-picker')
     }
     const variables = A2JVariable.fromGuideVars(testVariables)
     let vm
@@ -169,9 +169,9 @@ describe('<var-picker>', () => {
       vm.attr('suggestionIndex', 1)
 
       const testCases = [
-        { keyCode: 40, attrsToTest: [ 'suggestionIndex' ], expectedResults: [ 2 ] },
-        { keyCode: 38, attrsToTest: [ 'suggestionIndex' ], expectedResults: [ 1 ] },
-        { keyCode: 13, attrsToTest: [ 'selected', 'suggestionIndex' ], expectedResults: [ 'Child Name', 0 ] }
+        { keyCode: 40, attrsToTest: ['suggestionIndex'], expectedResults: [2] },
+        { keyCode: 38, attrsToTest: ['suggestionIndex'], expectedResults: [1] },
+        { keyCode: 13, attrsToTest: ['selected', 'suggestionIndex'], expectedResults: ['Child Name', 0] }
       ]
 
       let testEvent
