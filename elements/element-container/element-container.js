@@ -29,7 +29,7 @@ import 'can-map-define'
  *
  * `<element-container>`'s viewModel.
  */
-export let ContainerVM = CanMap.extend('ElementContainerVM', {
+export const ContainerVM = CanMap.extend('ElementContainerVM', {
   define: {
     // passed in via stache
     nodeId: {},
@@ -101,7 +101,7 @@ export default Component.extend({
     },
 
     '{viewModel} deleted': function (ps, evt, deleted) {
-      let $el = $(this.element)
+      const $el = $(this.element)
 
       if (deleted) {
         $el.slideUp('fast')

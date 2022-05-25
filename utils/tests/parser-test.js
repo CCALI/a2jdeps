@@ -27,31 +27,31 @@ describe('Parser', function () {
   })
 
   it('generates hot docs answers file correctly', function () {
-    let variables = answersJSON
-    let expectedXML = answersXML
-    let pages = interviewJSON.pages
+    const variables = answersJSON
+    const expectedXML = answersXML
+    const pages = interviewJSON.pages
 
-    let parsedXML = Parser.parseANX(variables, pages)
+    const parsedXML = Parser.parseANX(variables, pages)
     assert.equal(parsedXML, expectedXML.trim(), 'generated xml is wrong')
   })
 
   it('parses hot docs answers file correctly', function () {
-    let answersXML = partialXML
-    let expectedAnswers = partialJSON
-    let parsedAnswers = Parser.parseJSON(answersXML)
+    const answersXML = partialXML
+    const expectedAnswers = partialJSON
+    const parsedAnswers = Parser.parseJSON(answersXML)
 
     assert.deepEqual(parsedAnswers, expectedAnswers, 'generated answers are wrong')
   })
 
   it('parsed answer file sets TF values to boolean', function () {
-    let answersXML = partialXML
-    let parsedAnswers = Parser.parseJSON(answersXML)
+    const answersXML = partialXML
+    const parsedAnswers = Parser.parseJSON(answersXML)
 
     assert.equal(parsedAnswers['like chocolate tf'].values[1], true, 'TF answer not of type boolean')
   })
 
   it('parsed answer file captures nested loop answers at correct indexes', function () {
-    let parsedAnswers = Parser.parseJSON(nestedAnswersXML)
+    const parsedAnswers = Parser.parseJSON(nestedAnswersXML)
     assert.equal(parsedAnswers['user gender'].values[21], 'Female', 'MC values')
     assert.equal(parsedAnswers['salary nu'].values[21], 67890, 'Number values')
     assert.equal(parsedAnswers['client last name te'].values[21], 'Dang', 'Text values')
@@ -60,8 +60,8 @@ describe('Parser', function () {
   })
 
   it('decodes html-entities to HTML tags', function () {
-    let encodedText = '&lt;p&gt;Text of my first question goes here, &amp; &quot;Some quotes&quot;.&lt;/p&gt;\n'
-    let decodedAnswers = '<p>Text of my first question goes here, & "Some quotes".</p>\n'
+    const encodedText = '&lt;p&gt;Text of my first question goes here, &amp; &quot;Some quotes&quot;.&lt;/p&gt;\n'
+    const decodedAnswers = '<p>Text of my first question goes here, & "Some quotes".</p>\n'
 
     assert.equal(decodeHTMLEntities(encodedText), decodedAnswers, 'Should convert html-entities to HTML tags')
   })

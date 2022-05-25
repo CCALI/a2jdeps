@@ -24,7 +24,7 @@ describe('<a2j-conditional>', function () {
     })
 
     it('unaryOperation - whether only one operand is needed', function () {
-      let items = [
+      const items = [
         { operator: 'is-true', expected: true },
         { operator: 'is-false', expected: true },
         { operator: 'is-equal', expected: false },
@@ -46,7 +46,7 @@ describe('<a2j-conditional>', function () {
     let vm
 
     beforeEach(function () {
-      let frag = stache(
+      const frag = stache(
         '<a2j-conditional children:from="children" />'
       )
 

@@ -15,8 +15,8 @@ export default Component.extend('A2JTemplateComponent', {
 
     'section dragstart': function (el, evt) {
       evt.stopPropagation()
-      let $el = $(el)
-      let dt = evt.dataTransfer
+      const $el = $(el)
+      const dt = evt.dataTransfer
       dt.effectAllowed = 'move'
       dt.setData('text/html', null)
       this.viewModel.attr('dragItemIndex', $el.index())
@@ -25,8 +25,8 @@ export default Component.extend('A2JTemplateComponent', {
 
     'section dragenter': function (el, evt) {
       evt.stopPropagation()
-      let $el = $(el)
-      let dropIndex = this.viewModel.attr('dropItemIndex')
+      const $el = $(el)
+      const dropIndex = this.viewModel.attr('dropItemIndex')
 
       // add placeholder class to the dragged element (dropIndex is null) and
       // when the element receiving the dragenter event is at a different index
@@ -39,7 +39,7 @@ export default Component.extend('A2JTemplateComponent', {
     'section dragover': function ($el, evt) {
       evt.preventDefault()
 
-      let dt = evt.dataTransfer
+      const dt = evt.dataTransfer
       dt.dropEffect = 'move'
     },
 
@@ -59,7 +59,7 @@ export default Component.extend('A2JTemplateComponent', {
       evt.stopPropagation()
       this.viewModel.removeDragPlaceholderFlag()
 
-      let $el = $(el)
+      const $el = $(el)
       this.viewModel.attr('dropItemIndex', $el.index())
 
       this.viewModel.attr({
@@ -87,7 +87,7 @@ export default Component.extend('A2JTemplateComponent', {
     },
 
     '{viewModel} dropItemIndex': function () {
-      let vm = this.viewModel
+      const vm = this.viewModel
       vm.updateChildrenOrder()
     },
 

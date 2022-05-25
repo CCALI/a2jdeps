@@ -4,7 +4,7 @@ import template from './demo.stache'
 
 import 'can-map-define'
 
-let AvatarDemoVM = CanMap.extend({
+const AvatarDemoVM = CanMap.extend({
   define: {
     gender: {
       value: 'female'

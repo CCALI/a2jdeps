@@ -10,7 +10,7 @@ describe('<element-container>', function () {
   describe('Component', function () {
     beforeEach(function () {
       const toggleEditActiveNode = () => { console.log('toggle') }
-      let frag = stache(
+      const frag = stache(
         `<element-container toggleEditActiveNode:from="toggleEditActiveNode">
           <h2>SectionTitle</h2>
         </element-container>`
@@ -35,14 +35,14 @@ describe('<element-container>', function () {
     })
 
     it('hides element-toolbar if not selected', function () {
-      let vm = $('element-container')[0].viewModel
+      const vm = $('element-container')[0].viewModel
 
       assert.isFalse(vm.attr('selected'), 'should default to false')
       assert(!$('element-toolbar').length, 'element-toolbar should not be rendered')
     })
 
     it('shows element-toolbar if selected', function () {
-      let vm = $('element-container')[0].viewModel
+      const vm = $('element-container')[0].viewModel
 
       vm.attr('selected', true)
       assert($('element-toolbar').length, 'should be visible')

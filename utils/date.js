@@ -17,10 +17,10 @@ const epoch = moment('1970-01-01 00:00:00')
 export default {
   // LHI uses british dates in HotDocs. This converts in both directions
   swapMonthAndDay: function (stringDate) {
-    var result = ''
+    let result = ''
 
     if (stringDate && typeof stringDate === 'string') {
-      var parts = stringDate.split('/')
+      const parts = stringDate.split('/')
       result = parts[1] + '/' + parts[0] + '/' + parts[2]
     }
 

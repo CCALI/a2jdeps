@@ -35,8 +35,8 @@ export default CanMap.extend('A2JVariableVM', {
      */
     variable: {
       get () {
-        let name = this.attr('name')
-        let answers = this.attr('answers')
+        const name = this.attr('name')
+        const answers = this.attr('answers')
 
         if (name && answers) {
           return answers.getVariable(name)
@@ -63,12 +63,12 @@ export default CanMap.extend('A2JVariableVM', {
      */
     value: {
       get () {
-        let variable = this.attr('variable')
+        const variable = this.attr('variable')
 
         if (variable) {
-          let name = this.attr('name')
-          let answers = this.attr('answers')
-          let index = this.attr('varIndex')
+          const name = this.attr('name')
+          const answers = this.attr('answers')
+          const index = this.attr('varIndex')
 
           return answers.getValue(name, index)
         }
@@ -83,8 +83,8 @@ export default CanMap.extend('A2JVariableVM', {
      */
     canShowAnswer: {
       get () {
-        let value = this.attr('value')
-        let useAnswers = this.attr('useAnswers')
+        const value = this.attr('value')
+        const useAnswers = this.attr('useAnswers')
 
         return value != null && useAnswers
       }
@@ -98,8 +98,8 @@ export default CanMap.extend('A2JVariableVM', {
      */
     isUnanswered: {
       get () {
-        let value = this.attr('value')
-        let useAnswers = this.attr('useAnswers')
+        const value = this.attr('value')
+        const useAnswers = this.attr('useAnswers')
 
         return useAnswers && value == null
       }

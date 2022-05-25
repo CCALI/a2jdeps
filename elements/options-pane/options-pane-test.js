@@ -10,7 +10,7 @@ describe('element-options-pane', function () {
     let vm
 
     beforeEach(function () {
-      let frag = stache('<element-options-pane />')
+      const frag = stache('<element-options-pane />')
 
       $('#test-area').html(frag())
       vm = $('element-options-pane')[0].viewModel

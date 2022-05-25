@@ -82,7 +82,7 @@ describe('<user-avatar-picker>', () => {
         skin: 'medium'
       }
 
-      let frag = stache('<user-avatar-picker />')
+      const frag = stache('<user-avatar-picker />')
       $('#test-area').html(frag({ userAvatar: startingAvatar }))
       vm = $('user-avatar-picker')[0].viewModel
     })

@@ -15,11 +15,11 @@ describe('<color-chips>', () => {
     ]
 
     beforeEach(() => {
-      vm = new ColorChipsVm({ colorClasses: colorClasses })
+      vm = new ColorChipsVm({ colorClasses })
     })
 
     it('onSelect', () => {
-      var handler = (colorClass) => {
+      const handler = (colorClass) => {
         vm.attr('selectedColorClass', colorClass)
       }
       vm.attr('onColorClass', handler)

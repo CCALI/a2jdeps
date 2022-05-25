@@ -19,11 +19,11 @@ const mapANX2Var = {
   rptvalue: constants.vtUnknown
 }
 
-let variableToField = function (varName, pages) {
+const variableToField = function (varName, pages) {
   let field
 
   _forEach(_keys(pages), function (pageName) {
-    let page = pages[pageName]
+    const page = pages[pageName]
 
     field = _find(page.fields, function (field) {
       return field.name.toLowerCase() === varName.toLowerCase()
@@ -36,10 +36,10 @@ let variableToField = function (varName, pages) {
   return field
 }
 
-let setVariable = function (variable, pages, counterNum) {
+const setVariable = function (variable, pages, counterNum) {
   let counter = counterNum
   let varType
-  let field = variableToField(variable.name, pages)
+  const field = variableToField(variable.name, pages)
 
   if (variable && variable.type) {
     varType = variable.type
@@ -98,7 +98,7 @@ let setVariable = function (variable, pages, counterNum) {
 
     xml = '<RptValue>' + xml + '</RptValue>'
   } else {
-    let value = variable.values[1]
+    const value = variable.values[1]
     if (!(typeof value === 'undefined' || value === null || value === '')) {
       // 2014-06-02 SJG Blank value for non-repeating must NOT be in the answer file.
       xml = getXMLValue(value)
@@ -159,19 +159,20 @@ export default {
       }
 
       switch (varANXType) {
-        case 'textvalue':
+        case 'textvalue': {
           let answerValue = $(this).find('TextValue').html()
           if (varName === 'visitedpages') {
             answerValue = decodeHTMLEntities(answerValue)
           }
           answers.varSet(varName, answerValue)
+        }
           break
 
         case 'numvalue':
           answers.varSet(varName, +$(this).find('NumValue').html())
           break
 
-        case 'tfvalue':
+        case 'tfvalue': {
         // Needs to be true boolean for 2 way binding in checkbox.stache view
           let bool = $(this).find('TFValue').html()
           if (bool.toLowerCase() === 'true') {
@@ -180,13 +181,15 @@ export default {
             bool = false
           }
           answers.varSet(varName, bool)
+        }
           break
 
-        case 'datevalue':
+        case 'datevalue': {
         // HotDocs dates in british format while A2J expects US format
           const britDate = $(this).find('DateValue').html()
           const usDate = cDate.swapMonthAndDay(britDate)
           answers.varSet(varName, usDate)
+        }
           break
 
         case 'mcvalue':
@@ -210,7 +213,7 @@ export default {
                   answers.varSet(varName, +$(this).html(), i + 1)
                   break
 
-                case 'tfvalue':
+                case 'tfvalue': {
                   // Needs to be true boolean for 2 way binding in checkbox.stache view
                   let bool = $(this).html()
                   if (bool.toLowerCase() === 'true') {
@@ -219,12 +222,14 @@ export default {
                     bool = false
                   }
                   answers.varSet(varName, bool, i + 1)
+                }
                   break
 
-                case 'datevalue':
+                case 'datevalue': {
                   const britDate = $(this).html()
                   const usDate = cDate.swapMonthAndDay(britDate)
                   answers.varSet(varName, usDate, i + 1)
+                }
                   break
 
                 case 'mcvalue':
@@ -276,12 +281,12 @@ export default {
         switch (this.nodeName) {
           case 'hd:text':
             // hd:text name="AGR Petitioner Mother-Father-TE" askAutomatically="false" saveAnswer="false" warnIfUnanswered="false"/>
-            newVarList.push({ name: name, type: constants.vtText })
+            newVarList.push({ name, type: constants.vtText })
             break
 
           case 'hd:trueFalse':
             // <hd:trueFalse name="Petitioner unemployment TF">
-            newVarList.push({ name: name, type: constants.vtTF })
+            newVarList.push({ name, type: constants.vtTF })
             break
 
           case 'hd:date':
@@ -290,30 +295,31 @@ export default {
             // <hd:prompt>Date on which child came into care of petitioner(s)</hd:prompt>
             // <hd:fieldWidth widthType="calculated"/>
             // </hd:date>
-            newVarList.push({ name: name, type: constants.vtDate })
+            newVarList.push({ name, type: constants.vtDate })
             break
 
           case 'hd:number':
             // <hd:number name="Putative children counter" askAutomatically="false" saveAnswer="false" warnIfUnanswered="false"/>
-            newVarList.push({ name: name, type: constants.vtNumber })
+            newVarList.push({ name, type: constants.vtNumber })
             break
 
           case 'hd:multipleChoice':
             // <hd:multipleChoice name="Child gender MC" askAutomatically="false">
-            newVarList.push({ name: name, type: constants.vtMC })
+            newVarList.push({ name, type: constants.vtMC })
             break
 
-          case 'hd:computation':
+          case 'hd:computation': {
             // <hd:computation name="Any parent address not known CO" resultType="trueFalse">
             // <hd:computation name="A minor/minors aff of due dliligence CO" resultType="text">
             const resultType = $(this).attr('resultType')
             if (resultType === 'text') {
-              newVarList.push({ name: name, type: constants.vtText })
+              newVarList.push({ name, type: constants.vtText })
             }
 
             if (resultType === 'trueFalse') {
-              newVarList.push({ name: name, type: constants.vtTF })
+              newVarList.push({ name, type: constants.vtTF })
             }
+          }
             break
         }
       })

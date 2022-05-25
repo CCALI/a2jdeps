@@ -28,7 +28,7 @@ function joinBaseUrl (path) {
  *
  * `<a2j-viewer-avatar>`'s viewModel.
  */
-export let ViewerAvatarVM = CanMap.extend('ViewerAvatarVM', {
+export const ViewerAvatarVM = CanMap.extend('ViewerAvatarVM', {
   define: {
     /**
      * @property {String} avatar.ViewModel.prototype.gender gender

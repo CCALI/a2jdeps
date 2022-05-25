@@ -22,7 +22,7 @@ export default {
 
   fieldTypeToVariableType: function (type) {
     // Return variable type corresponding to this field type.
-    var varType
+    let varType
     switch (type) {
       case constants.ftText:
       case constants.ftTextLong:
@@ -66,7 +66,7 @@ export default {
   ismdy: function (str) {
     //  Return true if str looks like a date (m/d/y)
     if (typeof str === 'string') {
-      var parts = str.split('/')
+      const parts = str.split('/')
       if (parts.length === 3) {
         return this.isNumber(parts[0]) && this.isNumber(parts[1]) && this.isNumber(parts[2])
       }
@@ -109,7 +109,7 @@ export default {
 
   decodeEntities: (function () {
     // this prevents any overhead from creating the object each time
-    var element = document.createElement('div')
+    const element = document.createElement('div')
 
     function decodeHTMLEntities (str) {
       if (str && typeof str === 'string') {

@@ -239,7 +239,7 @@ export default CanMap.extend('RepeatLoopVM', {
      */
     useLoopCounter: {
       get () {
-        let loopType = this.attr('loopType')
+        const loopType = this.attr('loopType')
         return loopType === 'counter'
       }
     },
@@ -255,13 +255,13 @@ export default CanMap.extend('RepeatLoopVM', {
      */
     loopCollection: {
       get () {
-        let useCounter = this.attr('useLoopCounter')
+        const useCounter = this.attr('useLoopCounter')
 
         if (useCounter) {
-          let counter = this.attr('loopCounter')
+          const counter = this.attr('loopCounter')
           return new CanList(_range(counter))
         } else {
-          let varName = this.attr('loopVariable')
+          const varName = this.attr('loopVariable')
           return this.rangeFromVariable(varName)
         }
       }
@@ -269,9 +269,9 @@ export default CanMap.extend('RepeatLoopVM', {
   },
 
   addColumn () {
-    let columns = this.attr('tableColumns')
-    let newLength = columns.attr('length') + 1
-    let colWidth = Math.floor(100 / newLength)
+    const columns = this.attr('tableColumns')
+    const newLength = columns.attr('length') + 1
+    const colWidth = Math.floor(100 / newLength)
 
     columns.forEach(function (col) {
       col.attr('width', colWidth)
@@ -285,9 +285,9 @@ export default CanMap.extend('RepeatLoopVM', {
   },
 
   removeColumn (index) {
-    let columns = this.attr('tableColumns')
-    let newLength = columns.attr('length') - 1
-    let colWidth = Math.floor(100 / newLength)
+    const columns = this.attr('tableColumns')
+    const newLength = columns.attr('length') - 1
+    const colWidth = Math.floor(100 / newLength)
 
     columns.forEach(function (col) {
       col.attr('width', colWidth)
@@ -297,8 +297,8 @@ export default CanMap.extend('RepeatLoopVM', {
   },
 
   addListItem () {
-    let items = this.attr('listItems')
-    let newLength = items.attr('length') + 1
+    const items = this.attr('listItems')
+    const newLength = items.attr('length') + 1
 
     items.push({
       variable: '',
@@ -307,13 +307,13 @@ export default CanMap.extend('RepeatLoopVM', {
   },
 
   removeListItem (index) {
-    let items = this.attr('listItems')
+    const items = this.attr('listItems')
     items.splice(index, 1)
   },
 
   getAnswer (varName = '') {
-    let answers = this.attr('answers')
-    let answerKey = varName.toLowerCase()
+    const answers = this.attr('answers')
+    const answerKey = varName.toLowerCase()
 
     if (answers && answerKey) {
       return answers.attr(answerKey)
@@ -322,7 +322,7 @@ export default CanMap.extend('RepeatLoopVM', {
 
   rangeFromVariable (varName = '') {
     let counter = 0
-    let variable = this.getAnswer(varName)
+    const variable = this.getAnswer(varName)
 
     if (variable) {
       counter = _last(variable.attr('values').attr())
@@ -332,7 +332,7 @@ export default CanMap.extend('RepeatLoopVM', {
   },
 
   updateLoopRichText () {
-    let editor = this.attr('ckeditorInstance')
+    const editor = this.attr('ckeditorInstance')
 
     if (editor) {
       this.attr('loopRichText', editor.getData())
@@ -340,7 +340,7 @@ export default CanMap.extend('RepeatLoopVM', {
   },
 
   destroyEditorInstance () {
-    let editor = this.attr('ckeditorInstance')
+    const editor = this.attr('ckeditorInstance')
 
     if (editor) {
       editor.destroy()

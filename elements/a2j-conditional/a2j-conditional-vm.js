@@ -99,7 +99,7 @@ export default CanMap.extend('A2JConditionalVM', {
      */
     unaryOperation: {
       get () {
-        let operator = this.attr('operator')
+        const operator = this.attr('operator')
         return _includes(['is-true', 'is-false'], operator)
       }
     },
