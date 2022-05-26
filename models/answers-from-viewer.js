@@ -21,9 +21,9 @@ export default Model.extend('AnswersModel', {}, {
   varExists: function (prop) {
     prop = $.trim(prop).toLowerCase()
 
-    let keys = CanMap.keys(this)
+    const keys = CanMap.keys(this)
 
-    let key = _find(keys, function (k) {
+    const key = _find(keys, function (k) {
       return k.toLowerCase() === prop
     })
 
@@ -52,7 +52,7 @@ export default Model.extend('AnswersModel', {}, {
   },
 
   varGet: function (varName, varIndex, opts) {
-    var v = this.varExists(varName)
+    const v = this.varExists(varName)
 
     if (!v) return undefined
 
@@ -65,7 +65,7 @@ export default Model.extend('AnswersModel', {}, {
       varIndex = 1
     }
 
-    var val = v.values[varIndex]
+    let val = v.values[varIndex]
 
     switch (v.type) {
       case CONST.vtNumber:

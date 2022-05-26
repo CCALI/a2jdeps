@@ -29,7 +29,7 @@ stache.registerPartial('section-title-content', contentTpl)
  *
  * `<a2j-section-title>`'s viewModel.
  */
-export let SectionTitleVM = CanMap.extend('SectionTitleVM', {
+export const SectionTitleVM = CanMap.extend('SectionTitleVM', {
   define: {
     // passed in via a2j-template.stache
     fontProperties: {},
@@ -127,9 +127,9 @@ export default Component.extend({
 
   helpers: {
     showSectionTitle () {
-      let title = this.attr('title')
-      let tag = this.attr('titleTag')
-      let sectionCounter = this.attr('sectionCounter')
+      const title = this.attr('title')
+      const tag = this.attr('titleTag')
+      const sectionCounter = this.attr('sectionCounter')
 
       return `<${tag} class="section-title count-${sectionCounter}">${title}</${tag}>`
     }

@@ -45,7 +45,7 @@ const guideVars = {
   }
 }
 
-let VarPickerDemoVM = CanMap.extend({
+const VarPickerDemoVM = CanMap.extend({
   define: {
     variables: {
       value () {
@@ -57,7 +57,7 @@ let VarPickerDemoVM = CanMap.extend({
 
 export default Component.extend({
   view: template,
-  tag: 'varpicker-demo',
+  tag: 'variable-picker-demo',
   ViewModel: VarPickerDemoVM,
   leakScope: true
 })

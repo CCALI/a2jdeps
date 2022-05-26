@@ -8,7 +8,7 @@ import 'steal-mocha'
 
 describe('A2JTemplate Model', function () {
   it('findOne', function () {
-    let promise = A2JTemplate.findOne({ guideId: 1261, templateId: 2112 })
+    const promise = A2JTemplate.findOne({ guideId: 1261, templateId: 2112 })
 
     return promise.then(function (a2jTemplate) {
       assert.equal(a2jTemplate.attr('templateId'), '2112', 'should grab correct template')
@@ -19,7 +19,7 @@ describe('A2JTemplate Model', function () {
   })
 
   it('findAll', function () {
-    let promise = A2JTemplate.findAll({ guideId: 1261 })
+    const promise = A2JTemplate.findAll({ guideId: 1261 })
 
     return promise.then(function (a2jTemplates) {
       assert.equal(a2jTemplates.length, 4, 'should have 4 total templates')
@@ -34,7 +34,7 @@ describe('A2JTemplate Model', function () {
   })
 
   it('findAll with active filter', function () {
-    let promise = A2JTemplate.findAll({ guideId: 1261, active: true })
+    const promise = A2JTemplate.findAll({ guideId: 1261, active: true })
 
     return promise.then(function (a2jTemplates) {
       assert.equal(a2jTemplates.length, 3, 'should only have 3 active of 4 templates')
@@ -42,17 +42,17 @@ describe('A2JTemplate Model', function () {
   })
 
   it('addNode', function () {
-    let promise = A2JTemplate.findOne({ guideId: 1261, templateId: 2112 })
+    const promise = A2JTemplate.findOne({ guideId: 1261, templateId: 2112 })
 
     return promise.then(function (a2jTemplate) {
-      let children = a2jTemplate.attr('rootNode.children')
-      let total = children.attr('length')
+      const children = a2jTemplate.attr('rootNode.children')
+      const total = children.attr('length')
 
       a2jTemplate.addNode(null)
       assert.equal(children.attr('length'), total,
         'it does nothing when invalid node is passed')
 
-      let newNode = new A2JNode({ title: 'foo bar' })
+      const newNode = new A2JNode({ title: 'foo bar' })
       a2jTemplate.addNode(newNode)
 
       assert.equal(children.attr('length'), total + 1, 'there should be one more')
@@ -62,7 +62,7 @@ describe('A2JTemplate Model', function () {
 
   it('search - filters list that matches title', function () {
     let result
-    let templates = new A2JTemplate.List([{ title: 'foo' }, { title: 'bar o' }])
+    const templates = new A2JTemplate.List([{ title: 'foo' }, { title: 'bar o' }])
 
     result = templates.search('baz')
     assert.equal(result.attr('length'), 0, 'no templates with baz title')
@@ -136,24 +136,27 @@ describe('A2JTemplate Model', function () {
         rootNode: {
           tag: 'a2j-template',
           children: [
-            { tag: 'a2j-conditional',
+            {
+              tag: 'a2j-conditional',
               state: {},
               children: [
-                { rootNode: {
-                  tag: 'a2j-template',
-                  children: [
-                    { tag: 'a2j-section-title', state: {} },
-                    { tag: 'a2j-repeat-loop', state: { displayType: '' } }
-                  ]
-                }
+                {
+                  rootNode: {
+                    tag: 'a2j-template',
+                    children: [
+                      { tag: 'a2j-section-title', state: {} },
+                      { tag: 'a2j-repeat-loop', state: { displayType: '' } }
+                    ]
+                  }
                 },
-                { rootNode: {
-                  tag: 'a2j-template',
-                  children: [
-                    { tag: 'a2j-rich-text', state: {} },
-                    { tag: 'a2j-page-break', state: {} }
-                  ]
-                }
+                {
+                  rootNode: {
+                    tag: 'a2j-template',
+                    children: [
+                      { tag: 'a2j-rich-text', state: {} },
+                      { tag: 'a2j-page-break', state: {} }
+                    ]
+                  }
                 }
               ]
             }
@@ -172,15 +175,17 @@ describe('A2JTemplate Model', function () {
         rootNode: {
           tag: 'a2j-template',
           children: [
-            { tag: 'a2j-conditional',
+            {
+              tag: 'a2j-conditional',
               state: {},
               children: [
-                { rootNode: {
-                  tag: 'a2j-template',
-                  children: [
-                    { tag: 'a2j-section-title', state: {} }
-                  ]
-                }
+                {
+                  rootNode: {
+                    tag: 'a2j-template',
+                    children: [
+                      { tag: 'a2j-section-title', state: {} }
+                    ]
+                  }
                 },
                 { rootNode: { tag: 'a2j-template', children: [] } }
               ]

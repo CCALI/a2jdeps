@@ -10,7 +10,7 @@ describe('<a2j-variable>', function () {
     let vm
 
     beforeEach(function () {
-      let fixture = {
+      const fixture = {
         'client first name': {
           values: [null],
           repeating: false,
@@ -38,7 +38,7 @@ describe('<a2j-variable>', function () {
     })
 
     it('gets variable object from answers if available', function () {
-      let variable = vm.attr('variable')
+      const variable = vm.attr('variable')
 
       assert.isTrue(variable instanceof CanMap)
       assert.isFalse(variable.attr('repeating'))
@@ -46,7 +46,7 @@ describe('<a2j-variable>', function () {
     })
 
     it('gets value for non repeating vars', function () {
-      let variable = vm.attr('variable')
+      const variable = vm.attr('variable')
 
       variable.attr('repeating', false)
       variable.attr('values').push('John')
@@ -74,7 +74,7 @@ describe('<a2j-variable>', function () {
     // this applies to use case when no index is provided and the variable
     // has only one value (after dropping first null value).
     it('gets value at last index for repeating vars', function () {
-      let variable = vm.attr('variable')
+      const variable = vm.attr('variable')
 
       variable.attr('repeating', true)
       variable.attr('values').push('John')

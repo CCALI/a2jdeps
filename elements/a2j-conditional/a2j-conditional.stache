@@ -1,4 +1,4 @@
-<can-import from="~/elements/varpicker/" />
+<can-import from="~/elements/variable-picker/" />
 <can-import from="~/elements/options-pane/" />
 <can-import from="~/elements/a2j-variable/" />
 <can-import from="~/elements/condition-form/" />

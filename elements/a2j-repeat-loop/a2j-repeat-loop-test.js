@@ -37,12 +37,12 @@ describe('<a2j-repeat-loop>', function () {
     })
 
     it('getAnswer returns answer object given variable name', function () {
-      let variable = vm.getAnswer('ChildCounter').attr()
+      const variable = vm.getAnswer('ChildCounter').attr()
       assert.deepEqual(variable, answers.childcounter)
     })
 
     it('rangeFromVariable create a range given variable name', function () {
-      let range = vm.rangeFromVariable('ChildCounter').attr()
+      const range = vm.rangeFromVariable('ChildCounter').attr()
       assert.deepEqual(range, [0, 1, 2], 'childcounter value is 3')
     })
 

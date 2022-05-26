@@ -62,11 +62,11 @@ export default CanMap.extend({
    *   then an index of 1 is defaulted and that element is returned.
    */
   getValue (varName, varIndex) {
-    let variable = this.getVariable(varName)
+    const variable = this.getVariable(varName)
 
     if (variable) {
-      let repeating = variable.attr('repeating')
-      let values = _tail(variable.attr('values').attr())
+      const repeating = variable.attr('repeating')
+      const values = _tail(variable.attr('values').attr())
 
       if (repeating) {
         return (varIndex != null) ? values[varIndex] : commaString(values)

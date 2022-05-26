@@ -45,7 +45,7 @@
  *
  * This method evaluates the condition specified by the user through the UI,
  * it also handles the look up in the answers object if the user set a variable
- * name through var-picker instead of some other (text) value:
+ * name through variable-picker instead of some other (text) value:
  *
  *   - is-true         -> `!!leftOperandValue`
  *   - is-false        -> `!leftOperandValue`
@@ -61,7 +61,7 @@
     const rightOperandType = params.rightOperandType
     const answers = params.answers
 
-    var val
+    let val
     const leftValue = getOperandValue(leftOperand, 'variable', answers)
     const rightValue = getOperandValue(rightOperand, rightOperandType, answers)
 

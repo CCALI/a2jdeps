@@ -21,12 +21,12 @@
 
   function getBoxPdfArea (pages) {
     return function _getBoxPdfArea (box) {
-      var page = pages[box.page]
-      var pdfSize = page.pdfSize
-      var domSize = page.domSize
-      var scaleX = pdfSize.width / domSize.width
-      var scaleY = pdfSize.height / domSize.height
-      var area = box.area
+      const page = pages[box.page]
+      const pdfSize = page.pdfSize
+      const domSize = page.domSize
+      const scaleX = pdfSize.width / domSize.width
+      const scaleY = pdfSize.height / domSize.height
+      const area = box.area
       return {
         top: scaleY * area.top,
         left: scaleX * area.left,
@@ -37,14 +37,14 @@
   }
 
   function getTemplateOverlayData (template) {
-    var rootNode = template.rootNode
-    var pages = rootNode.pages
-    var boxes = rootNode.boxes
-    var documentOptions = rootNode.documentOptions
+    const rootNode = template.rootNode
+    const pages = rootNode.pages
+    const boxes = rootNode.boxes
+    const documentOptions = rootNode.documentOptions
     return {
-      pages: pages,
-      boxes: boxes,
-      documentOptions: documentOptions
+      pages,
+      boxes,
+      documentOptions
     }
   }
 
@@ -59,18 +59,18 @@
   }
 
   function getDocumentGlobals (pages, documentOptions) {
-    var margins = documentOptions.addendumOptions.margins || {
+    const margins = documentOptions.addendumOptions.margins || {
       top: 0,
       left: 0,
       right: 0,
       bottom: 0
     }
-    var lastPageSize = pages[pages.length - 1].pdfSize
-    var pageSize = documentOptions.addendumOptions.pageSize || lastPageSize
+    const lastPageSize = pages[pages.length - 1].pdfSize
+    const pageSize = documentOptions.addendumOptions.pageSize || lastPageSize
     return {
       addendum: {
-        margins: margins,
-        pageSize: pageSize,
+        margins,
+        pageSize,
         labelStyle: {
           fontSize: documentOptions.fontSize - 2,
           fontName: documentOptions.fontName,
@@ -82,90 +82,90 @@
   }
 
   function getOverlay (templateData) {
-    var boxes = templateData.boxes
-    var pages = templateData.pages
-    var answers = templateData.answers
-    var variables = templateData.variables
-    var customDocumentOptions = templateData.documentOptions
+    const boxes = templateData.boxes
+    const pages = templateData.pages
+    const answers = templateData.answers
+    const variables = templateData.variables
+    const customDocumentOptions = templateData.documentOptions
 
-    var documentOptions = Object.assign({ fontName: 'Lato' }, customDocumentOptions, { fontSize: readInteger(customDocumentOptions.fontSize, 12) })
-    var documentGlobals = getDocumentGlobals(pages, documentOptions)
+    const documentOptions = Object.assign({ fontName: 'Lato' }, customDocumentOptions, { fontSize: readInteger(customDocumentOptions.fontSize, 12) })
+    const documentGlobals = getDocumentGlobals(pages, documentOptions)
 
-    var defaultTextOptions = {
+    const defaultTextOptions = {
       fontSize: documentOptions.fontSize,
       fontName: documentOptions.fontName,
       textAlign: 'left',
       textColor: '000000'
     }
 
-    var variableBoxesMap = boxes.filter(function (box) {
+    const variableBoxesMap = boxes.filter(function (box) {
       return !!box.variable
     }).reduce(function (map, box) {
-      var key = box.groupId || box.id
+      const key = box.groupId || box.id
       map[key] = map[key] || []
       map[key].push(box)
 
       return map
     }, {})
 
-    var getBoxArea = getBoxPdfArea(pages)
-    var patches = Object.keys(variableBoxesMap).reduce(function (patches, boxKey) {
-      var variableKey = variableBoxesMap[boxKey][0].variable.toLowerCase()
-      var variable = variables[variableKey]
-      var answer = answers[variableKey]
-      var answerValue = answer && answer.values[1]
-      var hasAnswerValue = answerValue !== null &&
+    const getBoxArea = getBoxPdfArea(pages)
+    const patches = Object.keys(variableBoxesMap).reduce(function (patches, boxKey) {
+      const variableKey = variableBoxesMap[boxKey][0].variable.toLowerCase()
+      const variable = variables[variableKey]
+      const answer = answers[variableKey]
+      const answerValue = answer && answer.values[1]
+      const hasAnswerValue = answerValue !== null &&
                           answerValue !== undefined &&
                           answerValue !== ''
-      var hasVariableToPatch = variable && answer && hasAnswerValue
+      const hasVariableToPatch = variable && answer && hasAnswerValue
       if (!hasVariableToPatch) {
         return patches
       }
 
-      var boxes = variableBoxesMap[boxKey]
-      var defaultVariableOptions = {
+      const boxes = variableBoxesMap[boxKey]
+      const defaultVariableOptions = {
         overflowStyle: 'clip-overflow',
         addendumLabel: variable.name,
         checkIcon: 'normal-check',
         isCheck: false
       }
-      var customVariableOptions = documentOptions.variableOptions[variableKey] || {}
-      var variableOptions = Object.assign({}, defaultVariableOptions, customVariableOptions)
-      var patcher = getPatcher(variable.type)
-      var newPatches = patcher({
-        boxes: boxes,
-        getBoxArea: getBoxArea,
-        answer: answer,
-        answerValue: answerValue,
-        variable: variable,
-        variableOptions: variableOptions,
-        documentOptions: documentOptions,
-        defaultTextOptions: defaultTextOptions
+      const customVariableOptions = documentOptions.variableOptions[variableKey] || {}
+      const variableOptions = Object.assign({}, defaultVariableOptions, customVariableOptions)
+      const patcher = getPatcher(variable.type)
+      const newPatches = patcher({
+        boxes,
+        getBoxArea,
+        answer,
+        answerValue,
+        variable,
+        variableOptions,
+        documentOptions,
+        defaultTextOptions
       })
 
       return [].concat(patches, newPatches)
     }, [])
 
-    return Object.assign({}, documentGlobals, { patches: patches })
+    return Object.assign({}, documentGlobals, { patches })
   }
 
   function getTextPatches (options) {
-    var boxes = options.boxes
-    var getBoxArea = options.getBoxArea
-    var variable = options.variable
-    var answer = options.answer
-    var answerValue = options.answerValue
-    var variableOptions = options.variableOptions
-    var defaultTextOptions = options.defaultTextOptions
+    const boxes = options.boxes
+    const getBoxArea = options.getBoxArea
+    const variable = options.variable
+    const answer = options.answer
+    const answerValue = options.answerValue
+    const variableOptions = options.variableOptions
+    const defaultTextOptions = options.defaultTextOptions
 
-    var style = variableOptions.overflowStyle
-    var addendumLabel = variableOptions.addendumLabel
+    const style = variableOptions.overflowStyle
+    const addendumLabel = variableOptions.addendumLabel
 
-    var isTableColumn = variable.repeating
+    const isTableColumn = variable.repeating
     if (isTableColumn) {
-      var values = answer.values.slice(1)
-      var columnBoxes = boxes.sort(boxComparator).slice(0, values.length)
-      var column = columnBoxes.map(function (box, index) {
+      const values = answer.values.slice(1)
+      const columnBoxes = boxes.sort(boxComparator).slice(0, values.length)
+      const column = columnBoxes.map(function (box, index) {
         return {
           type: 'text',
           page: box.page,
@@ -174,20 +174,20 @@
           text: defaultTextOptions
         }
       })
-      var tablePatch = {
+      const tablePatch = {
         type: 'table-text',
         columns: [column],
-        addendumLabel: addendumLabel,
+        addendumLabel,
         addendumColumns: []
       }
       return [tablePatch]
     }
 
     // mutli-line patch required for addendum overflow on single-text
-    var isSingleLine = boxes.length === 1 && (!style || style === 'clip-overflow')
+    const isSingleLine = boxes.length === 1 && (!style || style === 'clip-overflow')
     if (isSingleLine) {
-      var box = boxes[0]
-      var textPatch = {
+      const box = boxes[0]
+      const textPatch = {
         type: 'text',
         page: box.page,
         content: answerValue,
@@ -197,12 +197,12 @@
       return [textPatch]
     }
 
-    var multilinePatch = {
+    const multilinePatch = {
       type: 'multiline-text',
       content: answerValue,
       overflow: {
-        style: style,
-        addendumLabel: addendumLabel
+        style,
+        addendumLabel
       },
       addendumText: defaultTextOptions,
       lines: boxes.sort(boxComparator).map(function (box) {
@@ -217,14 +217,14 @@
   }
 
   function getTrueFalsePatches (options) {
-    var boxes = options.boxes
-    var getBoxArea = options.getBoxArea
-    var answerValue = options.answerValue
-    var variableOptions = options.variableOptions
+    const boxes = options.boxes
+    const getBoxArea = options.getBoxArea
+    const answerValue = options.answerValue
+    const variableOptions = options.variableOptions
 
     return boxes
       .filter(function (box) {
-        var shouldInclude = box.isInverted ? !answerValue : answerValue
+        const shouldInclude = box.isInverted ? !answerValue : answerValue
         return shouldInclude
       })
       .map(function (box) {
@@ -238,19 +238,19 @@
   }
 
   function getMultipleChoicePatches (options) {
-    var boxes = options.boxes
-    var getBoxArea = options.getBoxArea
-    var answerValue = options.answerValue
-    var variableOptions = options.variableOptions
-    var defaultTextOptions = options.defaultTextOptions
+    const boxes = options.boxes
+    const getBoxArea = options.getBoxArea
+    const answerValue = options.answerValue
+    const variableOptions = options.variableOptions
+    const defaultTextOptions = options.defaultTextOptions
     return boxes
       .filter(function (box) {
-        var shouldMatch = variableOptions.isCheck
+        const shouldMatch = variableOptions.isCheck
         if (!shouldMatch) {
           return true
         }
-        var isMatch = box.variableValue === answerValue
-        var shouldInclude = box.isInverted ? !isMatch : isMatch
+        const isMatch = box.variableValue === answerValue
+        const shouldInclude = box.isInverted ? !isMatch : isMatch
         return shouldInclude
       })
       .map(function (box) {
@@ -274,20 +274,20 @@
   }
 
   function getDatePatches (options) {
-    var boxes = options.boxes
-    var answer = options.answer
-    var getBoxArea = options.getBoxArea
-    var answerValue = options.answerValue
-    var defaultTextOptions = options.defaultTextOptions
-    var variable = options.variable
-    var variableOptions = options.variableOptions
-    var addendumLabel = variableOptions.addendumLabel
+    const boxes = options.boxes
+    const answer = options.answer
+    const getBoxArea = options.getBoxArea
+    const answerValue = options.answerValue
+    const defaultTextOptions = options.defaultTextOptions
+    const variable = options.variable
+    const variableOptions = options.variableOptions
+    const addendumLabel = variableOptions.addendumLabel
 
-    var isTableColumn = variable.repeating
+    const isTableColumn = variable.repeating
     if (isTableColumn) {
-      var values = answer.values.slice(1)
-      var columnBoxes = boxes.sort(boxComparator).slice(0, values.length)
-      var column = columnBoxes.map(function (box, index) {
+      const values = answer.values.slice(1)
+      const columnBoxes = boxes.sort(boxComparator).slice(0, values.length)
+      const column = columnBoxes.map(function (box, index) {
         return {
           type: 'text',
           page: box.page,
@@ -296,10 +296,10 @@
           text: defaultTextOptions
         }
       })
-      var tablePatch = {
+      const tablePatch = {
         type: 'table-text',
         columns: [column],
-        addendumLabel: addendumLabel,
+        addendumLabel,
         addendumColumns: []
       }
       return [tablePatch]
@@ -317,20 +317,20 @@
   }
 
   function getNumberPatches (options) {
-    var boxes = options.boxes
-    var getBoxArea = options.getBoxArea
-    var answer = options.answer
-    var answerValue = options.answerValue
-    var defaultTextOptions = options.defaultTextOptions
-    var variable = options.variable
-    var variableOptions = options.variableOptions
-    var addendumLabel = variableOptions.addendumLabel
+    const boxes = options.boxes
+    const getBoxArea = options.getBoxArea
+    const answer = options.answer
+    const answerValue = options.answerValue
+    const defaultTextOptions = options.defaultTextOptions
+    const variable = options.variable
+    const variableOptions = options.variableOptions
+    const addendumLabel = variableOptions.addendumLabel
 
-    var isTableColumn = variable.repeating
+    const isTableColumn = variable.repeating
     if (isTableColumn) {
-      var values = answer.values.slice(1)
-      var columnBoxes = boxes.sort(boxComparator).slice(0, values.length)
-      var column = columnBoxes.map(function (box, index) {
+      const values = answer.values.slice(1)
+      const columnBoxes = boxes.sort(boxComparator).slice(0, values.length)
+      const column = columnBoxes.map(function (box, index) {
         return {
           type: 'text',
           page: box.page,
@@ -339,10 +339,10 @@
           text: defaultTextOptions
         }
       })
-      var tablePatch = {
+      const tablePatch = {
         type: 'table-text',
         columns: [column],
-        addendumLabel: addendumLabel,
+        addendumLabel,
         addendumColumns: []
       }
       return [tablePatch]
@@ -359,7 +359,7 @@
     })
   }
 
-  var patcherTypeMap = {
+  const patcherTypeMap = {
     text: getTextPatches,
     date: getDatePatches,
     number: getNumberPatches,
@@ -368,34 +368,34 @@
   }
 
   function getPatcher (variableType) {
-    var type = variableType.toLowerCase()
+    const type = variableType.toLowerCase()
     return patcherTypeMap[type]
   }
 
   function getTemplateOverlay (template, variables, answers) {
     return getOverlay(Object.assign(getTemplateOverlayData(template), {
-      variables: variables,
-      answers: answers
+      variables,
+      answers
     }))
   }
 
   module.exports = {
-    areaComparator: areaComparator,
-    boxComparator: boxComparator,
-    readInteger: readInteger,
-    getTemplateOverlay: getTemplateOverlay,
+    areaComparator,
+    boxComparator,
+    readInteger,
+    getTemplateOverlay,
     testing: {
-      getOverlay: getOverlay,
-      getPatcher: getPatcher,
-      getTextPatches: getTextPatches,
-      getDatePatches: getDatePatches,
-      getNumberPatches: getNumberPatches,
-      getTrueFalsePatches: getTrueFalsePatches,
-      getMultipleChoicePatches: getMultipleChoicePatches,
+      getOverlay,
+      getPatcher,
+      getTextPatches,
+      getDatePatches,
+      getNumberPatches,
+      getTrueFalsePatches,
+      getMultipleChoicePatches,
 
-      getBoxPdfArea: getBoxPdfArea,
-      getDocumentGlobals: getDocumentGlobals,
-      getTemplateOverlayData: getTemplateOverlayData
+      getBoxPdfArea,
+      getDocumentGlobals,
+      getTemplateOverlayData
     }
   }
 })()

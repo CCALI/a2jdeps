@@ -7,7 +7,7 @@ describe('Answers', function () {
   let answers
 
   beforeEach(function () {
-    let fixture = {
+    const fixture = {
       'client first name': {
         values: [null],
         repeating: false,
@@ -32,14 +32,14 @@ describe('Answers', function () {
   })
 
   it('getVariable - returns variable object from answers if available', function () {
-    let variable = answers.getVariable('Client First Name')
+    const variable = answers.getVariable('Client First Name')
 
     assert.isFalse(variable.attr('repeating'))
     assert.equal(variable.attr('name'), 'Client First Name')
   })
 
   it('getValue - returns single value for non repeating vars', function () {
-    let variable = answers.getVariable('Client First Name')
+    const variable = answers.getVariable('Client First Name')
 
     variable.attr('values').push('John')
 
@@ -48,8 +48,8 @@ describe('Answers', function () {
   })
 
   it('getValue - return value at given index for repeating vars', function () {
-    let varName = 'child name'
-    let variable = answers.getVariable(varName)
+    const varName = 'child name'
+    const variable = answers.getVariable(varName)
 
     assert.isTrue(variable.attr('repeating'))
 
@@ -63,8 +63,8 @@ describe('Answers', function () {
   // this applies to use case when no index is provided and the variable
   // has only one value (after dropping first null value).
   it('getValue - returns value at last index for repeating vars', function () {
-    let varName = 'Client First Name'
-    let variable = answers.getVariable(varName)
+    const varName = 'Client First Name'
+    const variable = answers.getVariable(varName)
 
     variable.attr('repeating', true)
     variable.attr('values').push('John')
@@ -77,8 +77,8 @@ describe('Answers', function () {
 
   // this applies for repeating variables with more than 2 values
   it('getValue - returns a comma separated string if index is not provided', function () {
-    let varName = 'child name'
-    let variable = answers.getVariable(varName)
+    const varName = 'child name'
+    const variable = answers.getVariable(varName)
 
     assert.isTrue(variable.attr('repeating'))
     assert.equal(answers.getValue(varName), 'Bart, Lisa and Maggie')

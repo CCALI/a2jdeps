@@ -13,7 +13,7 @@
         {{#for (tableColumn of scope/tableColumns)}}
           <th style="width: {{tableColumn.width}}%;">
             {{#if scope/editActive}}
-              <var-picker
+              <variable-picker
                 selected:bind="tableColumn.variable"
                 variables:from="scope/variablesList"
                 filterOccurrence:raw="repeating"

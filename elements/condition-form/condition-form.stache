@@ -3,7 +3,7 @@
 <form>
   <div class="form-group row clearfix">
     <div class="col-md-12">
-      <var-picker
+      <variable-picker
         disabled:from="disabled"
         selected:bind="leftOperand"
         variables:from="variablesList"
@@ -43,7 +43,7 @@
 
     <div class="col-md-12">
       {{#is(rightOperandType, 'variable')}}
-        <var-picker
+        <variable-picker
           disabled:from="disabled"
           selected:bind="rightOperand"
           variables:from="variablesList"

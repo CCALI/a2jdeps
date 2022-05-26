@@ -10,7 +10,7 @@ const occurrence = ['any', 'single', 'repeating']
 
 const byRepeating = function (filter, variable) {
   if (filter !== 'any') {
-    let repeating = filter === 'repeating'
+    const repeating = filter === 'repeating'
     return variable.attr('repeating') === repeating
   } else {
     return true
@@ -19,7 +19,7 @@ const byRepeating = function (filter, variable) {
 
 const byType = function (types, variable) {
   if (types && types.length) {
-    let type = variable.attr('type') || ''
+    const type = variable.attr('type') || ''
     return _includes(types, type.toLowerCase())
   } else {
     return true
@@ -27,10 +27,10 @@ const byType = function (types, variable) {
 }
 
 /**
- * @property {can.Map} varPicker.ViewModel
- * author/templates/elements/var-picker/
+ * @property {can.Map} variablePicker.ViewModel
+ * author/templates/elements/variable-picker/
  *
- * `<var-picker>`'s viewModel.
+ * `<variable-picker>`'s viewModel.
  */
 export default CanMap.extend('VarPickerVM', {
   define: {
@@ -53,8 +53,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {String} varPicker.ViewModel.prototype.selected selected
-     * @parent varPicker.ViewModel
+     * @property {String} variablePicker.ViewModel.prototype.selected selected
+     * @parent variablePicker.ViewModel
      *
      * Name of the variable selected by the user.
      */
@@ -63,8 +63,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {String} varPicker.ViewModel.prototype.filterOccurrence filterOccurrence
-     * @parent varPicker.ViewModel
+     * @property {String} variablePicker.ViewModel.prototype.filterOccurrence filterOccurrence
+     * @parent variablePicker.ViewModel
      *
      * The variables can be either `repeating` (multiple values) or just
      * `single` value. This property filter the [variables] list by looking
@@ -82,8 +82,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {Array} varPicker.ViewModel.prototype.filterTypes filterTypes
-     * @parent varPicker.ViewModel
+     * @property {Array} variablePicker.ViewModel.prototype.filterTypes filterTypes
+     * @parent variablePicker.ViewModel
      *
      * Array of variable types used to filter the [variable] list.
      */
@@ -96,15 +96,15 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {A2JVariable.List} varPicker.ViewModel.prototype.variables variables
-     * @parent varPicker.ViewModel
+     * @property {A2JVariable.List} variablePicker.ViewModel.prototype.variables variables
+     * @parent variablePicker.ViewModel
      *
      * List of A2JVariable objects.
      */
     variables: {
       get (list) {
-        let types = this.attr('filterTypes')
-        let occurrence = this.attr('filterOccurrence')
+        const types = this.attr('filterTypes')
+        const occurrence = this.attr('filterOccurrence')
 
         if (list) {
           return list
@@ -115,8 +115,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {CanList} varPicker.ViewModel.prototype.variableSuggestions variableSuggestions
-     * @parent varPicker.ViewModel
+     * @property {CanList} variablePicker.ViewModel.prototype.variableSuggestions variableSuggestions
+     * @parent variablePicker.ViewModel
      *
      * List of search result suggestions, limited by this.maxSuggestionCount.
      */
@@ -132,7 +132,7 @@ export default CanMap.extend('VarPickerVM', {
           return []
         }
 
-        let names = this.attr('variableNames')
+        const names = this.attr('variableNames')
         if (!names) {
           return []
         }
@@ -151,15 +151,15 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {CanList} varPicker.ViewModel.prototype.variableNames variableNames
-     * @parent varPicker.ViewModel
+     * @property {CanList} variablePicker.ViewModel.prototype.variableNames variableNames
+     * @parent variablePicker.ViewModel
      *
      * List of variables names, this derived from the [variables] list.
      */
     variableNames: {
       get () {
         let names = new CanList([])
-        let variables = this.attr('variables')
+        const variables = this.attr('variables')
 
         if (variables && variables.length) {
           names = variables.map(v => v.attr('name'))
@@ -170,8 +170,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {Number} varPicker.ViewModel.prototype.suggestionIndex suggestionIndex
-     * @parent varPicker.ViewModel
+     * @property {Number} variablePicker.ViewModel.prototype.suggestionIndex suggestionIndex
+     * @parent variablePicker.ViewModel
      *
      * Index of current .active or hovered suggestion
      */
@@ -180,8 +180,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {Number} varPicker.ViewModel.prototype.suggestionIndexMax suggestionIndexMax
-     * @parent varPicker.ViewModel
+     * @property {Number} variablePicker.ViewModel.prototype.suggestionIndexMax suggestionIndexMax
+     * @parent variablePicker.ViewModel
      *
      * Index of current .active or hovered suggestion
      */
@@ -192,8 +192,8 @@ export default CanMap.extend('VarPickerVM', {
     },
 
     /**
-     * @property {Boolean} varPicker.ViewModel.prototype.showInvalidMessage showInvalidMessage
-     * @parent varPicker.ViewModel
+     * @property {Boolean} variablePicker.ViewModel.prototype.showInvalidMessage showInvalidMessage
+     * @parent variablePicker.ViewModel
      *
      * Toggle warning message when no matches
      */
@@ -209,8 +209,8 @@ export default CanMap.extend('VarPickerVM', {
   },
 
   /**
-   * @property {Booelan} varPicker.ViewModel.prototype.isValidVarName isValidVarName
-   * @parent varPicker.ViewModel
+   * @property {Booelan} variablePicker.ViewModel.prototype.isValidVarName isValidVarName
+   * @parent variablePicker.ViewModel
    *
    * Check varName is in the list of variableNames
    */
@@ -220,8 +220,8 @@ export default CanMap.extend('VarPickerVM', {
   },
 
   /**
-   * @property {Function} varPicker.ViewModel.prototype.onSuggestionSelect onSuggestionSelect
-   * @parent varPicker.ViewModel
+   * @property {Function} variablePicker.ViewModel.prototype.onSuggestionSelect onSuggestionSelect
+   * @parent variablePicker.ViewModel
    *
    * Click handler for updating the selected name
    */
@@ -232,8 +232,8 @@ export default CanMap.extend('VarPickerVM', {
   },
 
   /**
-   * @property {Function} varPicker.ViewModel.prototype.onVarNameInput onVarNameInput
-   * @parent varPicker.ViewModel
+   * @property {Function} variablePicker.ViewModel.prototype.onVarNameInput onVarNameInput
+   * @parent variablePicker.ViewModel
    *
    * Input handler to sync as a user types
    */
@@ -243,8 +243,8 @@ export default CanMap.extend('VarPickerVM', {
   },
 
   /**
-   * @property {Function} varPicker.ViewModel.prototype.highlightSuggestion highlightSuggestion
-   * @parent varPicker.ViewModel
+   * @property {Function} variablePicker.ViewModel.prototype.highlightSuggestion highlightSuggestion
+   * @parent variablePicker.ViewModel
    *
    * handler for keyboard nav/select on the suggestion list
    */
@@ -257,14 +257,14 @@ export default CanMap.extend('VarPickerVM', {
   },
 
   /**
-   * @property {Function} varPicker.ViewModel.prototype.onSuggestionKeydown onSuggestionKeydown
-   * @parent varPicker.ViewModel
+   * @property {Function} variablePicker.ViewModel.prototype.onSuggestionKeydown onSuggestionKeydown
+   * @parent variablePicker.ViewModel
    *
    * handler for keyboard nav/select on the suggestion list
    */
   onSuggestionKeydown (ev) {
     const vm = ev.currentTarget.vm
-    let currentSuggestionIndex = vm.attr('suggestionIndex')
+    const currentSuggestionIndex = vm.attr('suggestionIndex')
     let targetIndex
     const suggestionIndexMax = vm.attr('suggestionIndexMax')
 
@@ -307,7 +307,7 @@ export default CanMap.extend('VarPickerVM', {
   connectedCallback (el) {
     const vm = this
     // grab input unique to this instance
-    const varNameInput = el.querySelector('.var-picker-input')
+    const varNameInput = el.querySelector('.variable-picker-input')
     varNameInput.addEventListener('input', this.onVarNameInput)
     varNameInput.addEventListener('keydown', this.onSuggestionKeydown)
     varNameInput.vm = vm
