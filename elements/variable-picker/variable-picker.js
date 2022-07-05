@@ -6,7 +6,7 @@ import template from './variable-picker.stache'
  * @module {Module} author/templates/elements/variable-picker/ <variable-picker>
  * @parent api-components
  *
- * This is an input-like component that supports tagging and uses typeahead to
+ * This is an input-like component that supports tagging and uses Can List to
  * filter results in a given collection while user types. It is intented to allow
  * the user to pick a variable from the ones defined in a guided interview.
  *
