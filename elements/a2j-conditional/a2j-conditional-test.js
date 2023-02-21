@@ -8,6 +8,9 @@ import 'steal-mocha'
 import './a2j-conditional'
 import '../a2j-template/'
 import '~/author-styles.less'
+import testConditionalWithElse from './testConditionalWithElse.js'
+import testAnswers from './testAnswers.js'
+// import testConditionalSansElse from './testConditionalSansElse.js'
 
 describe('<a2j-conditional>', function () {
   describe('viewModel', function () {
@@ -42,7 +45,7 @@ describe('<a2j-conditional>', function () {
     })
   })
 
-  describe('Component', function () {
+  describe('Component - edit', function () {
     let vm
 
     beforeEach(function () {
@@ -101,6 +104,36 @@ describe('<a2j-conditional>', function () {
 
         F(done)
       })
+    })
+  })
+
+  describe.only('Component - rendered', function () {
+    let vm
+
+    beforeEach(function () {
+      const frag = stache(
+        '<a2j-conditional children:from="children" />'
+      )
+
+      $('#test-area').html(frag({
+        editEnabled: false,
+        editActive: false,
+        children: testConditionalWithElse.children,
+        state: testConditionalWithElse.state
+      }))
+
+      vm = $('a2j-conditional')[0].viewModel
+      vm.attr('answers', testAnswers)
+      vm.attr('editEnabled', false)
+    })
+
+    afterEach(function () {
+      $('#test-area').empty()
+    })
+
+    it('renders nothing when if condition fails without an else panel', function () {
+      assert.isFalse($('.panel-else').is(':visible'))
+      assert.lengthOf($('.with-conditional'), 1, 'only if body should be rendered')
     })
   })
 })

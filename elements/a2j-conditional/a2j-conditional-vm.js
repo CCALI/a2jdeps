@@ -38,7 +38,11 @@ export default CanMap.extend('A2JConditionalVM', {
      * assembly.
      */
     answers: {
-      Type: Answers
+      Type: Answers,
+      set(answers) {
+        console.log(answers)
+        return answers
+      }
     },
 
     /**
@@ -98,7 +102,7 @@ export default CanMap.extend('A2JConditionalVM', {
      * E.g: 'is-true' only requires one operand.
      */
     unaryOperation: {
-      get () {
+      get() {
         const operator = this.attr('operator')
         return _includes(['is-true', 'is-false'], operator)
       }
@@ -165,7 +169,7 @@ export default CanMap.extend('A2JConditionalVM', {
      * evaluates to `true` (`evalCondition()` yields `true`).
      */
     ifBody: {
-      get () {
+      get() {
         const children = this.attr('children')
         return children.attr(0)
       }
@@ -180,7 +184,7 @@ export default CanMap.extend('A2JConditionalVM', {
      * evaluates to `false` (`evalCondition()` yields `false`).
      */
     elseBody: {
-      get () {
+      get() {
         const children = this.attr('children')
         return children.attr(1)
       }
@@ -194,7 +198,7 @@ export default CanMap.extend('A2JConditionalVM', {
      * `conditional-add-element` instance used to add elements to `ifBody`.
      */
     addToIfNode: {
-      get () {
+      get() {
         const children = this.attr('children')
         return children.attr(2)
       }
@@ -208,14 +212,14 @@ export default CanMap.extend('A2JConditionalVM', {
      * `conditional-add-element` instance used to add elements to `elseBody`.
      */
     addToElseNode: {
-      get () {
+      get() {
         const children = this.attr('children')
         return children.attr(3)
       }
     }
   },
 
-  init () {
+  init() {
     this.setChildrenIfEmpty()
   },
 
@@ -226,7 +230,7 @@ export default CanMap.extend('A2JConditionalVM', {
    * Callback passed down to the `a2j-templates` used in `ifBody`/`elseBody` to
    * to be called when the children of these template instances are saved.
    */
-  updateNodeState () {
+  updateNodeState() {
     const id = this.attr('nodeId')
     const updateNode = this.attr('updateNode')
 
@@ -252,7 +256,7 @@ export default CanMap.extend('A2JConditionalVM', {
    *
    *  TODO: Find a better way to do this.
    */
-  setChildrenIfEmpty () {
+  setChildrenIfEmpty() {
     const children = this.attr('children')
 
     if (!children.attr('length')) {
@@ -275,7 +279,7 @@ export default CanMap.extend('A2JConditionalVM', {
    * @function conditional.ViewModel.prototype.evalCondition evalCondition
    * @return {Boolean} Result of evaluating the condition set by the user.
    */
-  evalCondition () {
+  evalCondition() {
     return evalAuthorCondition({
       answers: this.attr('answers'),
       operator: this.attr('operator'),
@@ -283,5 +287,13 @@ export default CanMap.extend('A2JConditionalVM', {
       rightOperand: this.attr('rightOperand'),
       rightOperandType: this.attr('rightOperandType')
     })
+  },
+
+  /**
+   * @function conditional.ViewModel.prototype.renderElseClause renderElseClause
+   * @return {Boolean} Renders elseBody only if it exists and IF body condtion failed to pass.
+   */
+  renderElseClause() {
+    return this.attr('elseClause') && !this.evalCondition()
   }
 })
