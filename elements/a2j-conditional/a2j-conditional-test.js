@@ -8,9 +8,6 @@ import 'steal-mocha'
 import './a2j-conditional'
 import '../a2j-template/'
 import '~/author-styles.less'
-import testConditionalWithElse from './testConditionalWithElse.js'
-import testAnswers from './testAnswers.js'
-// import testConditionalSansElse from './testConditionalSansElse.js'
 
 describe('<a2j-conditional>', function () {
   describe('viewModel', function () {
