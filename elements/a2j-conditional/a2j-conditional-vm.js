@@ -283,5 +283,13 @@ export default CanMap.extend('A2JConditionalVM', {
       rightOperand: this.attr('rightOperand'),
       rightOperandType: this.attr('rightOperandType')
     })
+  },
+
+  /**
+   * @function conditional.ViewModel.prototype.renderElseClause renderElseClause
+   * @return {Boolean} Renders elseBody only if it exists and IF body condtion failed to pass.
+   */
+  renderElseClause () {
+    return this.attr('elseClause') && !this.evalCondition()
   }
 })

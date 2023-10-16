@@ -42,7 +42,7 @@ describe('<a2j-conditional>', function () {
     })
   })
 
-  describe('Component', function () {
+  describe('Component - edit', function () {
     let vm
 
     beforeEach(function () {

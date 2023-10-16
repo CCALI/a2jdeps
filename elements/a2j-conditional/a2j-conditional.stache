@@ -109,6 +109,7 @@
 {{else}}
   {{#if evalCondition()}}
     <a2j-template
+      class="with-nested-conditional"
       guide:from="scope/guide"
       useAnswers:raw="true"
       answers:from="scope/answers"
@@ -116,8 +117,10 @@
       editEnabled:raw="false"
       parentState:from="scope/parentState"
     />
-  {{else}}
+  {{/if}}
+  {{#if renderElseClause()}}
     <a2j-template
+      class="with-nested-conditional"
       guide:from="scope/guide"
       useAnswers:raw="true"
       answers:from="scope/answers"
